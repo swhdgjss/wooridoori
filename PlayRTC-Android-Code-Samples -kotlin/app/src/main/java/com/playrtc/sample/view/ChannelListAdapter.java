@@ -145,7 +145,7 @@ public class ChannelListAdapter extends BaseAdapter {
                 public void onClick(View bv) {
                     // 채널 목록의 입장 버튼을 누르면 채널 정보를 전달한다.
                     ChannelData data = (ChannelData) bv.getTag();
-                    Log.d("LIST", "setOnClickListener channelId=" + data.channelId);
+                    Log.d("LIST", "setOnClickListener channelId=" + data.getChannelId());
                     if (ChannelListAdapter.this.listener != null) {
                         ChannelListAdapter.this.listener.onSelectListItem(data);
                     }
@@ -168,11 +168,11 @@ public class ChannelListAdapter extends BaseAdapter {
         btn.setTag(item);
 
         // 채널 아이디 표시 
-        txtChannelId.setText(item.channelId);
+        txtChannelId.setText(item.getChannelId());
 
         // 채널이름 표시 
-        if (TextUtils.isEmpty(item.channelName) == false) {
-            txtChannelName.setText(item.channelName);
+        if (TextUtils.isEmpty(item.getChannelName()) == false) {
+            txtChannelName.setText(item.getChannelName());
         } else {
             txtChannelName.setText("");
         }

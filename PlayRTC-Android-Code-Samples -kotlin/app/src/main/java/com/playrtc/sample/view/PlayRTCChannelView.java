@@ -223,12 +223,12 @@ public class PlayRTCChannelView extends RelativeLayout implements IChannelListAd
      */
     @Override
     public void onSelectListItem(ChannelData data) {
-        Log.d("LIST", "onSelectListItem channelId=" + data.channelId);
-        if (TextUtils.isEmpty(data.channelId) == false) {
+        Log.d("LIST", "onSelectListItem channelId=" + data.getChannelId());
+        if (TextUtils.isEmpty(data.getChannelId()) == false) {
             String userId = this.txtCnUserId.getText().toString();
             String userName = this.txtCnUserName.getText().toString();
             // 채널 입장 버튼 선택 시 채널 생성 관련 정보를 전달
-            this.listener.onClickConnectChannel(data.channelId, userId, userName);
+            this.listener.onClickConnectChannel(data.getChannelId(), userId, userName);
         }
     }
 
@@ -389,8 +389,8 @@ public class PlayRTCChannelView extends RelativeLayout implements IChannelListAd
                             String channelId = channel.getString("channelId");
                             String channelName = (channel.has("channelName")) ? channel.getString("channelName") : "";
                             ChannelData item = new ChannelData();
-                            item.channelId = channelId;
-                            item.channelName = channelName;
+                            item.setChannelId(channelId);
+                            item.setChannelName(channelName);
                             list.add(item);
                         }
                         // 리스트 데이터 전달

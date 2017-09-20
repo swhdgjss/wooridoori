@@ -1,40 +1,36 @@
-package com.playrtc.sample.handler;
+package com.playrtc.sample.handler
 
-import android.text.format.Formatter;
+import android.text.format.Formatter
 
-import com.playrtc.sample.PlayRTCActivity;
-import com.sktelecom.playrtc.PlayRTC;
-import com.sktelecom.playrtc.PlayRTCStatsReport;
-import com.sktelecom.playrtc.PlayRTCStatsReport.RatingValue;
-import com.sktelecom.playrtc.observer.PlayRTCStatsReportObserver;
+import com.playrtc.sample.PlayRTCActivity
+import com.sktelecom.playrtc.PlayRTC
+import com.sktelecom.playrtc.PlayRTCStatsReport
+import com.sktelecom.playrtc.PlayRTCStatsReport.RatingValue
+import com.sktelecom.playrtc.observer.PlayRTCStatsReportObserver
 
-public class PlayRTCStatsReportHandler  implements PlayRTCStatsReportObserver {
+class PlayRTCStatsReportHandler(activity: PlayRTCActivity) : PlayRTCStatsReportObserver {
 
-    //StatsReport 조회 주기 msec
-	private static final long TIMER_INTERVAL = 5000;//5 sec
+    private var activity: PlayRTCActivity?=null
+    private var playrtc: PlayRTC?=null
 
-	private PlayRTCActivity activity = null;
-	private PlayRTC playrtc = null;
-	
-	public PlayRTCStatsReportHandler(PlayRTCActivity activity) {
-		this.activity = activity;
-	}
-	
-	public void start(PlayRTC playrtc, String peerId) {
+    init {
+        this.activity=activity  //yn var로 바꿈
+    }
 
-		if(playrtc != null) {
-			playrtc.startStatsReport(TIMER_INTERVAL, (PlayRTCStatsReportObserver)this, peerId);
-		}
-        this.playrtc = playrtc;
-	}
-	public void stop() {
-		if(playrtc != null) {
-			playrtc.stopStatsReport();
-		}
-	}
+    fun start(playrtc: PlayRTC?, peerId: String) {
+
+        playrtc?.startStatsReport(TIMER_INTERVAL, this as PlayRTCStatsReportObserver, peerId)
+        this.playrtc=playrtc
+    }
+
+    fun stop() {
+        if (playrtc != null) {
+            playrtc!!.stopStatsReport()
+        }
+    }
 
 
-	/*
+    /*
 	 * PlayRTCStatsReportObserver Interface 구현
 	 * @param report PlayRTCStatsReport
 	 *
@@ -84,44 +80,49 @@ public class PlayRTCStatsReportHandler  implements PlayRTCStatsReportObserver {
      * - RatingValue getRemoteVideoFractionLost();
      *   Packet Loss 값을 기반으로 상대방의 영상 전송 상태를 5등급으로 분류하여RatingValue 를 반환한다.
 	 */
-	@Override
-	public void onStatsReport(PlayRTCStatsReport report) {
-		
-		RatingValue localVideoFl = report.getLocalVideoFractionLost();
-		RatingValue localAudioFl = report.getLocalAudioFractionLost();
-		RatingValue remoteVideoFl = report.getRemoteVideoFractionLost();
-		RatingValue remoteAudioFl = report.getRemoteAudioFractionLost();
+    override fun onStatsReport(report: PlayRTCStatsReport) {
+
+        val localVideoFl=report.localVideoFractionLost
+        val localAudioFl=report.localAudioFractionLost
+        val remoteVideoFl=report.remoteVideoFractionLost
+        val remoteAudioFl=report.remoteAudioFractionLost
 
 
-		final String text = String.format("Local\n ICE:%s\n Frame:%sx%sx%s\n 코덱:%s,%s\n Bandwidth[%sps]\n RTT[%s]\n RttRating[%d/%.4f]\n VFLost[%d/%.4f]\n AFLost[%d/%.4f]\n\nRemote\n ICE:%s\n Frame:%sx%sx%s\n 코덱:%s,%s\n Bandwidth[%sps]\n VFLost[%d/%.4f]\n AFLost[%d/%.4f]\n",
-											report.getLocalCandidate(),
-											report.getLocalFrameWidth(),
-											report.getLocalFrameHeight(),
-											report.getLocalFrameRate(),
-											report.getLocalVideoCodec(),
-											report.getLocalAudioCodec(),
-											Formatter.formatFileSize(activity.getApplicationContext(), report.getAvailableSendBandwidth())+"",
-											report.getRtt(),
-											report.getRttRating().getLevel(),
-											report.getRttRating().getValue(),
-											localVideoFl.getLevel(),
-											localVideoFl.getValue(),
-											localAudioFl.getLevel(),
-											localAudioFl.getValue(),
-											report.getRemoteCandidate(),
-											report.getRemoteFrameWidth(),
-											report.getRemoteFrameHeight(),
-											report.getRemoteFrameRate(),
-											report.getRemoteVideoCodec(),
-											report.getRemoteAudioCodec(),
-											Formatter.formatFileSize(activity.getApplicationContext(), report.getAvailableReceiveBandwidth())+"",
-											remoteVideoFl.getLevel(),
-											remoteVideoFl.getValue(),
-											remoteAudioFl.getLevel(),
-											remoteAudioFl.getValue());
-				
+        val text=java.lang.String.format("Local\n ICE:%s\n Frame:%sx%sx%s\n 코덱:%s,%s\n Bandwidth[%sps]\n RTT[%s]\n RttRating[%d/%.4f]\n VFLost[%d/%.4f]\n AFLost[%d/%.4f]\n\nRemote\n ICE:%s\n Frame:%sx%sx%s\n 코덱:%s,%s\n Bandwidth[%sps]\n VFLost[%d/%.4f]\n AFLost[%d/%.4f]\n",
+                report.localCandidate,
+                report.localFrameWidth,
+                report.localFrameHeight,
+                report.localFrameRate,
+                report.localVideoCodec,
+                report.localAudioCodec,
+                Formatter.formatFileSize(activity!!.applicationContext, report.availableSendBandwidth.toLong()) + "",
+                report.rtt,
+                report.rttRating.level,
+                report.rttRating.value,
+                localVideoFl.level,
+                localVideoFl.value,
+                localAudioFl.level,
+                localAudioFl.value,
+                report.remoteCandidate,
+                report.remoteFrameWidth,
+                report.remoteFrameHeight,
+                report.remoteFrameRate,
+                report.remoteVideoCodec,
+                report.remoteAudioCodec,
+                Formatter.formatFileSize(activity!!.applicationContext, report.availableReceiveBandwidth.toLong()) + "",   //yn 느낌표 붙임
+                remoteVideoFl.level,
+                remoteVideoFl.value,
+                remoteAudioFl.level,
+                remoteAudioFl.value)   //java.lang. yn 이거 왜 노랑색이냐..
 
-		activity.printRtcStatReport(text);
-	}
+
+        activity!!.printRtcStatReport(text)
+    }
+
+    companion object {
+
+        //StatsReport 조회 주기 msec
+        private val TIMER_INTERVAL: Long=5000//5 sec
+    }
 
 }
