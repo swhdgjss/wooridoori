@@ -6,96 +6,24 @@
     tools:context=".MainActivity" 
     android:gravity="center"
     android:background="#f0f0f0">
-	
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="26sp"
-        android:layout_marginTop="2dp"
-        android:textColor="#000000"
-        android:text="@string/playrtc_sample" />
-    
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-	   	<Button
-			android:id="@+id/btn_go_sample1"
-			android:layout_width="190dp"
-			android:layout_height="wrap_content"
-			android:textSize="14sp"
-			android:text="@string/btn_sample_playrtc" />
-	   	
-	     <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textColor="#000000"
-	        android:text="@string/sample_playrtc1" />
-     
-     </LinearLayout>
-     
 
-    <LinearLayout
-        android:layout_marginTop="1dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    
-	    <Button
-			android:id="@+id/btn_go_sample2"
-			android:layout_width="190dp"
-			android:layout_height="wrap_content"
-			android:textSize="14sp"
-			android:text="@string/btn_sample_playrtc" />
-	    
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textColor="#000000"
-	        android:text="@string/sample_playrtc2" />
-    </LinearLayout>
-    
-	<LinearLayout
-        android:layout_marginTop="1dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    
-	    <Button
-			android:id="@+id/btn_go_sample3"
-			android:layout_width="190dp"
-			android:layout_height="wrap_content"
-			android:textSize="14sp"
-			android:text="@string/btn_sample_playrtc" />
-	    
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textColor="#000000"
-	        android:text="@string/sample_playrtc3" />
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_marginTop="1dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    
-	    <Button
-			android:id="@+id/btn_go_sample4"
-			android:layout_width="190dp"
-			android:layout_height="wrap_content"
-			android:textSize="14sp"
-			android:text="@string/btn_sample_playrtc" />
-	    
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textColor="#000000"
-	        android:text="@string/sample_playrtc4" />
-    </LinearLayout>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="150dp"
+		android:layout_marginTop="2dp"
+		android:text="@string/playrtc_sample"
+		android:textColor="#000000"
+		android:textSize="26sp" />
+
+
+	<Button
+		android:id="@+id/btn_go_sample2"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/btn_sample_playrtc"
+		android:textSize="14sp" />
 
 	<RelativeLayout
 		android:layout_width="match_parent"
@@ -105,81 +33,84 @@
 			android:id="@+id/radio_ring_group"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginLeft="45dp"
+			android:layout_marginTop="80dp"
 			android:orientation="horizontal"
-			android:layout_alignParentLeft="true"
-			android:layout_centerVertical="true">
+			tools:ignore="NotSibling">
+
 			<RadioButton
 				android:id="@+id/radio_ring_false"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textColor="#000000"
-				android:textSize="16sp"
+				android:checked="true"
 				android:text="Ring 사용안함"
-				android:checked="true"/>
+				android:textColor="#000000"
+				android:textSize="16sp" />
 
 			<RadioButton
 				android:id="@+id/radio_ring_true"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginLeft="5dp"
+				android:text="Ring 사용"
 				android:textColor="#000000"
-				android:textSize="16sp"
-				android:text="Ring 사용" />
+				android:textSize="16sp" />
 		</RadioGroup>
 
 
 		<RelativeLayout
-			android:orientation="horizontal"
+			android:id="@+id/relativeLayout2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_alignParentTop="true"
-			android:layout_toRightOf="@+id/radio_ring_group"
-			android:layout_marginRight="5dp">
+			android:layout_below="@+id/radio_ring_group"
+			android:layout_centerHorizontal="true"
+			android:layout_marginTop="40dp"
+			android:orientation="horizontal">
 
 			<TextView
 				android:id="@+id/label_video_codec"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textSize="16sp"
+				android:layout_centerVertical="true"
 				android:gravity="center_vertical|left"
-				android:textColor="#000000"
 				android:text="Video Codec"
-				android:layout_centerVertical="true"/>
+				android:textColor="#000000"
+				android:textSize="16sp" />
 
 			<RadioGroup
 				android:id="@+id/radio_video_codec_group"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:orientation="horizontal"
-				android:layout_toRightOf="@id/label_video_codec">
+				android:layout_toRightOf="@id/label_video_codec"
+				android:orientation="horizontal">
 
 
 				<RadioButton
 					android:id="@+id/radio_video_codec_vp8"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textColor="#000000"
-					android:textSize="16sp"
+					android:checked="true"
 					android:text="VP8"
-					android:checked="true"/>
+					android:textColor="#000000"
+					android:textSize="16sp" />
 
 				<RadioButton
 					android:id="@+id/radio_video_codec_vp9"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginLeft="5dp"
+					android:layout_marginLeft="0dp"
+					android:text="VP9"
 					android:textColor="#000000"
-					android:textSize="16sp"
-					android:text="VP9" />
+					android:textSize="16sp" />
 
 				<RadioButton
 					android:id="@+id/radio_video_codec_h264"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginLeft="20dp"
+					android:text="H264"
 					android:textColor="#000000"
-					android:textSize="16sp"
-					android:text="H264" />
+					android:textSize="16sp" />
 			</RadioGroup>
 		</RelativeLayout>
 
@@ -187,9 +118,11 @@
 			android:orientation="horizontal"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_alignParentBottom="true"
-			android:layout_toRightOf="@+id/radio_ring_group"
-			android:layout_marginRight="5dp">
+			android:id="@+id/relativeLayout"
+			android:layout_alignTop="@+id/relativeLayout2"
+			android:layout_alignLeft="@+id/relativeLayout2"
+			android:layout_alignStart="@+id/relativeLayout2"
+			android:layout_marginTop="80dp">
 
 			<TextView
 				android:id="@+id/label_audio_codec"

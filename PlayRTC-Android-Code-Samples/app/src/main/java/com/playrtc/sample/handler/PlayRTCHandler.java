@@ -218,19 +218,13 @@ public class PlayRTCHandler extends PlayRTCObserver {
     }
 
     /**
-     * SDK 설정 객체인 PlayRTCConfig를 생성한 후 PlayRTC 인스턴스를 생성.
-     * @param runType int
-     *  - 1. 영상, 음성, p2p data
-     *  - 2. 영상, 음성
-     *  - 3. 음성, data
-     *  - 4. p2p data only
      * @throws UnsupportedPlatformVersionException Android SDK 버전 체크 Exception
      * @throws RequiredParameterMissingException 필수 Parameter 체크 Exception
      */
-    public void createPlayRTC(int runType, String channelRing, String videoCodec, String audioCodec) throws UnsupportedPlatformVersionException, RequiredParameterMissingException {
+    public void createPlayRTC(String channelRing, String videoCodec, String audioCodec) throws UnsupportedPlatformVersionException, RequiredParameterMissingException {
 
         // PlayRTC 서비스 설정 객체를 생성하여 반환
-        PlayRTCConfig config = createPlayRTCConfig(runType, channelRing, videoCodec, audioCodec);
+        PlayRTCConfig config = createPlayRTCConfig(channelRing, videoCodec, audioCodec);
 
 		/*
 		 * PlayRTC 인터페이스를 구현한 객체 인스턴스를 생성하고 PlayRTC를 반환한다. static
@@ -912,7 +906,7 @@ public class PlayRTCHandler extends PlayRTCObserver {
      *
      * @return PlayRTCConfig
      */
-    private PlayRTCConfig createPlayRTCConfig(int runType, String channelRing, String videoCodec, String audioCodec) {
+    private PlayRTCConfig createPlayRTCConfig(String channelRing, String videoCodec, String audioCodec) {
 		/* PlayRTC 서비스 설정 */
         // 1. create PlayRTCConfig
         PlayRTCConfig config = PlayRTCFactory.createConfig();
@@ -980,219 +974,81 @@ public class PlayRTCHandler extends PlayRTCObserver {
             audioPreferCodec = AudioCodec.ISAC;
         }
 
-        // 4. Audio/Video/Data Enable runType 타입에 따라 지정
-        // 양상 + 음성 + Data
-        if(runType == 1) {
-            /*
-		     * 영상 스트림 전송 사용.
-		     * false 설정 시 SDK는 read-only 모드로 동작하며, 상대방이 영상 스트림을 전송하면 수신이 된다.
-		     */
-            config.video.setEnable(true);
+        /*
+         * 영상 스트림 전송 사용.
+         * false 설정 시 SDK는 read-only 모드로 동작하며, 상대방이 영상 스트림을 전송하면 수신이 된다.
+         */
+        config.video.setEnable(true);
 
-            /*
-             * 전방카메라 사용
-             * @param  enum CameraType
-		     * - Front,
-		     * - Back
-             */
-            config.video.setCameraType(cameraType);
+        /*
+         * 전방카메라 사용
+         * @param  enum CameraType
+         * - Front,
+         * - Back
+         */
+        config.video.setCameraType(cameraType);
 
-            /*
-             * Video 영상의 선호 코덱을 지정, default VP8
-             * 상호 SDK 교환과정에서 선호코덱을 사용할 수 있으면 사용됨. 코덱 미지원 시 다른 코덱 사용
-             * v2.2.6
-             * @param enum VideoCodec,
-             *  - VP8
-             *  - VP9
-             *  - H264, Open H.264
-            */
-            config.video.setPreferCodec(videPreferCodec);
-            /*
-		     * 영상 해상도 지정 , 기본 640x480
-		     * min - max 범위를 다르게 지정하면 내부적으로 max 해상도 우선 사용
-		     * - 320x240 해상도
-		     * - 640x480 해상도 : 기본 해상도
-		     * - 1280x720 해상도 : 단말기 성능에 따라 영상 품질이 매우 않좋아질 수 있음.
-		     */
-            config.video.setMaxFrameSize(frameWidth, frameHeight);
-            config.video.setMinFrameSize(frameWidth, frameHeight);
+        /*
+         * Video 영상의 선호 코덱을 지정, default VP8
+         * 상호 SDK 교환과정에서 선호코덱을 사용할 수 있으면 사용됨. 코덱 미지원 시 다른 코덱 사용
+         * v2.2.6
+         * @param enum VideoCodec,
+         *  - VP8
+         *  - VP9
+         *  - H264, Open H.264
+        */
+        config.video.setPreferCodec(videPreferCodec);
+        /*
+         * 영상 해상도 지정 , 기본 640x480
+         * min - max 범위를 다르게 지정하면 내부적으로 max 해상도 우선 사용
+         * - 320x240 해상도
+         * - 640x480 해상도 : 기본 해상도
+         * - 1280x720 해상도 : 단말기 성능에 따라 영상 품질이 매우 않좋아질 수 있음. 대부분의 단말기 성능 저하 발생
+         */
+        config.video.setMaxFrameSize(frameWidth, frameHeight);
+        config.video.setMinFrameSize(frameWidth, frameHeight);
 
-            config.video.setMinFrameRate(minVideoFrameRate);
-            config.video.setMaxFrameRate(maxVideoFrameRate);
+        config.video.setMinFrameRate(minVideoFrameRate);
+        config.video.setMaxFrameRate(maxVideoFrameRate);
 
-            /*
-             * PlayRTC Video-Stream BandWidth를 지정한다.
-             * 600 ~ 2500
-             * default 1500 (640x480)
-             */
+        /*
+         * PlayRTC Video-Stream BandWidth를 지정한다.
+         * 600 ~ 2500
+         * default 1500 (640x480)
+         */
 
-            config.bandwidth.setVideoBitrateKbps(videoBitrateKbps);
+        config.bandwidth.setVideoBitrateKbps(videoBitrateKbps);
 
-            /*
-             * 음성 스트림 전송 사용.
-             * false 설정 시 SDK는 read-only 모드로 동작하며, 상대방이 음성 스트림을 전송하면 수신이 된다.
-             */
-            config.audio.setEnable(true);
+        /*
+         * 음성 스트림 전송 사용.
+         * false 설정 시 SDK는 read-only 모드로 동작하며, 상대방이 음성 스트림을 전송하면 수신이 된다.
+         */
+        config.audio.setEnable(true);
 
-            /*
-             * Audio의 선호 코덱을 지정, default ISAC
-             * 상호 SDK 교환과정에서 선호코덱을 사용할 수 있으면 사용됨. 코덱 미지원 시 다른 코덱 사용
-             * v2.2.6
-             * @param codec AudioCodec
-             *  - ISAC,
-             *  - OPUS
-             */
-            config.audio.setPreferCodec(audioPreferCodec);
+        /*
+         * Audio의 선호 코덱을 지정, default ISAC
+         * 상호 SDK 교환과정에서 선호코덱을 사용할 수 있으면 사용됨. 코덱 미지원 시 다른 코덱 사용
+         * v2.2.6
+         * @param codec AudioCodec
+         *  - ISAC,
+         *  - OPUS
+         */
+        config.audio.setPreferCodec(audioPreferCodec);
 
-            // 음성 데이터 평균 bitrate 지정,kbps
-            // ISAC 32
-            // OPUS 32 ~ 64
-            config.bandwidth.setAudioBitrateKbps(audioBitrateKbps);
+        // 음성 데이터 평균 bitrate 지정,kbps
+        // ISAC 32
+        // OPUS 32 ~ 64
+        config.bandwidth.setAudioBitrateKbps(audioBitrateKbps);
 
-            /*
-             * SDK 내부에 구현되어 있는 단말기 Sound 출력 장치 제어 기능을 시용하도록 설정
-             * 사용자가 직접 기능(AudioManager)을 구현하는 경우 false로 지정
-             * default true, loud speaker 모드
-             *
-             * -------------------------------------------------
-             * ear-speaker |                | wired-earphone
-             *     ^       |                |       ^
-             *     |       |                |       |
-             * 근접 센서 감지  | <-----------> |     장치 유형
-             *     |       |  장치 연결 감지   |       |
-             *     v       |                |       v
-             * loud speaker|                | bluetooth-headset
-             * -------------------------------------------------
-             */
-            config.audio.setAudioManagerEnable(true);
+        /*
+         * SDK 내부에 구현되어 있는 단말기 Sound 출력 장치 제어 기능을 시용하도록 설정
+         * 사용자가 직접 기능(AudioManager)을 구현하는 경우 false로 지정
+         * default true, speaker 모드
+         */
+        config.audio.setAudioManagerEnable(true);
 
-            /* P2P 데이터 교환을 위한 DataChannel 사용 여부 */
-            config.data.setEnable(true);
-
-        }
-        // 영상 + 음성
-        else if(runType == 2){
-            /*
-		     * 영상 스트림 전송 사용.
-		     * false 설정 시 SDK는 read-only 모드로 동작하며, 상대방이 영상 스트림을 전송하면 수신이 된다.
-		     */
-            config.video.setEnable(true);
-
-            /*
-             * 전방카메라 사용
-             * @param  enum CameraType
-		     * - Front,
-		     * - Back
-             */
-            config.video.setCameraType(cameraType);
-
-            /*
-             * Video 영상의 선호 코덱을 지정, default VP8
-             * 상호 SDK 교환과정에서 선호코덱을 사용할 수 있으면 사용됨. 코덱 미지원 시 다른 코덱 사용
-             * v2.2.6
-             * @param enum VideoCodec,
-             *  - VP8
-             *  - VP9
-             *  - H264, Open H.264
-            */
-            config.video.setPreferCodec(videPreferCodec);
-            /*
-		     * 영상 해상도 지정 , 기본 640x480
-		     * min - max 범위를 다르게 지정하면 내부적으로 max 해상도 우선 사용
-		     * - 320x240 해상도
-		     * - 640x480 해상도 : 기본 해상도
-		     * - 1280x720 해상도 : 단말기 성능에 따라 영상 품질이 매우 않좋아질 수 있음. 대부분의 단말기 성능 저하 발생
-		     */
-            config.video.setMaxFrameSize(frameWidth, frameHeight);
-            config.video.setMinFrameSize(frameWidth, frameHeight);
-
-            config.video.setMinFrameRate(minVideoFrameRate);
-            config.video.setMaxFrameRate(maxVideoFrameRate);
-
-            /*
-             * PlayRTC Video-Stream BandWidth를 지정한다.
-             * 600 ~ 2500
-             * default 1500 (640x480)
-             */
-
-            config.bandwidth.setVideoBitrateKbps(videoBitrateKbps);
-
-            /*
-             * 음성 스트림 전송 사용.
-             * false 설정 시 SDK는 read-only 모드로 동작하며, 상대방이 음성 스트림을 전송하면 수신이 된다.
-             */
-            config.audio.setEnable(true);
-
-            /*
-             * Audio의 선호 코덱을 지정, default ISAC
-             * 상호 SDK 교환과정에서 선호코덱을 사용할 수 있으면 사용됨. 코덱 미지원 시 다른 코덱 사용
-             * v2.2.6
-             * @param codec AudioCodec
-             *  - ISAC,
-             *  - OPUS
-             */
-            config.audio.setPreferCodec(audioPreferCodec);
-
-            // 음성 데이터 평균 bitrate 지정,kbps
-            // ISAC 32
-            // OPUS 32 ~ 64
-            config.bandwidth.setAudioBitrateKbps(audioBitrateKbps);
-
-            /*
-             * SDK 내부에 구현되어 있는 단말기 Sound 출력 장치 제어 기능을 시용하도록 설정
-             * 사용자가 직접 기능(AudioManager)을 구현하는 경우 false로 지정
-             * default true, speaker 모드
-             */
-            config.audio.setAudioManagerEnable(true);
-
-            /* P2P 데이터 교환을 위한 DataChannel 사용 여부 */
-            config.data.setEnable(false);
-
-
-        }
-        // 음성 only
-        else if(runType == 3){
-            // video  전송 안함.
-            config.video.setEnable(false);
-            /*
-             * 음성 스트림 전송 사용.
-             * false 설정 시 SDK는 read-only 모드로 동작하며, 상대방이 음성 스트림을 전송하면 수신이 된다.
-             */
-            config.audio.setEnable(true);
-
-            /*
-             * Audio의 선호 코덱을 지정, default ISAC
-             * 상호 SDK 교환과정에서 선호코덱을 사용할 수 있으면 사용됨. 코덱 미지원 시 다른 코덱 사용
-             * v2.2.6
-             * @param codec AudioCodec
-             *  - ISAC,
-             *  - OPUS
-             */
-            config.audio.setPreferCodec(AudioCodec.OPUS);
-
-            // 음성 데이터 평균 bitrate 지정,kbps
-            // ISAC 32
-            // OPUS 32 ~ 64
-            config.bandwidth.setAudioBitrateKbps(audioBitrateKbps);
-
-            /*
-             * SDK 내부에 구현되어 있는 단말기 Sound 출력 장치 제어 기능을 시용하도록 설정
-             * 사용자가 직접 기능(AudioManager)을 구현하는 경우 false로 지정
-             * default true, speaker 모드
-             */
-            config.audio.setAudioManagerEnable(true);
-
-            /* P2P 데이터 교환을 위한 DataChannel 사용 여부 */
-            config.data.setEnable(false);
-
-
-        }
-        // Data Only
-        else {
-            config.video.setEnable(false);  /* 영상 전송 안함 */
-            config.audio.setEnable(false);   /* 음성 전송 안함 */
-            config.data.setEnable(true);    /* P2P 데이터 교환을 위한 DataChannel 사용 여부 */
-        }
+        /* P2P 데이터 교환을 위한 DataChannel 사용 여부 */
+        config.data.setEnable(false);
 
         /*
          * SDK Console 로그 레벨 지정

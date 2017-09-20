@@ -128,35 +128,11 @@ public class MainActivity extends Activity {
      * Sample Type 별 버튼 이벤트 등록
      */
     private void initUIControls() {
-
-
-
-        // 영상 + 음성 + Data Sample
-        this.findViewById(R.id.btn_go_sample1).setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                excutePlayRTCSample(1);
-            }
-        });
         // 영상 + 음성 Sample
         this.findViewById(R.id.btn_go_sample2).setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                excutePlayRTCSample(2);
-            }
-        });
-        // 음성 only Sample
-        this.findViewById(R.id.btn_go_sample3).setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                excutePlayRTCSample(3);
-            }
-        });
-        //  Data  only Sample
-        this.findViewById(R.id.btn_go_sample4).setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                excutePlayRTCSample(4);
+                excutePlayRTCSample();
             }
         });
 
@@ -236,18 +212,10 @@ public class MainActivity extends Activity {
     /**
      * PlayRTCActivity 이동
      *
-     * @param type int
-     * <pre>
-     * 1. 영상, 음성, p2p data
-     * 2. 영상, 음성
-     * 3. 음성, data
-     * 4. p2p data only
-     * </pre>
      */
-    private void excutePlayRTCSample(int type) {
+    private void excutePlayRTCSample() {
         Intent intent = new Intent(MainActivity.this, PlayRTCActivity.class);
         // PlayRTC Sample 유형 전달
-        intent.putExtra("type", type);
         intent.putExtra("channelRing", channelRing);
         intent.putExtra("videoCodec", videoCodec);
         intent.putExtra("audioCodec", audioCodec);

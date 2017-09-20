@@ -120,16 +120,6 @@ public class PlayRTCActivity extends Activity {
      */
     private boolean isResetLogViewArea = false;
 
-    /*
-     * PlayRTC Sample Type
-     * - 1 : 영상 + 음성 + Data Sample<br>
-     * - 2 : 영상 + 음성 Sample<br>
-     * - 3 : 음성 Sample<br>
-     * - 4 : Data Sample<br>
-     */
-    private int playrtcType = 1;
-
-
     private PlayRTCVerticalSeekBar zoomRangeBar = null;
     private PlayRTCVerticalSeekBar exposureRangeBar = null;
     private PlayRTCRange<Integer> exposureRange = null;
@@ -146,14 +136,6 @@ public class PlayRTCActivity extends Activity {
 
         Intent intent = getIntent();
 
-        /*
-         * PlayRTC Sample Type
-         * - 1. 영상, 음성, p2p data
-         * - 2. 영상, 음성
-         * - 3. 음성, data
-         * - 4. p2p data only
-         */
-        playrtcType = intent.getIntExtra("type", 1);
         String channelRing = intent.getStringExtra("channelRing");
         String videoCodec = intent.getStringExtra("videoCodec");
         String audioCodec = intent.getStringExtra("audioCodec");
@@ -162,14 +144,12 @@ public class PlayRTCActivity extends Activity {
         // UI 인스턴스 변수 처리
         initUIControls();
 
-        if (playrtcType < 3) {
-            initSnapshotControlls();
-        }
+        initSnapshotControlls();
 
         playrtcHandler = new PlayRTCHandler(this);
         try {
             //  PlayRTC 인스턴스를 생성.
-            playrtcHandler.createPlayRTC(playrtcType, channelRing, videoCodec, audioCodec);
+            playrtcHandler.createPlayRTC(channelRing, videoCodec, audioCodec);
         } catch (UnsupportedPlatformVersionException e) {
             // Android SDK 버전 체크 Exception
             e.printStackTrace();
@@ -200,12 +180,7 @@ public class PlayRTCActivity extends Activity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (playrtcType == 3 || playrtcType == 4) {
-            if (hasFocus && isResetLogViewArea == false) {
-                resetLogViewArea();
-            }
-            return;
-        }
+
         /*
         // Layout XML을 사용하지 않고 소스 코드에서 직접 샹성하는 경우
         if (hasFocus && videoLayer.isCreatedVideoView() == false) {
@@ -467,9 +442,6 @@ public class PlayRTCActivity extends Activity {
         /* 후방 카메라 사용 시 플래쉬 On/Off 전환 버튼 */
         initSwitchVideoCameraFlashFunctionUIControls();
 
-        /* DataChannel 기능 버튼 */
-        initDataChannelFunctionUIControls();
-
         /* 로그뷰  토글 버튼 */
         initLogViewFunctionUIControls();
 
@@ -504,95 +476,47 @@ public class PlayRTCActivity extends Activity {
     private void initSwitchVideoCameraFunctionUIControls() {
         Button cameraBtn = (Button) this.findViewById(R.id.btn_switch_camera);
 
-		/* 카메라 전환 */
-        if (playrtcType < 3) {
-            cameraBtn.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    playrtcHandler.switchVideoCamera();
-                }
-            });
-        } else {
-            // 영상 전송을 사용하지 않으므로 화면에서 숨긴다.
-            cameraBtn.setVisibility(View.INVISIBLE);
-        }
+        cameraBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playrtcHandler.switchVideoCamera();
+            }
+        });
     }
 
     /* 후방 카메라 사용 시 플래쉬 On/Off 전환 버튼 */
     private void initSwitchVideoCameraFlashFunctionUIControls() {
         Button flashBtn = (Button) this.findViewById(R.id.btn_switch_flash);
             /* 후방 카메라 플래쉬 On/Off, 후방 카메라 사용 시 작동  */
-        if(playrtcType < 3)
 
-        {
-            flashBtn.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (playrtcHandler == null) {
-                        return;
-                    }
-                    playrtcHandler.switchBackCameraFlash();
+        flashBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (playrtcHandler == null) {
+                    return;
                 }
-            });
-
-        }
-
-        else
-
-        {
-            // 영상 전송을 사용하지 않으므로 화면에서 숨긴다.
-            flashBtn.setVisibility(View.INVISIBLE);
-        }
-
-    }
-
-    /* DataChannel 기능 버튼 */
-    private void initDataChannelFunctionUIControls() {
-        /* DataChannel Text 전송 버튼 */
-        Button btnText = (Button) this.findViewById(R.id.btn_text);
-		/* DataChannel 파일 전송 버튼 */
-        Button btnFile = (Button) this.findViewById(R.id.btn_file);
-
-        if (playrtcType == 1 || playrtcType == 4) {
-            btnText.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dataHandler.sendText();
-                }
-            });
-            btnFile.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dataHandler.sendFile();
-                }
-            });
-        } else {
-            // DataChannel을 사용하지 않으므로 화면에서 숨긴다.
-            btnText.setVisibility(View.INVISIBLE);
-            btnFile.setVisibility(View.INVISIBLE);
-        }
+                playrtcHandler.switchBackCameraFlash();
+            }
+        });
     }
 
     /* 로그뷰  토글 버튼 */
     private void initLogViewFunctionUIControls() {
         /* 로그뷰  토글 버튼 이벤트 처리 */
         Button btnLog = (Button) this.findViewById(R.id.btn_log);
-        if (playrtcType < 3) {
-            btnLog.setOnClickListener(new Button.OnClickListener() {
-                public void onClick(View v) {
-                    if (logView.isShown() == false) {
-                        logView.show();
-                        ((Button) v).setText("로그닫기");
-                    } else {
-                        logView.hide();
-                        ((Button) v).setText("로그보기");
-                    }
+
+        btnLog.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                if (logView.isShown() == false) {
+                    logView.show();
+                    ((Button) v).setText("로그닫기");
+                } else {
+                    logView.hide();
+                    ((Button) v).setText("로그보기");
                 }
-            });
-        } else {
-            btnLog.setVisibility(View.GONE);
-            logView.setVisibility(View.VISIBLE);
-        }
+            }
+        });
+
     }
 
     /* Peer 채널 퇴장/종료 버튼 */
@@ -692,295 +616,274 @@ public class PlayRTCActivity extends Activity {
     /* 로컬뷰 미러 모드 전환 버튼 */
     private void initVideoViewMirrorFunctionUIControls() {
         Button btnMirror = (Button)this.findViewById(R.id.btn_mirror);
-        if (playrtcType < 3) {
-            btnMirror.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    RelativeLayout layer = (RelativeLayout)findViewById(R.id.btn_mirror_layer);
-                    if(layer.isShown()) {
-                        layer.setVisibility(View.GONE);
-                    }
-                    else {
-                        hideFuntionUILayer();
-                        layer.setVisibility(View.VISIBLE);
-                    }
+
+        btnMirror.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RelativeLayout layer = (RelativeLayout)findViewById(R.id.btn_mirror_layer);
+                if(layer.isShown()) {
+                    layer.setVisibility(View.GONE);
                 }
-            });
-            ((Button)this.findViewById(R.id.btn_mirror_on)).setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((TextView)findViewById(R.id.lb_btn_mirror)).setText("미러-On");
-                    LocalVideoView view = videoLayer.getLocalView();
-                    view.setMirror(true);
+                else {
+                    hideFuntionUILayer();
+                    layer.setVisibility(View.VISIBLE);
                 }
-            });
-            ((Button)this.findViewById(R.id.btn_mirror_off)).setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((TextView)findViewById(R.id.lb_btn_mirror)).setText("미러-Off");
-                    LocalVideoView view = videoLayer.getLocalView();
-                    view.setMirror(false);
-                }
-            });
-        }
-        else {
-            ((TextView)findViewById(R.id.lb_btn_mirror)).setVisibility(View.GONE);
-        }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_mirror_on)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((TextView)findViewById(R.id.lb_btn_mirror)).setText("미러-On");
+                LocalVideoView view = videoLayer.getLocalView();
+                view.setMirror(true);
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_mirror_off)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((TextView)findViewById(R.id.lb_btn_mirror)).setText("미러-Off");
+                LocalVideoView view = videoLayer.getLocalView();
+                view.setMirror(false);
+            }
+        });
     }
 
     /* 카메라 영상 추가 회전 각 버튼 v2.2.9 */
     private void initCameraDegreeFunctionUIControls() {
         Button btnCameraDegree = (Button) this.findViewById(R.id.btn_camera_degree);
-        if (playrtcType < 3) {
-            btnCameraDegree.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    RelativeLayout layer = (RelativeLayout)findViewById(R.id.btn_camera_degree_layer);
-                    if(layer.isShown()) {
-                        layer.setVisibility(View.GONE);
-                    }
-                    else {
-                        hideFuntionUILayer();
-                        layer.setVisibility(View.VISIBLE);
-                    }
+        btnCameraDegree.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RelativeLayout layer = (RelativeLayout)findViewById(R.id.btn_camera_degree_layer);
+                if(layer.isShown()) {
+                    layer.setVisibility(View.GONE);
                 }
-            });
-            Button cameraRotation0 = (Button)findViewById(R.id.btn_camera_0);
-            cameraRotation0.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setCameraRotation(0);
+                else {
+                    hideFuntionUILayer();
+                    layer.setVisibility(View.VISIBLE);
                 }
-            });
-            Button cameraRotation90 = (Button) this.findViewById(R.id.btn_camera_90);
-            cameraRotation90.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setCameraRotation(90);
-                }
-            });
-            Button cameraRotation180 = (Button) this.findViewById(R.id.btn_camera_180);
-            cameraRotation180.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setCameraRotation(180);
-                }
-            });
-            Button cameraRotation270 = (Button) this.findViewById(R.id.btn_camera_270);
-            cameraRotation270.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setCameraRotation(270);
-                }
-            });
-        }
-        else {
-            ((TextView)findViewById(R.id.lb_camera_degree)).setVisibility(View.GONE);
-            btnCameraDegree.setVisibility(View.GONE);
-        }
+            }
+        });
+        Button cameraRotation0 = (Button)findViewById(R.id.btn_camera_0);
+        cameraRotation0.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCameraRotation(0);
+            }
+        });
+        Button cameraRotation90 = (Button) this.findViewById(R.id.btn_camera_90);
+        cameraRotation90.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCameraRotation(90);
+            }
+        });
+        Button cameraRotation180 = (Button) this.findViewById(R.id.btn_camera_180);
+        cameraRotation180.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCameraRotation(180);
+            }
+        });
+        Button cameraRotation270 = (Button) this.findViewById(R.id.btn_camera_270);
+        cameraRotation270.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCameraRotation(270);
+            }
+        });
     }
 
     /* 카메라 영상 Zoom 기능 버튼 v2.3.0 */
     private void initCameraZoomFunctionUIControls() {
         Button btnCameraZoom = (Button)this.findViewById(R.id.btn_camera_zoom);
         zoomRangeBar = (PlayRTCVerticalSeekBar) this.findViewById(R.id.seekbar_camera_zoom);
-        if (playrtcType < 3) {
-            btnCameraZoom.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    if(playrtcHandler == null) {
-                        return;
-                    }
-                    RelativeLayout layer = (RelativeLayout)findViewById(R.id.btn_camera_zoom_layer);
-                    if(layer.isShown()) {
-                        layer.setVisibility(View.GONE);
-                    }
-                    else {
+        btnCameraZoom.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                        hideFuntionUILayer();
-
-                        PlayRTCRange<Integer> zoomRange = playrtcHandler.getCameraZoomRange();
-                        int zoomLevel = playrtcHandler.getCurrentCameraZoom();
-                        zoomRangeBar.setMaximum(zoomRange.getMaxValue());
-                        zoomRangeBar.setProgressAndThumb(zoomLevel);
-                        ((TextView)findViewById(R.id.lb_camera_zoom_max)).setText(zoomRange.getMaxValue() +"");
-                        ((TextView)findViewById(R.id.lb_camera_zoom_min)).setText(zoomRange.getMinValue() +"");
-                        ((TextView)findViewById(R.id.lb_camera_zoom)).setText("Zoom: "+ zoomLevel);
-
-
-                        layer.setVisibility(View.VISIBLE);
-                    }
+                if(playrtcHandler == null) {
+                    return;
                 }
-            });
-
-
-            zoomRangeBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
-
-                @Override
-                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    if(fromUser == false) {
-                        return;
-                    }
-                    zoomRangeBar.setProgressAndThumb(progress);
-                    ((TextView)findViewById(R.id.lb_camera_zoom)).setText("Zoom: "+ progress);
-                    playrtcHandler.setCameraZoom(progress);
+                RelativeLayout layer = (RelativeLayout)findViewById(R.id.btn_camera_zoom_layer);
+                if(layer.isShown()) {
+                    layer.setVisibility(View.GONE);
                 }
+                else {
 
-                @Override
-                public void onStartTrackingTouch(SeekBar seekBar) { }
+                    hideFuntionUILayer();
 
-                @Override
-                public void onStopTrackingTouch(SeekBar seekBar) { }
+                    PlayRTCRange<Integer> zoomRange = playrtcHandler.getCameraZoomRange();
+                    int zoomLevel = playrtcHandler.getCurrentCameraZoom();
+                    zoomRangeBar.setMaximum(zoomRange.getMaxValue());
+                    zoomRangeBar.setProgressAndThumb(zoomLevel);
+                    ((TextView)findViewById(R.id.lb_camera_zoom_max)).setText(zoomRange.getMaxValue() +"");
+                    ((TextView)findViewById(R.id.lb_camera_zoom_min)).setText(zoomRange.getMinValue() +"");
+                    ((TextView)findViewById(R.id.lb_camera_zoom)).setText("Zoom: "+ zoomLevel);
 
-            });
 
-        }
-        else {
-            ((TextView)findViewById(R.id.lb_camera_zoom)).setVisibility(View.GONE);
-            btnCameraZoom.setVisibility(View.GONE);
-        }
+                    layer.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+        zoomRangeBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(fromUser == false) {
+                    return;
+                }
+                zoomRangeBar.setProgressAndThumb(progress);
+                ((TextView)findViewById(R.id.lb_camera_zoom)).setText("Zoom: "+ progress);
+                playrtcHandler.setCameraZoom(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) { }
+
+        });
     }
 
     /* 카메라 Whitebalance 기능 버튼 v2.3.0 */
     private void initCameraWhitebalanceFunctionUIControls() {
         Button btnCameraWbalance = (Button)this.findViewById(R.id.btn_white_balance);
-        if (playrtcType < 3) {
-            btnCameraWbalance.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    if(playrtcHandler == null) {
-                        return;
-                    }
-                    RelativeLayout layer = (RelativeLayout)findViewById(R.id.btn_white_balance_layer);
-                    if(layer.isShown()) {
-                        layer.setVisibility(View.GONE);
-                    }
-                    else {
+        btnCameraWbalance.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                        hideFuntionUILayer();
-
-                        PlayRTCWhiteBalance whiteBalance = playrtcHandler.getCameraWhiteBalance();
-                        String labelText = null;
-
-                        if(whiteBalance == PlayRTCWhiteBalance.Auto) {
-                            labelText = "자동";
-                        }
-                        else if(whiteBalance == PlayRTCWhiteBalance.Incandescent) {
-                            labelText = "백열등";
-                        }
-                        else if(whiteBalance == PlayRTCWhiteBalance.FluoreScent) {
-                            labelText = "형광등";
-                        }
-                        else if(whiteBalance == PlayRTCWhiteBalance.DayLight) {
-                            labelText = "햇빛";
-                        }
-                        else if(whiteBalance == PlayRTCWhiteBalance.CloudyDayLight) {
-                            labelText = "흐림";
-                        }
-                        else if(whiteBalance == PlayRTCWhiteBalance.TwiLight) {
-                            labelText = "저녁빛";
-                        }
-                        else if(whiteBalance == PlayRTCWhiteBalance.Shade) {
-                            labelText = "그늘";
-                        }
-                        ((TextView)findViewById(R.id.white_balance_label)).setText(labelText);
-                        layer.setVisibility(View.VISIBLE);
-                    }
+                if(playrtcHandler == null) {
+                    return;
                 }
-            });
+                RelativeLayout layer = (RelativeLayout)findViewById(R.id.btn_white_balance_layer);
+                if(layer.isShown()) {
+                    layer.setVisibility(View.GONE);
+                }
+                else {
 
-            ((Button)this.findViewById(R.id.btn_white_balance_auto)).setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                    hideFuntionUILayer();
 
-                    if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.Auto)) {
-                        ((TextView)findViewById(R.id.white_balance_label)).setText("자동");
-                    }
-                }
-            });
-            ((Button)this.findViewById(R.id.btn_white_balance_incandescent)).setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                    PlayRTCWhiteBalance whiteBalance = playrtcHandler.getCameraWhiteBalance();
+                    String labelText = null;
 
-                    if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.Incandescent) == false) {
-                        Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
-                        return;
+                    if(whiteBalance == PlayRTCWhiteBalance.Auto) {
+                        labelText = "자동";
                     }
-                    if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.Incandescent)) {
-                        ((TextView)findViewById(R.id.white_balance_label)).setText("백열등");
+                    else if(whiteBalance == PlayRTCWhiteBalance.Incandescent) {
+                        labelText = "백열등";
                     }
+                    else if(whiteBalance == PlayRTCWhiteBalance.FluoreScent) {
+                        labelText = "형광등";
+                    }
+                    else if(whiteBalance == PlayRTCWhiteBalance.DayLight) {
+                        labelText = "햇빛";
+                    }
+                    else if(whiteBalance == PlayRTCWhiteBalance.CloudyDayLight) {
+                        labelText = "흐림";
+                    }
+                    else if(whiteBalance == PlayRTCWhiteBalance.TwiLight) {
+                        labelText = "저녁빛";
+                    }
+                    else if(whiteBalance == PlayRTCWhiteBalance.Shade) {
+                        labelText = "그늘";
+                    }
+                    ((TextView)findViewById(R.id.white_balance_label)).setText(labelText);
+                    layer.setVisibility(View.VISIBLE);
                 }
-            });
-            ((Button)this.findViewById(R.id.btn_white_balance_fluoreScent)).setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.FluoreScent) == false) {
-                        Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
-                        return;
-                    }
-                    if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.FluoreScent)) {
-                        ((TextView)findViewById(R.id.white_balance_label)).setText("형광등");
-                    }
-                }
-            });
-            ((Button)this.findViewById(R.id.btn_white_balance_daylight)).setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            }
+        });
 
-                    if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.DayLight) == false) {
-                        Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
-                        return;
-                    }
-                    if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.DayLight)) {
-                        ((TextView)findViewById(R.id.white_balance_label)).setText("햇빛");
-                    }
-                }
-            });
-            ((Button)this.findViewById(R.id.btn_white_balance_cloudydaylight)).setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        ((Button)this.findViewById(R.id.btn_white_balance_auto)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                    if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.CloudyDayLight) == false) {
-                        Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
-                        return;
-                    }
-                    if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.CloudyDayLight)) {
-                        ((TextView)findViewById(R.id.white_balance_label)).setText("흐림");
-                    }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.Auto)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("자동");
                 }
-            });
-            ((Button)this.findViewById(R.id.btn_white_balance_twilight)).setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_incandescent)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                    if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.TwiLight) == false) {
-                        Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
-                        return;
-                    }
-                    if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.TwiLight)) {
-                        ((TextView)findViewById(R.id.white_balance_label)).setText("저녁빛");
-                    }
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.Incandescent) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
                 }
-            });
-            ((Button)this.findViewById(R.id.btn_white_balance_shade)).setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.Shade) == false) {
-                        Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
-                        return;
-                    }
-                    if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.Shade)) {
-                        ((TextView)findViewById(R.id.white_balance_label)).setText("그늘");
-                    }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.Incandescent)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("백열등");
                 }
-            });
-        }
-        else {
-            ((TextView)findViewById(R.id.white_balance_label)).setVisibility(View.GONE);
-            btnCameraWbalance.setVisibility(View.GONE);
-        }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_fluoreScent)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.FluoreScent) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
+                }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.FluoreScent)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("형광등");
+                }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_daylight)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.DayLight) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
+                }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.DayLight)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("햇빛");
+                }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_cloudydaylight)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.CloudyDayLight) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
+                }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.CloudyDayLight)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("흐림");
+                }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_twilight)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.TwiLight) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
+                }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.TwiLight)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("저녁빛");
+                }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_shade)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.Shade) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
+                }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.Shade)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("그늘");
+                }
+            }
+        });
     }
 
     /* 카메라 노출 보정 기능 버튼 v2.3.0 */
@@ -988,82 +891,70 @@ public class PlayRTCActivity extends Activity {
 
         Button btnCameraExposure = (Button)this.findViewById(R.id.btn_exposure_compensation);
         exposureRangeBar = (PlayRTCVerticalSeekBar) this.findViewById(R.id.seekbar_exposure_compensation);
-        if (playrtcType < 3) {
 
-            btnCameraExposure.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    RelativeLayout layer = (RelativeLayout)findViewById(R.id.btn_exposure_compensation_layer);
-                    if(layer.isShown()) {
-                        layer.setVisibility(View.GONE);
-                    }
-                    else {
-                        hideFuntionUILayer();
-
-                        exposureRange = playrtcHandler.getCameraExposureCompensationRange();
-                        int min = exposureRange.getMinValue();
-                        int max = exposureRange.getMaxValue();
-                        int exposureLevel = playrtcHandler.getCameraExposureCompensation();
-                        exposureRangeBar.setMaximum(max * 2);
-                        exposureRangeBar.setProgressAndThumb(exposureLevel + max);
-                        String sValue = String.format(Locale.getDefault(), "노출: %d", exposureLevel);
-                        ((TextView)findViewById(R.id.lb_exposure_compensation)).setText(sValue);
-                        ((TextView)findViewById(R.id.lb_exposure_compensation_max)).setText(max +"");
-                        ((TextView)findViewById(R.id.lb_exposure_compensation_min)).setText(min +"");
-                        layer.setVisibility(View.VISIBLE);
-                    }
+        btnCameraExposure.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RelativeLayout layer = (RelativeLayout)findViewById(R.id.btn_exposure_compensation_layer);
+                if(layer.isShown()) {
+                    layer.setVisibility(View.GONE);
                 }
-            });
-            exposureRangeBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+                else {
+                    hideFuntionUILayer();
 
-                @Override
-                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    if(fromUser == false) {
-                        return;
-                    }
+                    exposureRange = playrtcHandler.getCameraExposureCompensationRange();
+                    int min = exposureRange.getMinValue();
                     int max = exposureRange.getMaxValue();
-                    int exposureLevel = progress - max;
-                    exposureRangeBar.setProgressAndThumb(progress);
+                    int exposureLevel = playrtcHandler.getCameraExposureCompensation();
+                    exposureRangeBar.setMaximum(max * 2);
+                    exposureRangeBar.setProgressAndThumb(exposureLevel + max);
                     String sValue = String.format(Locale.getDefault(), "노출: %d", exposureLevel);
                     ((TextView)findViewById(R.id.lb_exposure_compensation)).setText(sValue);
-                    playrtcHandler.setCameraExposureCompensation(exposureLevel);
+                    ((TextView)findViewById(R.id.lb_exposure_compensation_max)).setText(max +"");
+                    ((TextView)findViewById(R.id.lb_exposure_compensation_min)).setText(min +"");
+                    layer.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+        exposureRangeBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
 
-                @Override
-                public void onStartTrackingTouch(SeekBar seekBar) { }
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(fromUser == false) {
+                    return;
+                }
+                int max = exposureRange.getMaxValue();
+                int exposureLevel = progress - max;
+                exposureRangeBar.setProgressAndThumb(progress);
+                String sValue = String.format(Locale.getDefault(), "노출: %d", exposureLevel);
+                ((TextView)findViewById(R.id.lb_exposure_compensation)).setText(sValue);
+                playrtcHandler.setCameraExposureCompensation(exposureLevel);
+            }
 
-                @Override
-                public void onStopTrackingTouch(SeekBar seekBar) { }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
-            });
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) { }
 
-        }
-        else {
-
-            ((TextView)findViewById(R.id.lb_exposure_compensation)).setVisibility(View.GONE);
-            btnCameraExposure.setVisibility(View.GONE);
-        }
-
+        });
     }
 
     /* Video View ShowSnapshot 기능 버튼 */
     private void initVideoViewShowSnapshotFunctionUIControls() {
         /* snapshot 레이어 보기 버튼 */
         Button btnShowSnapshot = (Button) this.findViewById(R.id.btn_show_snapshot);
-        if (playrtcType < 3) {
 
+        btnShowSnapshot.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (snapshotLayer.isShown() == false) {
+                    hideFuntionUILayer();
 
-            btnShowSnapshot.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (snapshotLayer.isShown() == false) {
-                        hideFuntionUILayer();
-
-                        snapshotLayer.setVisibility(View.VISIBLE);
-                    }
+                    snapshotLayer.setVisibility(View.VISIBLE);
                 }
-            });
-        }
+            }
+        });
     }
 
     private void hideFuntionUILayer() {
