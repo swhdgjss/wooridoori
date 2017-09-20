@@ -23,8 +23,6 @@ import android.widget.RadioGroup;
  *
  */
 public class MainActivity extends Activity {
-
-
     
     private static final String LOG_TAG = "MainActivity";
 
