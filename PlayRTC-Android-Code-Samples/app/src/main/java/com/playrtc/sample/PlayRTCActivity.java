@@ -519,20 +519,8 @@ public class PlayRTCActivity extends Activity {
 
     }
 
-    /* Peer 채널 퇴장/종료 버튼 */
+    /* 종료 버튼 */
     private void initChannelCloseFunctionUIControls() {
-        /* Peer 채널 퇴장 버튼 */
-        Button btnDisconnectChannel = (Button) this.findViewById(R.id.btn_peerChClose);
-        btnDisconnectChannel.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (playrtcHandler != null && playrtcHandler.isChannelConnected()) {
-
-                    playrtcHandler.disconnectChannel();
-                }
-            }
-        });
-
 		/*  채널 종료 버튼 */
         Button btnCloseChannel = (Button) this.findViewById(R.id.btn_chClose);
         btnCloseChannel.setOnClickListener(new Button.OnClickListener() {

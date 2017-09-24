@@ -523,22 +523,13 @@
 				android:text="채널종료" />
 
 			<Button
-				android:id="@+id/btn_peerChClose"
-				android:layout_width="82dp"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:layout_toLeftOf="@id/btn_chClose"
-				android:textSize="13sp"
-				android:text="채널퇴장" />
-
-			<Button
 				android:id="@+id/btn_show_snapshot"
 				android:layout_width="82dp"
 				android:layout_height="wrap_content"
-				android:textSize="13sp"
 				android:layout_centerVertical="true"
-				android:layout_toLeftOf="@id/btn_peerChClose"
-				android:text="스냅샷" />
+				android:layout_toLeftOf="@+id/btn_chClose"
+				android:text="스냅샷"
+				android:textSize="13sp" />
 		</RelativeLayout>
 	</LinearLayout>
 	<!-- Channel Popup Layer-->
