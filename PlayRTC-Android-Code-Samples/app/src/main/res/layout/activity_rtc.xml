@@ -251,125 +251,14 @@
 			<!-- v2.3.0 카메라 Zoom -->
 
 			<!-- v2.3.0 카메라 white balance -->
-			<TextView
-				android:id="@+id/white_balance_label"
-				android:layout_width="80dp"
-				android:layout_height="wrap_content"
-				android:textSize="12sp"
-				android:layout_below="@id/btn_camera_zoom"
-				android:layout_alignLeft="@id/videoarea"
-				android:layout_marginTop="6dp"
-				android:textColor="#ff0000"
-				android:gravity="center"
-				android:text="자동" />
 
-			<Button
-				android:id="@+id/btn_white_balance"
-				android:layout_width="80dp"
-				android:layout_height="36dp"
-				android:layout_below="@id/white_balance_label"
-				android:layout_alignLeft="@id/videoarea"
-				android:textSize="11sp"
-				android:text="화이트밸런스" />
-
-			<RelativeLayout
-				android:id="@+id/btn_white_balance_layer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_toRightOf="@id/btn_white_balance"
-				android:layout_alignBottom="@id/btn_white_balance"
-				android:visibility="gone">
-
-				<Button
-					android:id="@+id/btn_white_balance_auto"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_alignParentLeft="true"
-					android:textSize="12sp"
-					android:text="자동" />
-
-				<Button
-					android:id="@+id/btn_white_balance_incandescent"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_auto"
-					android:layout_alignParentLeft="true"
-					android:textSize="12sp"
-					android:text="백열등" />
-
-				<Button
-					android:id="@+id/btn_white_balance_fluoreScent"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_auto"
-					android:layout_toRightOf="@id/btn_white_balance_incandescent"
-					android:textSize="12sp"
-					android:text="형광등" />
-
-
-				<Button
-					android:id="@+id/btn_white_balance_daylight"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_incandescent"
-					android:layout_alignParentLeft="true"
-					android:textSize="12sp"
-					android:text="햇빛" />
-
-				<Button
-					android:id="@+id/btn_white_balance_cloudydaylight"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_incandescent"
-					android:layout_toRightOf="@id/btn_white_balance_daylight"
-					android:textSize="12sp"
-					android:text="흐림" />
-				<Button
-					android:id="@+id/btn_white_balance_twilight"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_daylight"
-					android:layout_alignParentLeft="true"
-					android:textSize="12sp"
-					android:text="저녁빛" />
-
-				<Button
-					android:id="@+id/btn_white_balance_shade"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_daylight"
-					android:layout_toRightOf="@id/btn_white_balance_twilight"
-					android:textSize="12sp"
-					android:text="그늘" />
-
-			</RelativeLayout>
 			<!-- v2.3.0 카메라 white balance -->
 
 			<!-- v2.3.0 카메라 노출 보정 -->
-			<TextView
-				android:id="@+id/lb_exposure_compensation"
-				android:layout_width="80dp"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@id/videoarea"
-				android:layout_below="@id/btn_white_balance"
-				android:layout_marginTop="2dp"
-				android:textSize="12sp"
-				android:textColor="#ff0000"
-				android:gravity="center"
-				android:text="노출: 0" />
-			<Button
-				android:id="@+id/btn_exposure_compensation"
-				android:layout_width="80dp"
-				android:layout_height="36dp"
-				android:layout_below="@id/lb_exposure_compensation"
-				android:layout_alignLeft="@id/videoarea"
-				android:textSize="12sp"
-				android:text="노출조정" />
 			<RelativeLayout
 				android:id="@+id/btn_exposure_compensation_layer"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_toRightOf="@id/btn_exposure_compensation"
 				android:layout_centerVertical="true"
 				android:visibility="gone">
 

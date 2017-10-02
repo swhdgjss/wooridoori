@@ -14,14 +14,8 @@ import android.widget.RadioGroup
 
 /*
  * PlayRTC Sample App Main Activity Class
- * Sample 구현
- *
- * 1. 영상, 음성, p2p data
- * 2. 영상, 음성
- * 3. 음성, data
- * 4. p2p data only
- *
  */
+
 class MainActivity : Activity() {
     /**
      * isCloesActivity가 false이면 Dialog를 통해 사용자의 종료 의사를 확인하고<br></br>
@@ -97,12 +91,9 @@ class MainActivity : Activity() {
      * Sample Type 별 버튼 이벤트 등록
      */
     private fun initUIControls() {
-        // 영상 + 음성 Sample
-        this.findViewById(R.id.btn_go_sample2).setOnClickListener(object : Button.OnClickListener {
-            override fun onClick(v: View) {
-                excutePlayRTCSample()
-            }
-        })
+        this.findViewById(R.id.btn_go_sample2).setOnClickListener{
+            excutePlayRTCSample()
+        }
 
         (findViewById(R.id.radio_ring_group) as RadioGroup).setOnCheckedChangeListener { group, checkedId ->
             if (checkedId == R.id.radio_ring_false) {
@@ -162,7 +153,7 @@ class MainActivity : Activity() {
      *
      */
     private fun excutePlayRTCSample() {
-        val intent=Intent(this@MainActivity, PlayRTCActivity::class.java)
+        val intent = Intent(this, PlayRTCActivity::class.java)
         // PlayRTC Sample 유형 전달
         intent.putExtra("channelRing", channelRing)
         intent.putExtra("videoCodec", videoCodec)
