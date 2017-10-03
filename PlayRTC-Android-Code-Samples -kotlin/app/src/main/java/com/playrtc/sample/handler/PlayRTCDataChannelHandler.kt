@@ -388,7 +388,7 @@ class PlayRTCDataChannelHandler/*
         val recvDataElapsed=Date().time - recvStartTime
         recvStartTime=0
         recvDataSize=0L
-        Utils.showToast(activity, "Data Recv Elapsed-Time=" + recvDataElapsed)
+        Utils.showToast(activity!!, "Data Recv Elapsed-Time=" + recvDataElapsed)   //!!붙이기
         if (header.type == PlayRTCDataHeader.DATA_TYPE_TEXT) {
             val recvText=String(data)
             Log.d(LOG_TAG, "Text[$recvText]")
@@ -441,7 +441,7 @@ class PlayRTCDataChannelHandler/*
      * @param desc    String, description
      */
     override fun onError(obj: PlayRTCData, peerId: String, peerUid: String, id: Long, code: PlayRTCDataCode, desc: String) {
-        Utils.showToast(activity, "Data-Channel[$peerId] onError[$code] $desc")
+        Utils.showToast(activity!!, "Data-Channel[$peerId] onError[$code] $desc")  //!!붙이기
         activity!!.appnedLogMessage(">>Data-Channel onError[$code] $desc")
     }
 
@@ -459,7 +459,7 @@ class PlayRTCDataChannelHandler/*
      *                - Closed
      */
     override fun onStateChange(obj: PlayRTCData, peerId: String, peerUid: String, state: PlayRTCDataStatus) {
-        Utils.showToast(activity, "Data-Channel[$peerId] $state...")
+        Utils.showToast(activity!!, "Data-Channel[$peerId] $state...")   //!!붙이기
         activity!!.appnedLogMessage(">>Data-Channel $state...")
     }
 
