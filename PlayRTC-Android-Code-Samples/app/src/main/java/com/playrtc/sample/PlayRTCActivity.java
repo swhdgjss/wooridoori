@@ -463,6 +463,8 @@ public class PlayRTCActivity extends Activity {
         /* Video View ShowSnapshot 기능 버튼 */
         initVideoViewShowSnapshotFunctionUIControls();
 
+         /* 카메라 Whitebalance 기능 버튼 */
+        initCameraWhitebalanceFunctionUIControls();
 
     }
 
@@ -749,11 +751,148 @@ public class PlayRTCActivity extends Activity {
         });
     }
 
+    /* 카메라 Whitebalance 기능 버튼 v2.3.0 */
+    private void initCameraWhitebalanceFunctionUIControls() {
+        Button btnCameraWbalance = (Button)this.findViewById(R.id.btn_white_balance);
+
+        btnCameraWbalance.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(playrtcHandler == null) {
+                    return;
+                }
+                RelativeLayout layer = (RelativeLayout)findViewById(R.id.btn_white_balance_layer);
+                if(layer.isShown()) {
+                    layer.setVisibility(View.GONE);
+                }
+                else {
+
+                    hideFuntionUILayer();
+
+                    PlayRTCWhiteBalance whiteBalance = playrtcHandler.getCameraWhiteBalance();
+                    String labelText = null;
+
+                    if(whiteBalance == PlayRTCWhiteBalance.Auto) {
+                        labelText = "자동";
+                    }
+                    else if(whiteBalance == PlayRTCWhiteBalance.Incandescent) {
+                        labelText = "백열등";
+                    }
+                    else if(whiteBalance == PlayRTCWhiteBalance.FluoreScent) {
+                        labelText = "형광등";
+                    }
+                    else if(whiteBalance == PlayRTCWhiteBalance.DayLight) {
+                        labelText = "햇빛";
+                    }
+                    else if(whiteBalance == PlayRTCWhiteBalance.CloudyDayLight) {
+                        labelText = "흐림";
+                    }
+                    else if(whiteBalance == PlayRTCWhiteBalance.TwiLight) {
+                        labelText = "저녁빛";
+                    }
+                    else if(whiteBalance == PlayRTCWhiteBalance.Shade) {
+                        labelText = "그늘";
+                    }
+                    ((TextView)findViewById(R.id.white_balance_label)).setText(labelText);
+                    layer.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        ((Button)this.findViewById(R.id.btn_white_balance_auto)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.Auto)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("자동");
+                }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_incandescent)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.Incandescent) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
+                }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.Incandescent)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("백열등");
+                }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_fluoreScent)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.FluoreScent) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
+                }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.FluoreScent)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("형광등");
+                }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_daylight)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.DayLight) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
+                }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.DayLight)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("햇빛");
+                }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_cloudydaylight)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.CloudyDayLight) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
+                }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.CloudyDayLight)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("흐림");
+                }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_twilight)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.TwiLight) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
+                }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.TwiLight)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("저녁빛");
+                }
+            }
+        });
+        ((Button)this.findViewById(R.id.btn_white_balance_shade)).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(playrtcHandler.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.Shade) == false) {
+                    Utils.showToast(PlayRTCActivity.this, "단말기가 지원하지 않습니다.");
+                    return;
+                }
+                if(playrtcHandler.setCameraWhiteBalance(PlayRTCWhiteBalance.Shade)) {
+                    ((TextView)findViewById(R.id.white_balance_label)).setText("그늘");
+                }
+            }
+        });
+    }
+
     private void hideFuntionUILayer() {
         ((RelativeLayout)findViewById(R.id.btn_mirror_layer)).setVisibility(View.GONE);
         ((RelativeLayout)findViewById(R.id.btn_camera_degree_layer)).setVisibility(View.GONE);
         ((RelativeLayout)findViewById(R.id.btn_camera_zoom_layer)).setVisibility(View.GONE);
         ((RelativeLayout)findViewById(R.id.btn_exposure_compensation_layer)).setVisibility(View.GONE);
+        ((RelativeLayout)findViewById(R.id.btn_white_balance_layer)).setVisibility(View.GONE);
     }
     /**
      * 카메라 영상 회전 기능. v2.2.9

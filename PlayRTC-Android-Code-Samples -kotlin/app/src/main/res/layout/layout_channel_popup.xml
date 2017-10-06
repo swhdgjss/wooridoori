@@ -135,14 +135,6 @@
 						android:background="@drawable/textview_border"
 						android:text=""
 						android:hint="채널 이름을 입력하세요[option]" />
-					<Button
-						android:id="@+id/btn_creator_clear"
-						android:layout_width="150dp"
-						android:layout_height="40dp"
-						android:textSize="18sp"
-						android:layout_marginLeft="20dp"
-						android:text="지우기">
-					</Button>
 				</LinearLayout>
 
 				<LinearLayout
@@ -200,21 +192,34 @@
 						android:background="@drawable/textview_border"
 						android:text=""
 						android:hint="사용자 이름을 입력하세요[option]" />
+				</LinearLayout>
+
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="50dp"
+					android:layout_marginBottom="10dp"
+					android:layout_marginTop="10dp"
+					android:background="@android:color/transparent"
+					android:orientation="vertical">
+
+					<Button
+						android:id="@+id/btn_creator_clear"
+						android:layout_width="150dp"
+						android:layout_height="40dp"
+						android:layout_marginLeft="20dp"
+						android:layout_toLeftOf="@id/btn_create_channel"
+						android:text="지우기"
+						android:textSize="18sp"></Button>
+
 					<Button
 						android:id="@+id/btn_create_channel"
 						android:layout_width="150dp"
 						android:layout_height="40dp"
-						android:textSize="18sp"
+						android:layout_centerHorizontal="true"
 						android:layout_marginLeft="20dp"
-						android:text="채널생성하기">
-					</Button>
-				</LinearLayout>
-
-				<RelativeLayout
-					android:layout_height="20dp"
-					android:layout_width="match_parent"
-					android:background="@drawable/split_bar"
-					android:orientation="vertical" />
+						android:text="채널생성하기"
+						android:textSize="18sp"></Button>
+				</RelativeLayout>
 
 
 				<TextView
@@ -222,15 +227,15 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
-					android:layout_marginTop="10dp"
+					android:layout_marginBottom="20dp"
 					android:background="@drawable/box_channelid"
+					android:paddingBottom="15dp"
 					android:paddingLeft="20dp"
 					android:paddingRight="20dp"
-					android:paddingTop="20dp"
-					android:paddingBottom="20dp"
+					android:paddingTop="15dp"
+					android:text="CHANNEL-ID"
 					android:textColor="#000000"
-					android:textSize="26sp"
-					android:text="CHANNEL-ID" />
+					android:textSize="26sp" />
 
 			</LinearLayout>
 
@@ -267,13 +272,6 @@
 						android:background="@drawable/textview_border"
 						android:text=""
 						android:hint="사용자 아이디를 입력하세요." />
-					<Button
-						android:id="@+id/btn_connect_clear"
-						android:layout_width="150dp"
-						android:layout_height="40dp"
-						android:textSize="18sp"
-						android:layout_marginLeft="20dp"
-						android:text="지우기" />
 				</LinearLayout>
 
 				<LinearLayout
@@ -302,32 +300,46 @@
 						android:background="@drawable/textview_border"
 						android:text=""
 						android:hint="사용자 이름을 입력하세요[option]" />
+				</LinearLayout>
+
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="40dp"
+					android:layout_marginBottom="10dp"
+					android:layout_marginTop="10dp"
+					android:background="@android:color/transparent"
+					android:orientation="vertical">
+
+					<Button
+						android:id="@+id/btn_connect_clear"
+						android:layout_width="150dp"
+						android:layout_height="40dp"
+						android:layout_marginLeft="20dp"
+						android:layout_toLeftOf="@id/btn_connect_channel_list"
+						android:text="지우기"
+						android:textSize="18sp" />
+
 					<Button
 						android:id="@+id/btn_connect_channel_list"
 						android:layout_width="150dp"
 						android:layout_height="40dp"
-						android:textSize="18sp"
+						android:layout_centerHorizontal="true"
 						android:layout_marginLeft="20dp"
-						android:text="채널조회">
-					</Button>
-				</LinearLayout>
-				<RelativeLayout
-					android:layout_height="10dp"
-					android:layout_width="match_parent"
-					android:background="@drawable/split_bar"
-					android:orientation="vertical" />
+						android:text="채널조회"
+						android:textSize="18sp"></Button>
+				</RelativeLayout>
 
 
 				<ListView
 					android:id="@+id/channel_list"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:layout_marginLeft="8dp"
+					android:layout_marginRight="8dp"
 					android:divider="@color/list_row_divider"
 					android:dividerHeight="1dp"
 					android:fastScrollEnabled="false"
-					android:layout_marginLeft="8dp"
-					android:layout_marginRight="8dp"
-					android:scrollbarAlwaysDrawVerticalTrack="true"  />
+					android:scrollbarAlwaysDrawVerticalTrack="true" />
 
 			</LinearLayout>
 

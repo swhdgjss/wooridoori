@@ -423,9 +423,6 @@ class PlayRTCActivity : Activity() {
         /* 카메라 Whitebalance 기능 버튼 */
         initCameraWhitebalanceFunctionUIControls()
 
-        /* 카메라 노출 보정 기능 버튼 */
-        initCameraExposureFunctionUIControls()
-
         /* Video View ShowSnapshot 기능 버튼 */
         initVideoViewShowSnapshotFunctionUIControls()
 
@@ -477,20 +474,8 @@ class PlayRTCActivity : Activity() {
 
     }
 
-    /* Peer 채널 퇴장/종료 버튼 */
+    /* Peer 채널 종료 버튼 */
     private fun initChannelCloseFunctionUIControls() {
-        /* Peer 채널 퇴장 버튼 */
-        val btnDisconnectChannel=this.findViewById(R.id.btn_peerChClose) as Button
-        btnDisconnectChannel.setOnClickListener(object : View.OnClickListener {           //button->view
-            override fun onClick(v: View) {
-                if (playRTCHandler != null && playRTCHandler!!.isChannelConnected) {
-
-                    playRTCHandler!!.disconnectChannel()
-                }
-            }
-        })
-
-        /*  채널 종료 버튼 */
         val btnCloseChannel=this.findViewById(R.id.btn_chClose) as Button
         btnCloseChannel.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
@@ -804,55 +789,6 @@ class PlayRTCActivity : Activity() {
                     (findViewById(R.id.white_balance_label) as TextView).text="그늘"
                 }
             }
-        })
-    }
-
-    /* 카메라 노출 보정 기능 버튼 v2.3.0 */
-    private fun initCameraExposureFunctionUIControls() {
-
-        val btnCameraExposure=this.findViewById(R.id.btn_exposure_compensation) as Button
-        exposureRangeBar=this.findViewById(R.id.seekbar_exposure_compensation) as PlayRTCVerticalSeekBar
-
-        btnCameraExposure.setOnClickListener(object : View.OnClickListener {    //Button->view
-            override fun onClick(v: View) {
-                val layer=findViewById(R.id.btn_exposure_compensation_layer) as RelativeLayout
-                if (layer.isShown) {
-                    layer.visibility=View.GONE
-                } else {
-                    hideFuntionUILayer()
-
-                    exposureRange=playRTCHandler!!.cameraExposureCompensationRange
-                    val min=exposureRange!!.minValue
-                    val max=exposureRange!!.maxValue
-                    val exposureLevel=playRTCHandler!!.cameraExposureCompensation
-                    exposureRangeBar!!.maximum=max * 2
-                    exposureRangeBar!!.setProgressAndThumb(exposureLevel + max)
-                    val sValue=String.format(Locale.getDefault(), "노출: %d", exposureLevel)
-                    (findViewById(R.id.lb_exposure_compensation) as TextView).setText(sValue)
-                    (findViewById(R.id.lb_exposure_compensation_max) as TextView).text=max.toString() + ""
-                    (findViewById(R.id.lb_exposure_compensation_min) as TextView).text=min.toString() + ""
-                    layer.visibility=View.VISIBLE
-                }
-            }
-        })
-        exposureRangeBar!!.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
-
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser == false) {
-                    return
-                }
-                val max=exposureRange!!.maxValue
-                val exposureLevel=progress - max
-                exposureRangeBar!!.setProgressAndThumb(progress)
-                val sValue=String.format(Locale.getDefault(), "노출: %d", exposureLevel)
-                (findViewById(R.id.lb_exposure_compensation) as TextView).setText(sValue)
-                playRTCHandler!!.cameraExposureCompensation=exposureLevel      //yn
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {}
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {}
-
         })
     }
 

@@ -1,20 +1,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <LinearLayout
-        android:layout_width="match_parent"
-    	android:layout_height="match_parent" 
-    	android:orientation="vertical"
-    	android:layout_alignParentTop="true">
-	    <RelativeLayout
-	        android:id="@+id/main_area" 
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent" >
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:layout_alignParentTop="true">
+		<RelativeLayout
+			android:id="@+id/main_area"
 			android:layout_width="match_parent"
-	        android:layout_height="0px"
-	        android:layout_weight="0.82"
-	        android:background="#e0e0e0"
-	        android:layout_alignParentTop="true">
+			android:layout_height="0px"
+			android:layout_weight="0.82"
+			android:background="#e0e0e0"
+			android:layout_alignParentTop="true">
 
 			<Button
 				android:id="@+id/btn_switch_camera"
@@ -47,13 +47,13 @@
 				android:background="#e0e0e0"/>
 
 
-		    
+
 			<com.playrtc.sample.view.PlayRTCVideoViewGroup
-			    android:id="@+id/videoarea"
+				android:id="@+id/videoarea"
 				android:layout_width="match_parent"
-		        android:layout_height="match_parent"
-		        android:layout_centerHorizontal="true"
-		        android:layout_centerVertical="true"
+				android:layout_height="match_parent"
+				android:layout_centerHorizontal="true"
+				android:layout_centerVertical="true"
 				android:background="#e0e0e0">
 				<!-- v2.2.6 xml 지원 -->
 				<com.playrtc.sample.view.RemoteVideoView
@@ -346,30 +346,10 @@
 			<!-- v2.3.0 카메라 white balance -->
 
 			<!-- v2.3.0 카메라 노출 보정 -->
-			<TextView
-				android:id="@+id/lb_exposure_compensation"
-				android:layout_width="80dp"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@id/videoarea"
-				android:layout_below="@id/btn_white_balance"
-				android:layout_marginTop="2dp"
-				android:textSize="12sp"
-				android:textColor="#ff0000"
-				android:gravity="center"
-				android:text="노출: 0" />
-			<Button
-				android:id="@+id/btn_exposure_compensation"
-				android:layout_width="80dp"
-				android:layout_height="36dp"
-				android:layout_below="@id/lb_exposure_compensation"
-				android:layout_alignLeft="@id/videoarea"
-				android:textSize="12sp"
-				android:text="노출조정" />
 			<RelativeLayout
 				android:id="@+id/btn_exposure_compensation_layer"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_toRightOf="@id/btn_exposure_compensation"
 				android:layout_centerVertical="true"
 				android:visibility="gone">
 
@@ -419,57 +399,57 @@
 				android:visibility="invisible"/>
 
 			<LinearLayout
-			    android:orientation="vertical"
-			    android:layout_width="100dp"
+				android:orientation="vertical"
+				android:layout_width="100dp"
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_alignParentRight="true">
-				
-				<TextView 
-		            android:layout_width="match_parent" 
-		            android:layout_height="wrap_content"
-		            android:textSize="16sp"
-		            android:textColor="#000000"
-		            android:text="Local Mute"
-		            android:background="#e0e0e0">
-	        	</TextView>  
-	        
-			    <Button
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="16sp"
+					android:textColor="#000000"
+					android:text="Local Mute"
+					android:background="#e0e0e0">
+				</TextView>
+
+				<Button
 					android:id="@+id/btn_local_vmute"
 					android:layout_width="90dp"
 					android:layout_height="wrap_content"
 					android:textSize="12sp"
 					android:text="VIDOE-OFF" />
-			    <Button
+				<Button
 					android:id="@+id/btn_local_amute"
 					android:layout_width="90dp"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10dp"
 					android:textSize="12sp"
 					android:text="AUDIO-OFF" />
-			    <TextView 
-		            android:layout_width="match_parent" 
-		            android:layout_height="wrap_content"
-		            android:layout_marginTop="10dp"
-		            android:textSize="16sp"
-		            android:textColor="#000000"
-		            android:text="Remote Mute"
-		            android:background="#e0e0e0">
-	        	</TextView>  
-			    <Button
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dp"
+					android:textSize="16sp"
+					android:textColor="#000000"
+					android:text="Remote Mute"
+					android:background="#e0e0e0">
+				</TextView>
+				<Button
 					android:id="@+id/btn_remote_vmute"
 					android:layout_width="90dp"
 					android:layout_height="wrap_content"
 					android:textSize="12sp"
 					android:text="VIDOE-OFF" />
-			    <Button
+				<Button
 					android:id="@+id/btn_remote_amute"
 					android:layout_width="90dp"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10dp"
 					android:textSize="12sp"
 					android:text="AUDIO-OFF" />
-			   
+
 			</LinearLayout>
 
 			<!-- 영상 뷰 Snapshot 이미지 요청 및 이미지 출력을 위한 뷰 그룹  -->
@@ -485,14 +465,14 @@
 			</com.playrtc.sample.view.PlayRTCSnapshotView>
 
 		</RelativeLayout>
-		
-		<RelativeLayout 
-		    android:id="@+id/controls"
+
+		<RelativeLayout
+			android:id="@+id/controls"
 			android:layout_width="match_parent"
-	        android:layout_height="0px"
-	        android:layout_weight="0.18"
-	        android:layout_below="@id/main_area"
-	        android:background="#e0e0e0">
+			android:layout_height="0px"
+			android:layout_weight="0.18"
+			android:layout_below="@id/main_area"
+			android:background="#e0e0e0">
 
 			<Button
 				android:id="@+id/btn_log"
@@ -501,7 +481,7 @@
 				android:layout_centerVertical="true"
 				android:textSize="13sp"
 				android:text="로그보기" />
-		    
+
 			<Button
 				android:id="@+id/btn_channel"
 				android:layout_width="82dp"
@@ -511,8 +491,8 @@
 				android:layout_marginLeft="10dp"
 				android:textSize="13sp"
 				android:text="채널팝업" />
-			
-		     <Button
+
+			<Button
 				android:id="@+id/btn_chClose"
 				android:layout_width="82dp"
 				android:layout_height="wrap_content"
@@ -523,22 +503,13 @@
 				android:text="채널종료" />
 
 			<Button
-				android:id="@+id/btn_peerChClose"
-				android:layout_width="82dp"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:layout_toLeftOf="@id/btn_chClose"
-				android:textSize="13sp"
-				android:text="채널퇴장" />
-
-			<Button
 				android:id="@+id/btn_show_snapshot"
 				android:layout_width="82dp"
 				android:layout_height="wrap_content"
-				android:textSize="13sp"
 				android:layout_centerVertical="true"
-				android:layout_toLeftOf="@id/btn_peerChClose"
-				android:text="스냅샷" />
+				android:layout_toLeftOf="@+id/btn_chClose"
+				android:text="스냅샷"
+				android:textSize="13sp" />
 		</RelativeLayout>
 	</LinearLayout>
 	<!-- Channel Popup Layer-->
