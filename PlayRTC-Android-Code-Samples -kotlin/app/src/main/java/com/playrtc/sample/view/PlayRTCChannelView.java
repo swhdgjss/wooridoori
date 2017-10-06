@@ -241,13 +241,13 @@ public class PlayRTCChannelView extends RelativeLayout implements IChannelListAd
 
         String crUserId = txtCrUserId.getText().toString();
         if (TextUtils.isEmpty(crUserId)) {
-            String userId = Utils.INSTANCE.getRandomServiceMailId();
+            String userId = Utils.getRandomServiceMailId();
             txtCrUserId.setText(userId);
             txtCrChannelName.setText("Android::" + userId + "의 채널입니다.");
         }
         String cnUserId = txtCnUserId.getText().toString();
         if (TextUtils.isEmpty(cnUserId)) {
-            txtCnUserId.setText(Utils.INSTANCE.getRandomServiceMailId());
+            txtCnUserId.setText(Utils.getRandomServiceMailId());
         }
         final Animation animation = AnimationUtils.loadAnimation(this.getContext(), R.anim.channel_show);
         animation.setAnimationListener(new Animation.AnimationListener() {
