@@ -11,11 +11,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.RelativeLayout
-import android.widget.SeekBar
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import android.widget.SeekBar.OnSeekBarChangeListener
-import android.widget.TextView
 
 import com.playrtc.sample.handler.PlayRTCChannelViewListener
 import com.playrtc.sample.handler.PlayRTCDataChannelHandler
@@ -33,6 +31,7 @@ import com.sktelecom.playrtc.exception.RequiredParameterMissingException
 import com.sktelecom.playrtc.exception.UnsupportedPlatformVersionException
 import com.sktelecom.playrtc.util.PlayRTCRange
 import com.sktelecom.playrtc.util.ui.PlayRTCVideoView
+import kotlinx.android.synthetic.main.activity_rtc.*
 
 import java.util.Locale
 
@@ -160,6 +159,8 @@ class PlayRTCActivity : Activity() {
 
         initSnapshotControlls()
 
+        chatting()
+
         playRTCHandler=PlayRTCHandler(this)
         try {
             //  PlayRTC 인스턴스를 생성.
@@ -225,7 +226,7 @@ class PlayRTCActivity : Activity() {
         if (playRTCHandler != null) playRTCHandler!!.onActivityResume()
     }
 
-    override fun onDestroy() {
+    override fun onDestroy() {             //채널 나가는 함수
         Log.e(LOG_TAG, "onDestroy===============================")
 
         // PlayRTC 인스턴스 해제
@@ -672,6 +673,21 @@ class PlayRTCActivity : Activity() {
         })
     }
 
+    /*채팅 버튼*/
+    private fun chatting() {
+        val text = findViewById(R.id.btn_chat) as Button
+        val edit = findViewById(R.id.editText) as EditText
+        val txt = findViewById(R.id.textView) as TextView
+        text.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View) {
+                edit.setVisibility(View.VISIBLE)
+                txt.setVisibility(View.VISIBLE)
+                Toast.makeText(this@PlayRTCActivity, "메시지", Toast.LENGTH_SHORT).show()
+            }
+        });
+    }
+
+
     /* 카메라 Whitebalance 기능 버튼 v2.3.0 */
     private fun initCameraWhitebalanceFunctionUIControls() {
         val btnCameraWbalance=this.findViewById(R.id.btn_white_balance) as Button
@@ -903,3 +919,5 @@ class PlayRTCActivity : Activity() {
         private val LOG_TAG="PlayRTCActivity"
     }
 }
+
+

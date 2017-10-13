@@ -16,6 +16,9 @@
 			android:background="#e0e0e0"
 			android:layout_alignParentTop="true">
 
+
+
+
 			<Button
 				android:id="@+id/btn_switch_camera"
 				android:layout_width="100dp"
@@ -521,4 +524,36 @@
 		android:layout_centerHorizontal="true"
 		android:layout_centerVertical="true"
 		android:visibility="invisible"/>
+
+	<Button
+		android:id="@+id/btn_chat"
+		android:layout_width="80dp"
+		android:layout_height="36dp"
+		android:layout_marginBottom="63dp"
+		android:text="채팅하기"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true" />
+
+	<EditText
+		android:id="@+id/editText"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:ems="10"
+		android:inputType="textPersonName"
+		android:text="Name"
+		android:visibility="invisible"
+		android:layout_above="@+id/btn_chat"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true" />
+
+	<TextView
+		android:id="@+id/textView"
+		android:layout_width="210dp"
+		android:layout_height="50dp"
+		android:layout_above="@+id/editText"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:textSize="20sp"
+		android:visibility="invisible" />
 </RelativeLayout>
