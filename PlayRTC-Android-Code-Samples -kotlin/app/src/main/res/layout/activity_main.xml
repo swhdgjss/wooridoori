@@ -42,7 +42,6 @@
 				android:id="@+id/radio_ring_false"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:checked="true"
 				android:text="Ring 사용안함"
 				android:textColor="#000000"
 				android:textSize="16sp" />
@@ -53,6 +52,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginLeft="5dp"
 				android:text="Ring 사용"
+				android:checked="true"
 				android:textColor="#000000"
 				android:textSize="16sp" />
 		</RadioGroup>
@@ -148,8 +148,7 @@
 					android:layout_height="wrap_content"
 					android:textColor="#000000"
 					android:textSize="16sp"
-					android:text="ISAC"
-					android:checked="true"/>
+					android:text="ISAC" />
 
 				<RadioButton
 					android:id="@+id/radio_audio_codec_opus"
@@ -157,7 +156,8 @@
 					android:layout_height="wrap_content"
 					android:textColor="#000000"
 					android:textSize="16sp"
-					android:text="OPUS" />
+					android:text="OPUS"
+					android:checked="true"/>
 
 			</RadioGroup>
 		</RelativeLayout>

@@ -499,7 +499,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
 
     /**
      * 현재 사용중인 카메라의 WhiteBalance를 지정한다.<br></br>
-     * 단말기에 따라 WhiteBalance를 지원하지 안ㄹ을 수 있음<br></br>
+     * 단말기에 따라 WhiteBalance를 지원하지 않을 수 있음<br></br>
      * v2.2.10
      * @param whiteBalance PlayRTCWhiteBalance
      * <pre>
@@ -516,43 +516,6 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
     fun setCameraWhiteBalance(whiteBalance: PlayRTCWhiteBalance): Boolean {
         return if (playRTC != null) {
             playRTC!!.setCameraWhiteBalance(whiteBalance)
-        } else false
-
-    }
-
-    /**
-     * 현재 사용중인 카메라의 노출 보정값 설정 범위를 반환한다.<br></br>
-     * v2.2.10
-     * maximim 값이 0 이면 지원 않함.
-     * @return PlayRTCRange<Integer>
-    </Integer> */
-    val cameraExposureCompensationRange: PlayRTCRange<Int>
-        get()=if (playRTC != null) {
-            playRTC!!.cameraExposureCompensationRange
-        } else PlayRTCRange.create(0, 0)
-
-    /**
-     * 현재 사용중인 카메라의 노출 보정값 설정 범위를 반환한다. <br></br>
-     * 0 이면 노출 보정이 지원안됨<br></br>
-     * v2.2.10
-     * @return int
-     */
-    var cameraExposureCompensation: Int=0        // 초기화!
-        get()=if (playRTC != null) {
-            playRTC!!.cameraExposureCompensation
-        } else 0
-
-    /**
-     * 현재 사용중인 카메라의 노출 보정값을 지정한다.<br></br>
-     * maximim값이 0이면  노출이 조정되지 않는다.<br></br>
-     * 노출 보정이 지원되는지 알아보기 위해 유효한 값 범위(getCameraExposureCompensationRange() 호출하여)를 확인해야한다<br></br>
-     * v2.2.10
-     * @param value int
-     * @return boolean, 실행 여부
-     */
-    fun setCameraExposureCompensation(value: Int): Boolean {
-        return if (playRTC != null) {
-            playRTC!!.setCameraExposureCompensation(value)
         } else false
 
     }
@@ -872,12 +835,12 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
 		 * - 640x480 해상도 : 기본 해상도
 		 * - 1280x720 해상도 : 단말기 성능에 따라 영상 품질이 매우 않좋아질 수 있음.
 		 */
-        val frameWidth=640
-        val frameHeight=480
+        val frameWidth=1280
+        val frameHeight=720
 
         val minVideoFrameRate=15
         val maxVideoFrameRate=30
-        val videoBitrateKbps=1500
+        val videoBitrateKbps=2500
 
         // 음성 데이터 평균 bitrate 지정,kbps
         // ISAC 32
