@@ -1,39 +1,32 @@
 package com.playrtc.sample
 
+import a.a.b.e
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Configuration
-import android.graphics.Bitmap
 import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import android.widget.SeekBar.OnSeekBarChangeListener
+
 
 import com.playrtc.sample.handler.PlayRTCChannelViewListener
 import com.playrtc.sample.handler.PlayRTCDataChannelHandler
 import com.playrtc.sample.handler.PlayRTCHandler
 import com.playrtc.sample.util.Utils
-import com.playrtc.sample.view.LocalVideoView
-import com.playrtc.sample.view.PlayRTCChannelView
-import com.playrtc.sample.view.PlayRTCLogView
-import com.playrtc.sample.view.PlayRTCSnapshotView
-import com.playrtc.sample.view.PlayRTCSnapshotView.SnapshotLayerObserver
-import com.playrtc.sample.view.PlayRTCVerticalSeekBar
-import com.playrtc.sample.view.PlayRTCVideoViewGroup
+import com.playrtc.sample.view.*
 import com.sktelecom.playrtc.PlayRTC.PlayRTCWhiteBalance
 import com.sktelecom.playrtc.exception.RequiredParameterMissingException
 import com.sktelecom.playrtc.exception.UnsupportedPlatformVersionException
 import com.sktelecom.playrtc.util.PlayRTCRange
 import com.sktelecom.playrtc.util.ui.PlayRTCVideoView
-import kotlinx.android.synthetic.main.activity_rtc.*
-
-import java.util.Locale
+import java.io.*
+import java.net.ServerSocket
+import java.net.Socket
 
 /*
  * PlayRTC를 구현한 Activity Class
@@ -918,6 +911,53 @@ class PlayRTCActivity : Activity() {
     companion object {
         private val LOG_TAG="PlayRTCActivity"
     }
+
+    //Class TCPServer 랑 companionobject 채팅 server코드--------------------------------------------------------------------------
+    class TCPServer : Runnable {
+        override fun run() {
+            // TODO Auto-generated method stub
+            try {
+                println("S: Connecting...")
+                val serverSocket=ServerSocket(ServerPort)
+
+                while (true) {
+                    val client=serverSocket.accept()
+                    println("S: Receiving...")
+                    try {
+                        val `in`=BufferedReader(
+                                InputStreamReader(client.getInputStream()))
+                        val str=`in`.readLine()
+                        println("S: Received: '$str'")
+                        val out=PrintWriter(BufferedWriter(OutputStreamWriter(client.getOutputStream())), true)
+                        out.println("Server Received " + str)
+                    } catch (e: Exception) {
+                        println("S: Error")
+                        e.printStackTrace()
+                    } finally {
+                        client.close()
+                        println("S: Done.")
+                    }
+                }
+            } catch (e: Exception) {
+                println("S: Error")
+                e.printStackTrace()
+            }
+
+        }
+
+        companion object {
+            val ServerPort=9999
+            val ServerIP="xxx.xxx.xxx.xxxx"
+            @JvmStatic
+            fun main(args: Array<String>) {
+                // TODO Auto-generated method stub
+                val desktopServerThread=Thread(TCPServer())
+                desktopServerThread.start()
+            }
+        }
+        //-----------------------------------------------------------------------------------------------------------------------
+    }
+
 }
 
 

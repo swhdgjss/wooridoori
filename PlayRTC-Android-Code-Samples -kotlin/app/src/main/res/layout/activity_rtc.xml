@@ -554,6 +554,7 @@
 		android:layout_above="@+id/editText"
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentStart="true"
+		android:text= "text"
 		android:textSize="20sp"
 		android:visibility="invisible" />
 </RelativeLayout>
