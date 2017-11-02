@@ -28,6 +28,7 @@ class client : Activity() {
     private var networkWriter: BufferedWriter?=null
     private val ip="xxx.xxx.xxx.xxx" // IP
     private val port=9999 // PORT번호
+
     override fun onStop() {
         // TODO Auto-generated method stub
         super.onStop()
@@ -68,7 +69,7 @@ class client : Activity() {
     }
 
 
-    private val checkUpdate=object : Thread() {
+    private val checkUpdate = object : Thread() {
         override fun run() {
             try {
                 var line: String
@@ -85,7 +86,7 @@ class client : Activity() {
         }
     }
 
-    private val showUpdate=Runnable {
+    private val showUpdate = Runnable {
         Toast.makeText(this@client, "Coming word: " + html,
                 Toast.LENGTH_SHORT).show()
     }

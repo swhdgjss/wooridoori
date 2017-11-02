@@ -682,13 +682,13 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      * @param peerUid String, 상대방 사용자의 아이디
      * @param data PlayRTCData
      */
-    override fun onAddDataStream(obj: PlayRTC?, peerId: String?, peerUid: String?, data: PlayRTCData?) {
+    /*override fun onAddDataStream(obj: PlayRTC?, peerId: String?, peerUid: String?, data: PlayRTCData?) {
         this.peerId=peerId
         activity!!.appnedLogMessage(">> onDataStream[$peerId]...")
         // PlayRTCDataObserver를 등록한다.
         activity!!.rtcDataHandler!!.setDataChannel(data!!)
 
-    }
+    }*/
 
     /*
      * 채널이 종료 되거나, 내가 채널에서 퇴장할 때 호출
