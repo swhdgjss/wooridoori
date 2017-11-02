@@ -1,13 +1,15 @@
-package com.playrtc.sample
-
+import java.io.BufferedInputStream
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.IOException
+import java.io.InputStream
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.io.PrintWriter
 import java.net.Socket
-//import org.apache.http.util.ByteArrayBuffer;
+import java.net.URL
+import java.net.URLConnection
+//import org.apache.http.util.ByteArrayBuffer
 import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
@@ -18,58 +20,21 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.lg_pc.chatting.R
+import kotlinx.android.synthetic.main.activity_main.view.*
 
-class client : Activity() {
+
+class MainActivity : Activity() {
     private var html=""
     private var mHandler: Handler?=null
     private var socket: Socket?=null
-    private val name: String?=null
     private var networkReader: BufferedReader?=null
     private var networkWriter: BufferedWriter?=null
-    private val ip="xxx.xxx.xxx.xxx" // IP
-    private val port=9999 // PORT번호
-
-    override fun onStop() {
-        // TODO Auto-generated method stub
-        super.onStop()
-        try {
-            socket!!.close()
-        } catch (e: IOException) {
-            // TODO Auto-generated catch block
-            e.printStackTrace()
-        }
-
-    }
-
-    public override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_rtc)
-        mHandler=Handler()
-
-        try {
-            setSocket(ip, port)             //소켓 연결
-        } catch (e1: IOException) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace()
-        }
-
-        checkUpdate.start()
-        val et=findViewById(R.id.editText) as EditText
-        val btn=findViewById(R.id.btn_chat) as Button
-        var tv=findViewById(R.id.textView) as TextView
-
-        btn.setOnClickListener {
-            if (et.text.toString() != null || et.text.toString() != "") {
-                    val out=PrintWriter(networkWriter!!, true)
-                    val return_msg=et.text.toString()
-                    // tv.println(return_msg);
-                    out.println(return_msg)
-            }
-        }
-    }
+    private val ip="223.62.22.45" // IP
+    private val port=8080 // PORT번호
 
 
-    private val checkUpdate = object : Thread() {
+    private val checkUpdate=object : Thread() {
         override fun run() {
             try {
                 var line: String
@@ -86,9 +51,43 @@ class client : Activity() {
         }
     }
 
-    private val showUpdate = Runnable {
-        Toast.makeText(this@client, "Coming word: " + html,
-                Toast.LENGTH_SHORT).show()
+    private val showUpdate=Runnable { Toast.makeText(this@MainActivity, "Coming word: " + html, Toast.LENGTH_SHORT).show() }
+
+    override fun onStop() {
+        super.onStop()
+        try {
+            socket!!.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+    }
+
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        mHandler=Handler()
+
+        try {
+            setSocket(ip, port)
+        } catch (e1: IOException) {
+            e1.printStackTrace()
+        }
+
+        checkUpdate.start()
+
+        val et=findViewById<EditText>(R.id.editText) as EditText
+        val btn=findViewById<Button>(R.id.btn_chat) as Button
+        val tv=findViewById<TextView>(R.id.textView) as TextView
+
+        btn.setOnClickListener {
+            if (et.text.toString() != null || et.text.toString() != "") {
+                val out=PrintWriter(networkWriter!!, true)
+                val return_msg=et.text.toString()
+                out.println(return_msg)
+            }
+        }
+
     }
 
     @Throws(IOException::class)
