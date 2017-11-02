@@ -41,32 +41,26 @@ import java.util.Date
  *
  * @see com.sktelecom.playrtc.observer.PlayRTCDataObserver
  */
-class PlayRTCDataChannelHandler/*
+/*
      * 생성자
      *
      * @param activity PlayRTCActivity
      * @see com.playrtc.sample.view.PlayRTCLogView
      */
-(activity: PlayRTCActivity) : PlayRTCDataObserver {
+class PlayRTCDataChannelHandler(activity: PlayRTCActivity) : PlayRTCDataObserver {
 
     private var activity: PlayRTCActivity?=null
-
     /*
      * P2P 데이터 통신을 위한 PlayRTCData객체
      */
     private var dataChannel: PlayRTCData?=null
-
-
     /*
      * 파일 전송 완료 이벤트에서 InputStream Close하기 위해 전역 변수 처리
      */
     private var dataIs: InputStream?=null
-
     private var elaspedStart=0L
-
-
     init {
-        this.activity=activity              //yn var로 바꿈
+        this.activity=activity
     }
 
     /*
@@ -161,173 +155,12 @@ class PlayRTCDataChannelHandler/*
      * 아래 예에서는 텍스트에서 Byte 배열을 추출하여 전송하고 있으며, MimeType으로 null을 전달하며
      * 문자에 대한 특별한 처리는 하지 않고 있어 수신 측이 native인 경우에 올바르게 수신
      */
-    fun sendBinary() {
-        if (dataChannel != null && dataChannel!!.status == PlayRTCDataStatus.Open) {
-            val sendData="DataChannel Hello 안녕하세요 こんにちは 你好..."
-            val sendByte=dataChannel!!.sendByte(sendData.toByteArray(), null, object : PlayRTCSendDataObserver {
-
-                /*
-                 * 데이터 전송 진척 정보를 알려준다.
-                 * PlayRTCData은 데이터 전송 시 데이터를 특정 사이즈 크기로 분할하여 전체 스트림에 대해 고유아이디를
-                 * 부여하고 분할 전송을 한다.
-                 * @param obj PlayRTCData
-                 * @param peerId String, PlayRTC 채널 서비스에서 발급받은 사용자 아이디
-                 * @param peerUid String, Application에서 사용하는 사용자 아이디.
-                 * @param id long, 전송 스트림에 대해 고유아이디
-                 * @param size long, 데이터 전체 크기
-                 * @param send long, 전송 한 데이터의 누적 크기
-                 * @param index index, 전성하는 분할 데이터 인덱스
-                 * @param count long, 전체 분할 데이터 수
-                 */
-                @SuppressLint("DefaultLocale")
-                override fun onSending(obj: PlayRTCData, peerId: String, peerUid: String, id: Long, size: Long, send: Long, index: Long, count: Long) {
-                    val per=send.toFloat() / size.toFloat() * 100.0f
-                    val sMsg=java.lang.String.format("Data onSending [%d/%d] [%d/%d]  %.2f%%", index + 1, count, send, size, per) //java.lang. yn
-                    Log.d(LOG_TAG, sMsg)
-                    activity!!.progressLogMessage(sMsg)
-                }
-
-                /*
-                 * 데이터 전송 완료를 알려준다.
-                 *
-                 * @param obj PlayRTCData
-                 * @param peerId String, PlayRTC 채널 서비스에서 발급받은 사용자 아이디
-                 * @param peerUid  String, PlayRTC 채널 서비스에서 발급받은 사용자 아이디
-                 * @param id  long, 전송 스트림에 대해 고유아이디
-                 * @param size long, 데이터 전체 크기
-                 */
-                override fun onSuccess(obj: PlayRTCData, peerId: String, peerUid: String, id: Long, size: Long) {
-                    Log.d(LOG_TAG, "sendBinary onSuccess $peerUid $id[$size]")
-                    activity!!.appnedLogMessage(">>Data-Channel sendBinary onSuccess[$id] $size bytes")
-
-                }
-
-                /*
-                 * 데이터 전송 실패를 알려준다.
-                 * @param obj PlayRTCData
-                 * @param peerId String, PlayRTC 채널 서비스에서 발급받은 사용자 아이디
-                 * @param peerUid  String, PlayRTC 채널 서비스에서 발급받은 사용자 아이디
-                 * @param id  long, 전송 스트림에 대해 고유아이디
-                 * @param code PlayRTCDataCode, PlayRTCDataCode = 오류 코드 정의
-                 *  - None,
-                 *  - NotOpen,
-                 *  - SendBusy,
-                 *  - SendFail,
-                 *  - FileIO,
-                 *  - ParseFail
-                 * @param desc String, description
-                 */
-                override fun onError(obj: PlayRTCData, peerId: String, peerUid: String, id: Long, code: PlayRTCDataCode, desc: String) {
-                    Log.d(LOG_TAG, "sendBinary onError $peerUid $id[$code] $desc")
-                    activity!!.appnedLogMessage(">>Data-Channel sendBinary onError[$id] [$code] $desc")
-                }
-            })
-        } else {
-            Log.d(LOG_TAG, "데이터 채널이 연결 상태가 아닙니다. ")
-            activity!!.appnedLogMessage(">>Data-Channel이 연결 상태가 아닙니다.")
-        }
-    }
 
 
     /*
      * 파일을 전송하기 위해서 File 객체를 생성하여 전달 하거나 파일에서 InputStream을 샹성하여 전달
      * 아래 예에서는 Android Application의 asset폴더에 있는 파일경로를  전달
      */
-    fun sendFile() {
-        // Data Channel이 Open 상태인지 검사
-        if (dataChannel != null && dataChannel!!.status == PlayRTCDataStatus.Open) {
-            elaspedStart=System.currentTimeMillis()
-            val fileName="librtc_xmllite.a"
-            dataIs=null
-
-            try {
-                dataIs=this.activity!!.assets.open(fileName)
-                Log.d(LOG_TAG, "sendFile [$fileName]")
-                activity!!.appnedLogMessage(">>Data-Channel sendFile[$fileName]")   //yn !!붙임
-                /*
-                 * byte 데이터를 전송한다.
-                 * @param istream InputStream
-                 * @param fileName String, 파일 명
-                 * @param observer PlayRTCSendDataObserver
-                 * @return long, 전송 데이터 스트림 고유 아이디
-                 * @see com.sktelecom.playrtc.observer.PlayRTCSendDataObserver
-                 */
-                dataChannel!!.sendFile(dataIs, fileName, object : PlayRTCSendDataObserver {
-
-                    /*
-                     * 데이터 전송 진척 정보를 알려준다.
-                     * PlayRTCData은 데이터 전송 시 데이터를 특정 사이즈 크기로 분할하여 전체 스트림에 대해 고유아이디를
-                     * 부여하고 분할 전송을 한다.
-                     * @param obj PlayRTCData
-                     * @param peerId String, PlayRTC 채널 서비스에서 발급받은 사용자 아이디
-                     * @param peerUid String, Application에서 사용하는 사용자 아이디.
-                     * @param id long, 전송 스트림에 대해 고유아이디
-                     * @param size long, 데이터 전체 크기
-                     * @param send long, 전송 한 데이터의 누적 크기
-                     * @param index index, 전성하는 분할 데이터 인덱스
-                     * @param count long, 전체 분할 데이터 수
-                     */
-                    @SuppressLint("DefaultLocale")
-                    override fun onSending(obj: PlayRTCData, peerId: String, peerUid: String, id: Long, size: Long, send: Long, index: Long, count: Long) {
-                        val per=send.toFloat() / size.toFloat() * 100.0f
-                        val sMsg=java.lang.String.format("Data onSending [%d/%d] [%d/%d]  %.2f%%", index + 1, count, send, size, per)  //java.lang. yn
-                        Log.d(LOG_TAG, sMsg)
-                        activity!!.progressLogMessage(sMsg)       //yn 느낌표 붙임
-                    }
-
-                    /*
-                     * 데이터 전송 완료를 알려준다.
-                     *
-                     * @param obj PlayRTCData
-                     * @param peerId String, PlayRTC 채널 서비스에서 발급받은 사용자 아이디
-                     * @param peerUid  String, PlayRTC 채널 서비스에서 발급받은 사용자 아이디
-                     * @param id  long, 전송 스트림에 대해 고유아이디
-                     * @param size long, 데이터 전체 크기
-                     */
-                    override fun onSuccess(obj: PlayRTCData, peerId: String, peerUid: String, id: Long, size: Long) {
-                        val elasedTime=System.currentTimeMillis() - elaspedStart
-                        val handler=Handler(Looper.getMainLooper())
-                        handler.post {
-                            closeInputStream()
-                            val logToast=Toast.makeText(activity!!.applicationContext, "elasedTime = " + elasedTime, Toast.LENGTH_LONG)//yn 느낌표 붙임
-                            logToast.show()
-                        }
-                        Log.d(LOG_TAG, "sendFile onSuccess $peerUid $id[$size]")
-                        activity!!.appnedLogMessage(">>Data-Channel[$peerId] sendFile[$fileName] onSuccess[$id] $size bytes") //yn 느낌표 붙임
-                    }
-
-                    /*
-                     * 데이터 전송 실패를 알려준다.
-                     * @param obj PlayRTCData
-                     * @param peerId String, PlayRTC 채널 서비스에서 발급받은 사용자 아이디
-                     * @param peerUid  String, PlayRTC 채널 서비스에서 발급받은 사용자 아이디
-                     * @param id  long, 전송 스트림에 대해 고유아이디
-                     * @param code PlayRTCDataCode, PlayRTCDataCode = 오류 코드 정의
-                     *  - None,
-                     *  - NotOpen,
-                     *  - SendBusy,
-                     *  - SendFail,
-                     *  - FileIO,
-                     *  - ParseFail
-                     * @param desc String, description
-                     */
-                    override fun onError(obj: PlayRTCData, peerId: String, peerUid: String, id: Long, code: PlayRTCDataCode, desc: String) {
-                        Log.d(LOG_TAG, "sendFile onError $peerUid $id[$code] $desc")
-                        activity!!.appnedLogMessage(">>Data-Channel sendFile[$fileName] onError[$id] [$code] $desc") //yn 느낌표 붙임
-                        closeInputStream()
-                    }
-                })
-            } catch (e: IOException) {
-                e.printStackTrace()
-                closeInputStream()
-            }
-
-        } else {
-            Log.d(LOG_TAG, "데이터 채널이 연결 상태가 아닙니다. ")
-            activity!!.appnedLogMessage(">>Data-Channel이 연결 상태가 아닙니다.")
-
-        }
-    }
 
     /*
      * 데이터 수신 진행 정보
