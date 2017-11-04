@@ -24,12 +24,13 @@ class Server:Activity() {
     internal var msg = ""
     internal var isConnected = true
 
-    protected override fun onCreate(savedInstanceState:Bundle?) {
+    override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_server)
         text_msg = findViewById<View>(R.id.text_massage_from_client) as TextView
         edit_msg = findViewById<View>(R.id.edit_message_to_client) as EditText
     }
+
     //Button 클릭시 자동으로 호출되는 callback 메소드
     fun mOnClick(v:View) {
         when (v.getId()) {
@@ -76,7 +77,7 @@ class Server:Activity() {
                             runOnUiThread(object:Runnable {
                                 public override fun run() {
                                     // TODO Auto-generated method stub
-                                    text_msg.append("\n" + msg)
+                                    text_msg.append("\n 상대방 : " + msg)
                                 }
                             })
                             /////////////////////////////////////////////////////////////////////////////
@@ -85,14 +86,16 @@ class Server:Activity() {
                 }).start() //Thread 실행..
             R.id.btn_send_server // 클라이언트로 메세지 전송하기.
             -> {
-                text_msg.append("\n" + msg)
+                val msg = edit_msg.getText().toString()
+
+                text_msg.append("\n 나 : " + msg)
+                edit_msg.setText("")
                 if (os == null) return  //클라이언트와 연결되어 있지 않다면 전송불가..
                 //네트워크 작업이므로 Thread 생성
                 Thread(object:Runnable {
                     public override fun run() {
                         // TODO Auto-generated method stub
                         //클라이언트로 보낼 메세지 EditText로 부터 얻어오기
-                        val msg = edit_msg.getText().toString()
 
                         try {
                             os!!.writeUTF(msg) //클라이언트로 메세지 보내기.UTF 방식으로(한글 전송가능...)
@@ -111,3 +114,4 @@ class Server:Activity() {
         internal val PORT = 10001
     }
 }
+

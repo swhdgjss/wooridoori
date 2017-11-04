@@ -66,7 +66,7 @@ class Client : Activity() {
                             //runOnUiThread()는 별도의 Thread가 main Thread에게 UI 작업을 요청하는 메소드임.
                             runOnUiThread {
                                 // TODO Auto-generated method stub
-                                text_msg.append("\n" + msg)
+                                text_msg.append("\n 상대방 : " + msg)
                             }
                             //////////////////////////////////////////////////////////////////////////
                         } catch (e: IOException) {
@@ -79,13 +79,15 @@ class Client : Activity() {
                 ).start()//Thread 실행..
             R.id.btn_send_client //서버로 메세지 전송하기...
             -> {
-                text_msg.append("\n" + msg)
+                val msg = edit_msg.text.toString()
+
+                text_msg.append("\n 나 : " + msg)
+                edit_msg.setText("")
                 if (os == null) return    //서버와 연결되어 있지 않다면 전송불가..
                 //네트워크 작업이므로 Thread 생성
                 Thread(Runnable {
                     // TODO Auto-generated method stub
                     //서버로 보낼 메세지 EditText로 부터 얻어오기
-                    val msg = edit_msg.text.toString()
 
                     try {
                         os!!.writeUTF(msg)  //서버로 메세지 보내기.UTF 방식으로(한글 전송가능...)

@@ -5,7 +5,8 @@
 	android:paddingTop="10dp"
 	android:paddingBottom="10dp"
 	android:paddingLeft="10dp"
-	android:paddingRight="10dp" >
+	android:paddingRight="10dp"
+    android:backgroundTint="#413126">
  
 
     <!-- Channel Info -->
@@ -41,8 +42,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="2dip"
         android:layout_marginRight="15dip"
-        android:textColor="#000000"
+        android:background="#3D3B3E"
+        android:textColor="#AC9588"
         android:text="입장하기"
-        android:textSize="18dp" />
+        android:textSize="24dp" />
 
 </RelativeLayout>

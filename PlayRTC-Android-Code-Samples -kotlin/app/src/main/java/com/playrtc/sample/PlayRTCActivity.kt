@@ -454,7 +454,8 @@ class PlayRTCActivity : Activity() {
         /* 로그뷰  토글 버튼 이벤트 처리 */
         val btnLog=this.findViewById(R.id.btn_log) as Button
 
-        btnLog.setOnClickListener(object : View.OnClickListener {//Button->view
+        btnLog.setOnClickListener(object : View.OnClickListener {
+            //Button->view
             override fun onClick(v: View) {
                 if (logView!!.isShown == false) {
                     logView!!.show()
@@ -668,10 +669,10 @@ class PlayRTCActivity : Activity() {
 
     /*채팅 버튼*/
     private fun chatting() {
-        val text = findViewById(R.id.btn_chat) as Button
-        val edit = findViewById(R.id.editText) as EditText
-        val txt = findViewById(R.id.textView) as TextView
-        text.setOnClickListener(object : View.OnClickListener{
+        val text=findViewById(R.id.btn_chat) as Button
+        val edit=findViewById(R.id.editText) as EditText
+        val txt=findViewById(R.id.textView) as TextView
+        text.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 edit.setVisibility(View.VISIBLE)
                 txt.setVisibility(View.VISIBLE)
@@ -911,53 +912,6 @@ class PlayRTCActivity : Activity() {
     companion object {
         private val LOG_TAG="PlayRTCActivity"
     }
-
-    //Class TCPServer 랑 companionobject 채팅 server코드--------------------------------------------------------------------------
-    class TCPServer : Runnable {
-        override fun run() {
-            // TODO Auto-generated method stub
-            try {
-                println("S: Connecting...")
-                val serverSocket=ServerSocket(ServerPort)
-
-                while (true) {
-                    val client=serverSocket.accept()
-                    println("S: Receiving...")
-                    try {
-                        val `in`=BufferedReader(
-                                InputStreamReader(client.getInputStream()))
-                        val str=`in`.readLine()
-                        println("S: Received: '$str'")
-                        val out=PrintWriter(BufferedWriter(OutputStreamWriter(client.getOutputStream())), true)
-                        out.println("Server Received " + str)
-                    } catch (e: Exception) {
-                        println("S: Error")
-                        e.printStackTrace()
-                    } finally {
-                        client.close()
-                        println("S: Done.")
-                    }
-                }
-            } catch (e: Exception) {
-                println("S: Error")
-                e.printStackTrace()
-            }
-
-        }
-
-        companion object {
-            val ServerPort=9999
-            val ServerIP="xxx.xxx.xxx.xxxx"
-            @JvmStatic
-            fun main(args: Array<String>) {
-                // TODO Auto-generated method stub
-                val desktopServerThread=Thread(TCPServer())
-                desktopServerThread.start()
-            }
-        }
-        //-----------------------------------------------------------------------------------------------------------------------
-    }
-
 }
 
 
