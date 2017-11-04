@@ -57,7 +57,6 @@ public class Server extends Activity {
                             //클라이언트와 데이터를 주고 받기 위한 통로구축..
                             is= new DataInputStream(socket.getInputStream()); //클라이언트로 부터 메세지를 받기 위한 통로
                             os= new DataOutputStream(socket.getOutputStream()); //클라이언트로 메세지를 보내기 위한 통로
-                            Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG).show();
                         } catch (IOException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();

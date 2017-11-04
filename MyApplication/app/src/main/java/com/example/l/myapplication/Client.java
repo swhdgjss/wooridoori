@@ -16,7 +16,7 @@ import java.net.Socket;
 
 public class Client extends Activity {
 
-    private static final int PORT = 8888; //서버에서 설정한 PORT 번호
+    private static final int PORT = 10001; //서버에서 설정한 PORT 번호
     String ip = "192.168.232.2"; //서버 단말기의 IP주소..
     //본 예제는 Genymotion 에뮬레이터 2대로 테스한 예제입니다.
     //Genymotion을 실행하면 각 에뮬레이터의 IP를 확인할 수 있습니다.
@@ -27,7 +27,6 @@ public class Client extends Activity {
     EditText edit_msg;  //서버로 전송할 메세지를 작성하는 EditText
     EditText edit_ip;   //서버의 IP를 작성할 수 있는 EditText
     String msg = "";
-    boolean isConnected = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,6 @@ public class Client extends Activity {
                             //서버와 메세지를 주고받을 통로 구축
                             is = new DataInputStream(socket.getInputStream());
                             os = new DataOutputStream(socket.getOutputStream());
-                            Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG).show();
                         } catch (IOException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
