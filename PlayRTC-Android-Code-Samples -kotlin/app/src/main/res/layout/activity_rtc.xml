@@ -18,25 +18,6 @@
 			android:layout_alignParentTop="true">
 
 
-
-
-			<Button
-				android:id="@+id/btn_switch_camera"
-				android:layout_width="100dp"
-				android:layout_height="40dp"
-				android:textSize="13sp"
-				android:layout_marginTop="5dp"
-				android:layout_alignParentLeft="true"
-				android:text="카메라전환" />
-
-			<Button
-				android:id="@+id/btn_switch_flash"
-				android:layout_width="100dp"
-				android:layout_height="40dp"
-				android:textSize="13sp"
-				android:layout_alignParentLeft="true"
-				android:layout_below="@id/btn_switch_camera"
-				android:text="플래쉬전환" />
 			<TextView
 				android:id="@+id/txt_stat_report"
 				android:layout_width="130dp"
@@ -90,14 +71,18 @@
 				android:textColor="#ff0000"
 				android:text="미러-Off">
 			</TextView>
+
 			<Button
 				android:id="@+id/btn_mirror"
 				android:layout_width="80dp"
 				android:layout_height="35dp"
 				android:layout_alignLeft="@id/videoarea"
 				android:layout_below="@id/lb_btn_mirror"
-				android:textSize="11sp"
-				android:text="미러모드" />
+				android:text="미러모드"
+				android:background="#413126"
+				android:textColor="#AC9588"
+				android:textSize="11sp" />
+
 			<RelativeLayout
 				android:id="@+id/btn_mirror_layer"
 				android:layout_width="wrap_content"
@@ -145,6 +130,8 @@
 				android:layout_alignLeft="@id/videoarea"
 				android:layout_below="@id/lb_camera_degree"
 				android:textSize="11sp"
+				android:background="#413126"
+				android:textColor="#AC9588"
 				android:text="영상회전" />
 			<RelativeLayout
 				android:id="@+id/btn_camera_degree_layer"
@@ -212,6 +199,8 @@
 				android:layout_alignLeft="@id/videoarea"
 				android:layout_below="@id/lb_camera_zoom"
 				android:textSize="11sp"
+				android:background="#413126"
+				android:textColor="#AC9588"
 				android:text="영상줌" />
 			<RelativeLayout
 				android:id="@+id/btn_camera_zoom_layer"
@@ -274,6 +263,8 @@
 				android:layout_below="@id/white_balance_label"
 				android:layout_alignLeft="@id/videoarea"
 				android:textSize="11sp"
+				android:background="#413126"
+				android:textColor="#AC9588"
 				android:text="화이트밸런스" />
 
 			<RelativeLayout
@@ -423,6 +414,8 @@
 					android:layout_width="90dp"
 					android:layout_height="wrap_content"
 					android:textSize="12sp"
+					android:background="#413126"
+					android:textColor="#AC9588"
 					android:text="VIDOE-OFF" />
 				<Button
 					android:id="@+id/btn_local_amute"
@@ -430,6 +423,8 @@
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10dp"
 					android:textSize="12sp"
+					android:background="#413126"
+					android:textColor="#AC9588"
 					android:text="AUDIO-OFF" />
 				<TextView
 					android:layout_width="match_parent"
@@ -445,6 +440,8 @@
 					android:layout_width="90dp"
 					android:layout_height="wrap_content"
 					android:textSize="12sp"
+					android:background="#413126"
+					android:textColor="#AC9588"
 					android:text="VIDOE-OFF" />
 				<Button
 					android:id="@+id/btn_remote_amute"
@@ -452,6 +449,8 @@
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10dp"
 					android:textSize="12sp"
+					android:background="#413126"
+					android:textColor="#AC9588"
 					android:text="AUDIO-OFF" />
 
 			</LinearLayout>
@@ -484,6 +483,8 @@
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:textSize="13sp"
+				android:background="#413126"
+				android:textColor="#AC9588"
 				android:text="로그보기" />
 
 			<Button
@@ -494,6 +495,8 @@
 				android:layout_toRightOf="@id/btn_log"
 				android:layout_marginLeft="10dp"
 				android:textSize="13sp"
+				android:background="#413126"
+				android:textColor="#AC9588"
 				android:text="채널팝업" />
 
 			<Button
@@ -504,6 +507,8 @@
 				android:layout_alignParentRight="true"
 				android:layout_marginRight="10dp"
 				android:textSize="13sp"
+				android:background="#413126"
+				android:textColor="#AC9588"
 				android:text="채널종료" />
 
 			<Button
@@ -512,6 +517,8 @@
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_toLeftOf="@+id/btn_chClose"
+				android:background="#413126"
+				android:textColor="#AC9588"
 				android:text="스냅샷"
 				android:textSize="13sp" />
 		</RelativeLayout>
@@ -532,6 +539,8 @@
 		android:layout_width="80dp"
 		android:layout_height="36dp"
 		android:layout_marginBottom="63dp"
+		android:background="#413126"
+		android:textColor="#AC9588"
 		android:text="채팅하기"
 		android:layout_alignParentBottom="true"
 		android:layout_alignParentLeft="true"
@@ -556,7 +565,30 @@
 		android:layout_above="@+id/editText"
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentStart="true"
-		android:text= "text"
+		android:text="text"
 		android:textSize="20sp"
 		android:visibility="invisible" />
+
+	<Button
+		android:id="@+id/btn_switch_camera"
+		android:layout_width="100dp"
+		android:layout_height="40dp"
+		android:layout_alignParentTop="true"
+		android:layout_marginLeft="11dp"
+		android:layout_marginStart="11dp"
+		android:layout_toEndOf="@+id/btn_chat"
+		android:layout_toRightOf="@+id/btn_chat"
+		android:text="카메라전환"
+		android:textSize="13sp" />
+
+	<Button
+		android:id="@+id/btn_switch_flash"
+		android:layout_width="100dp"
+		android:layout_height="40dp"
+		android:layout_alignLeft="@+id/btn_switch_camera"
+		android:layout_alignStart="@+id/btn_switch_camera"
+		android:layout_below="@+id/btn_switch_camera"
+		android:layout_marginTop="54dp"
+		android:text="플래쉬전환"
+		android:textSize="13sp" />
 </RelativeLayout>
