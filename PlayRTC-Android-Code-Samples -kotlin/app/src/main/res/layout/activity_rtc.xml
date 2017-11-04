@@ -2,7 +2,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent" >
+	android:layout_height="match_parent"
+	android:background="#9FC2CB">
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -517,13 +518,14 @@
 	</LinearLayout>
 	<!-- Channel Popup Layer-->
 	<include
-		layout="@layout/layout_channel_popup"
 		android:id="@+id/channel_info"
+		layout="@layout/layout_channel_popup"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_centerHorizontal="true"
-		android:layout_centerVertical="true"
-		android:visibility="invisible"/>
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentTop="true"
+		android:visibility="invisible" />
 
 	<Button
 		android:id="@+id/btn_chat"
