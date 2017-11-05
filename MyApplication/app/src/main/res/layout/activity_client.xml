@@ -29,7 +29,7 @@
     <TextView
         android:id="@+id/text_massage_from_server"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@id/label_message_from_server"
         android:layout_marginTop="20dp"
         android:gravity="center"
