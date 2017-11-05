@@ -404,12 +404,9 @@ class PlayRTCActivity : Activity() {
         /* Video View ShowSnapshot 기능 버튼 */
         initVideoViewShowSnapshotFunctionUIControls()
 
-<<<<<<< HEAD:WooriDoori/app/src/main/java/com/playrtc/wooridoori/PlayRTCActivity.kt
         /* Menu 기능 버튼*/
         initMenuControls()
-=======
 
->>>>>>> parent of 51f6d2f... 레이아웃 수정:PlayRTC-Android-Code-Samples -kotlin/app/src/main/java/com/playrtc/sample/PlayRTCActivity.kt
     }
 
     /* 카메라 전/후방 전환 버튼 */
@@ -564,7 +561,6 @@ class PlayRTCActivity : Activity() {
         })
     }
 
-<<<<<<< HEAD:WooriDoori/app/src/main/java/com/playrtc/wooridoori/PlayRTCActivity.kt
     //메뉴~
     private fun initMenuControls() {
         val btnMenu=this.findViewById(R.id.btn_menu) as ImageButton
