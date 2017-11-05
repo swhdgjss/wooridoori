@@ -404,8 +404,12 @@ class PlayRTCActivity : Activity() {
         /* Video View ShowSnapshot 기능 버튼 */
         initVideoViewShowSnapshotFunctionUIControls()
 
+<<<<<<< HEAD:WooriDoori/app/src/main/java/com/playrtc/wooridoori/PlayRTCActivity.kt
         /* Menu 기능 버튼*/
         initMenuControls()
+=======
+
+>>>>>>> parent of 51f6d2f... 레이아웃 수정:PlayRTC-Android-Code-Samples -kotlin/app/src/main/java/com/playrtc/sample/PlayRTCActivity.kt
     }
 
     /* 카메라 전/후방 전환 버튼 */
@@ -434,7 +438,7 @@ class PlayRTCActivity : Activity() {
         })
     }
 
-
+    /* 로그뷰  토글 버튼 */
     private fun initLogViewFunctionUIControls() {
         /* 로그뷰  토글 버튼 이벤트 처리 */
         val btnLog=this.findViewById(R.id.btn_log) as Button
@@ -455,7 +459,7 @@ class PlayRTCActivity : Activity() {
 
     /* Peer 채널 종료 버튼 */
     private fun initChannelCloseFunctionUIControls() {
-        val btnCloseChannel=this.findViewById(R.id.btn_chClose) as ImageButton
+        val btnCloseChannel=this.findViewById(R.id.btn_chClose) as Button
         btnCloseChannel.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
                 if (playRTCHandler != null && playRTCHandler!!.isChannelConnected) {
@@ -560,6 +564,7 @@ class PlayRTCActivity : Activity() {
         })
     }
 
+<<<<<<< HEAD:WooriDoori/app/src/main/java/com/playrtc/wooridoori/PlayRTCActivity.kt
     //메뉴~
     private fun initMenuControls() {
         val btnMenu=this.findViewById(R.id.btn_menu) as ImageButton
@@ -640,7 +645,7 @@ class PlayRTCActivity : Activity() {
 
     /* 카메라 영상 Zoom 기능 버튼 v2.3.0 */
     private fun initCameraZoomFunctionUIControls() {
-        val btnCameraZoom=this.findViewById(R.id.btn_camera_zoom) as ImageButton
+        val btnCameraZoom=this.findViewById(R.id.btn_camera_zoom) as Button
         zoomRangeBar=this.findViewById(R.id.seekbar_camera_zoom) as PlayRTCVerticalSeekBar
 
         btnCameraZoom.setOnClickListener(object : View.OnClickListener { //Button->view
@@ -844,7 +849,6 @@ class PlayRTCActivity : Activity() {
         (findViewById(R.id.btn_camera_zoom_layer) as RelativeLayout).visibility=View.GONE
         (findViewById(R.id.btn_white_balance_layer) as RelativeLayout).visibility=View.GONE
         (findViewById(R.id.btn_exposure_compensation_layer) as RelativeLayout).visibility=View.GONE
-        (findViewById(R.id.btn_menu_layer) as RelativeLayout).visibility=View.GONE
     }
 
     /**
