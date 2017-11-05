@@ -519,13 +519,13 @@
 		android:id="@+id/editText"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_above="@+id/btn_chat"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
 		android:ems="10"
 		android:inputType="textPersonName"
 		android:text="Name"
-		android:visibility="invisible"
-		android:layout_above="@+id/btn_chat"
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentStart="true" />
+		android:visibility="invisible" />
 
 	<TextView
 		android:id="@+id/textView"
@@ -536,6 +536,7 @@
 		android:layout_alignParentStart="true"
 		android:text="text"
 		android:textSize="20sp"
+		android:scrollbars="vertical"
 		android:visibility="invisible" />
 
 	<Button

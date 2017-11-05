@@ -31,7 +31,7 @@ class Client : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client)
         text_msg = findViewById<View>(R.id.text_massage_from_server) as TextView
-        text_msg.setMovementMethod(ScrollingMovementMethod());
+        text_msg.movementMethod = ScrollingMovementMethod();
         edit_msg = findViewById<View>(R.id.edit_message_to_server) as EditText
         edit_ip = findViewById<View>(R.id.edit_addressofserver) as EditText
         edit_ip.setText(ip)

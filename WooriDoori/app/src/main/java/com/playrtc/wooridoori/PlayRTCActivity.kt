@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Point
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -709,6 +710,7 @@ class PlayRTCActivity : Activity() {
         val text=findViewById(R.id.btn_chat) as Button
         val edit=findViewById(R.id.editText) as EditText
         val txt=findViewById(R.id.textView) as TextView
+        txt.movementMethod = ScrollingMovementMethod()
         text.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 edit.setVisibility(View.VISIBLE)
