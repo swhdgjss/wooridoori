@@ -29,7 +29,8 @@
 				android:lines="20"
 				android:layout_alignParentLeft="true"
 				android:layout_below="@id/btn_switch_flash"
-				android:background="#e0e0e0"/>
+				android:background="#e0e0e0"
+				tools:ignore="NotSibling" />
 
 
 
@@ -96,9 +97,11 @@
 					android:id="@+id/btn_mirror_on"
 					android:layout_width="80dp"
 					android:layout_height="35dp"
-					android:layout_alignParentTop="true"
-					android:textSize="11sp"
-					android:text="미러-On" />
+					android:layout_alignParentEnd="true"
+					android:layout_alignParentRight="true"
+					android:layout_marginBottom="13dp"
+					android:text="미러-On"
+					android:textSize="11sp" />
 
 				<Button
 					android:id="@+id/btn_mirror_off"
@@ -192,16 +195,15 @@
 				android:gravity="center"
 				android:text="Zoom :0">
 			</TextView>
-			<Button
+
+			<ImageButton
 				android:id="@+id/btn_camera_zoom"
-				android:layout_width="80dp"
-				android:layout_height="35dp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:layout_alignLeft="@id/videoarea"
 				android:layout_below="@id/lb_camera_zoom"
-				android:textSize="11sp"
-				android:background="#413126"
-				android:textColor="#AC9588"
-				android:text="영상줌" />
+				android:background="@drawable/list_btn"
+				android:src="@drawable/zoom" />
 			<RelativeLayout
 				android:id="@+id/btn_camera_zoom_layer"
 				android:layout_width="wrap_content"
@@ -478,40 +480,6 @@
 			android:background="#e0e0e0">
 
 			<Button
-				android:id="@+id/btn_log"
-				android:layout_width="82dp"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:textSize="13sp"
-				android:background="#413126"
-				android:textColor="#AC9588"
-				android:text="로그보기" />
-
-			<Button
-				android:id="@+id/btn_channel"
-				android:layout_width="82dp"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:layout_toRightOf="@id/btn_log"
-				android:layout_marginLeft="10dp"
-				android:textSize="13sp"
-				android:background="#413126"
-				android:textColor="#AC9588"
-				android:text="채널팝업" />
-
-			<Button
-				android:id="@+id/btn_chClose"
-				android:layout_width="82dp"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:layout_alignParentRight="true"
-				android:layout_marginRight="10dp"
-				android:textSize="13sp"
-				android:background="#413126"
-				android:textColor="#AC9588"
-				android:text="채널종료" />
-
-			<Button
 				android:id="@+id/btn_show_snapshot"
 				android:layout_width="82dp"
 				android:layout_height="wrap_content"
@@ -520,7 +488,8 @@
 				android:background="#413126"
 				android:textColor="#AC9588"
 				android:text="스냅샷"
-				android:textSize="13sp" />
+				android:textSize="13sp"
+				tools:ignore="NotSibling" />
 		</RelativeLayout>
 	</LinearLayout>
 	<!-- Channel Popup Layer-->
@@ -591,4 +560,59 @@
 		android:layout_marginTop="54dp"
 		android:text="플래쉬전환"
 		android:textSize="13sp" />
+
+	<ImageButton
+		android:id="@+id/btn_chClose"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentTop="true"
+		android:background="@drawable/list_btn"
+		android:src="@drawable/end" />
+
+	<ImageButton
+		android:id="@+id/btn_menu"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_marginEnd="23dp"
+		android:layout_marginRight="23dp"
+		android:layout_toLeftOf="@+id/btn_chClose"
+		android:layout_toStartOf="@+id/btn_chClose"
+		android:background="@drawable/list_btn"
+		android:src="@drawable/menu" />
+		<RelativeLayout
+			android:id="@+id/btn_menu_layer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_toRightOf="@id/btn_menu"
+			android:layout_alignTop="@id/btn_menu"
+			android:visibility="gone">
+
+			<Button
+				android:id="@+id/btn_log"
+				android:layout_width="70dp"
+				android:layout_height="35dp"
+				android:layout_alignParentTop="true"
+				android:textSize="11sp"
+				android:text="로그보기" />
+
+			<Button
+				android:id="@+id/btn_channel"
+				android:layout_width="70dp"
+				android:layout_height="35dp"
+				android:layout_below="@id/btn_log"
+				android:layout_marginTop="4dp"
+				android:background="#413126"
+				android:text="채널팝업"
+				android:textColor="#AC9588"
+				android:textSize="13sp" />
+
+
+		</RelativeLayout>
+
+
+
 </RelativeLayout>

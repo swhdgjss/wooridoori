@@ -1,11 +1,13 @@
 package com.playrtc.sample
 
 import a.a.b.e
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Point
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -420,6 +422,9 @@ class PlayRTCActivity : Activity() {
         /* Video View ShowSnapshot 기능 버튼 */
         initVideoViewShowSnapshotFunctionUIControls()
 
+        /* Menu 기능 버튼*/
+        initMenuControls()
+
 
     }
 
@@ -449,7 +454,7 @@ class PlayRTCActivity : Activity() {
         })
     }
 
-    /* 로그뷰  토글 버튼 */
+
     private fun initLogViewFunctionUIControls() {
         /* 로그뷰  토글 버튼 이벤트 처리 */
         val btnLog=this.findViewById(R.id.btn_log) as Button
@@ -471,7 +476,7 @@ class PlayRTCActivity : Activity() {
 
     /* Peer 채널 종료 버튼 */
     private fun initChannelCloseFunctionUIControls() {
-        val btnCloseChannel=this.findViewById(R.id.btn_chClose) as Button
+        val btnCloseChannel=this.findViewById(R.id.btn_chClose) as ImageButton
         btnCloseChannel.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
                 if (playRTCHandler != null && playRTCHandler!!.isChannelConnected) {
@@ -576,6 +581,44 @@ class PlayRTCActivity : Activity() {
         })
     }
 
+    //메뉴~
+    private fun initMenuControls() {
+        val btnMenu=this.findViewById(R.id.btn_menu) as ImageButton
+        btnMenu.setOnClickListener(object : View.OnClickListener {  //Button->view
+            override fun onClick(v: View) {
+                val layer=findViewById(R.id.btn_menu_layer) as RelativeLayout
+                if (layer.isShown) {
+                    layer.visibility=View.GONE
+                } else {
+                    hideFuntionUILayer()
+                    layer.visibility=View.VISIBLE
+                }
+            }
+        })
+        val log=findViewById(R.id.btn_log) as Button
+        log.setOnClickListener(object : View.OnClickListener {  //Button->view
+                override fun onClick(v: View) {
+                    if (logView!!.isShown == false) {
+                        logView!!.show()
+                        (v as Button).text="로그닫기"
+                    } else {
+                        logView!!.hide()
+                        (v as Button).text="로그보기"
+                    }
+                }
+
+        })
+        val channelPopup=this.findViewById(R.id.btn_channel) as Button
+        channelPopup.setOnClickListener {
+            if (channelInfoPopup!!.isShown) {
+                channelInfoPopup!!.hide(0)
+            } else {
+                channelInfoPopup!!.showChannelList()
+                channelInfoPopup!!.show(0)
+            }
+        }
+    }
+
     /* 카메라 영상 추가 회전 각 버튼 v2.2.9 */
     private fun initCameraDegreeFunctionUIControls() {
         val btnCameraDegree=this.findViewById(R.id.btn_camera_degree) as Button
@@ -618,7 +661,7 @@ class PlayRTCActivity : Activity() {
 
     /* 카메라 영상 Zoom 기능 버튼 v2.3.0 */
     private fun initCameraZoomFunctionUIControls() {
-        val btnCameraZoom=this.findViewById(R.id.btn_camera_zoom) as Button
+        val btnCameraZoom=this.findViewById(R.id.btn_camera_zoom) as ImageButton
         zoomRangeBar=this.findViewById(R.id.seekbar_camera_zoom) as PlayRTCVerticalSeekBar
 
         btnCameraZoom.setOnClickListener(object : View.OnClickListener { //Button->view
@@ -824,6 +867,7 @@ class PlayRTCActivity : Activity() {
         (findViewById(R.id.btn_camera_zoom_layer) as RelativeLayout).visibility=View.GONE
         (findViewById(R.id.btn_white_balance_layer) as RelativeLayout).visibility=View.GONE
         (findViewById(R.id.btn_exposure_compensation_layer) as RelativeLayout).visibility=View.GONE
+        (findViewById(R.id.btn_menu_layer) as RelativeLayout).visibility=View.GONE
     }
 
     /**
