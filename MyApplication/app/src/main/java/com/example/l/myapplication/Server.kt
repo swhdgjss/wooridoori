@@ -3,6 +3,7 @@ package com.example.l.myapplication
 import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -29,6 +30,7 @@ class Server:Activity() {
         setContentView(R.layout.activity_server)
         text_msg = findViewById<View>(R.id.text_massage_from_client) as TextView
         edit_msg = findViewById<View>(R.id.edit_message_to_client) as EditText
+        text_msg.setMovementMethod(ScrollingMovementMethod());
     }
 
     //Button 클릭시 자동으로 호출되는 callback 메소드

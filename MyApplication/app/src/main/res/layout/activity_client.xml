@@ -32,7 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/label_message_from_server"
         android:layout_marginTop="20dp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:scrollbars="vertical" />
 
     <TextView
         android:id="@+id/label_message_to_server"
