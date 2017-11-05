@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="G:\Android\wooridoori\WooriDoori\app\src\main\assets"><file name="librtc_xmllite.a" path="G:\Android\wooridoori\WooriDoori\app\src\main\assets\librtc_xmllite.a"/><file name="main.html" path="G:\Android\wooridoori\WooriDoori\app\src\main\assets\main.html"/></source><source path="G:\Android\wooridoori\WooriDoori\app\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="G:\Android\wooridoori\WooriDoori\app\src\debug\assets"/></dataSet></merger>

@@ -1,0 +1,175 @@
+-- Merging decision tree log ---
+manifest
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:2:1-56:12
+INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:2:1-56:12
+INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:2:1-56:12
+INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:2:1-56:12
+MERGED from [com.android.support:design:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\design-23.2.1.aar\86d531a377bf814df6a7f6243a14e4c0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:appcompat-v7:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.2.1.aar\84cae5004eeea560bdd08ac5d1281617\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.2.1.aar\d77e2e314ac766bafbfea21c9b8eb87b\AndroidManifest.xml:2:1-9:12
+MERGED from [com.android.support:support-vector-drawable:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.2.1.aar\b182262e0fa6df1e0acff78524ce2222\AndroidManifest.xml:2:1-9:12
+MERGED from [com.android.support:recyclerview-v7:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-23.2.1.aar\fb5fe654fcb2c466d86853ad51fcb928\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\support-v4-23.2.1.aar\49acfe171b02a89810c16567eb0916bd\AndroidManifest.xml:17:1-24:12
+INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:2:1-56:12
+INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:2:1-56:12
+INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:2:1-56:12
+	package
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:3:5-37
+		INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+		INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:2:1-56:12
+		INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:2:1-56:12
+		INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:2:11-69
+uses-feature#0x00020000
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:7:5-78
+	android:glEsVersion
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:7:19-51
+	android:required
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:7:52-75
+uses-permission#android.permission.CAMERA
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:9:5-64
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:9:22-62
+uses-feature#android.hardware.camera
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:10:5-60
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:10:19-57
+uses-feature#android.hardware.camera.autofocus
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:11:5-70
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:11:19-67
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:12:5-71
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:12:22-68
+uses-permission#android.permission.INTERNET
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:13:5-67
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:13:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:14:5-78
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:14:22-76
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:15:5-75
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:15:22-73
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:16:5-75
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:16:22-73
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:20:5-80
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:20:22-78
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:23:5-75
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:23:22-72
+uses-permission#android.permission.MODIFY_AUDIO_SETTINGS
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:24:5-80
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:24:22-77
+uses-permission#android.permission.BLUETOOTH
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:25:5-68
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:25:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:26:5-74
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:26:22-71
+uses-permission#android.permission.BROADCAST_STICKY
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:27:5-74
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:27:22-72
+application
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:29:5-54:19
+MERGED from [com.android.support:design:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\design-23.2.1.aar\86d531a377bf814df6a7f6243a14e4c0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\design-23.2.1.aar\86d531a377bf814df6a7f6243a14e4c0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.2.1.aar\84cae5004eeea560bdd08ac5d1281617\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.2.1.aar\84cae5004eeea560bdd08ac5d1281617\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.2.1.aar\d77e2e314ac766bafbfea21c9b8eb87b\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.2.1.aar\d77e2e314ac766bafbfea21c9b8eb87b\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.2.1.aar\b182262e0fa6df1e0acff78524ce2222\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.2.1.aar\b182262e0fa6df1e0acff78524ce2222\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\support-v4-23.2.1.aar\49acfe171b02a89810c16567eb0916bd\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\support-v4-23.2.1.aar\49acfe171b02a89810c16567eb0916bd\AndroidManifest.xml:22:5-20
+	android:supportsRtl
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:33:9-35
+	android:label
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:32:9-41
+	android:icon
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:31:9-45
+	android:allowBackup
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:30:9-35
+	android:theme
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:34:9-40
+activity#com.playrtc.wooridoori.MainActivity
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:35:9-45:20
+	android:screenOrientation
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:39:13-49
+	android:label
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:37:13-45
+	android:configChanges
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:40:13-59
+	android:theme
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:38:13-66
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:36:13-41
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:41:13-44:29
+action#android.intent.action.MAIN
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:42:17-69
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:42:25-66
+category#android.intent.category.LAUNCHER
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:43:17-77
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:43:27-74
+activity#com.playrtc.wooridoori.PlayRTCActivity
+ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:47:9-53:20
+	android:screenOrientation
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:51:13-49
+	android:label
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:49:13-45
+	android:configChanges
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:52:13-59
+	android:theme
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:50:13-66
+	android:name
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml:48:13-44
+uses-sdk
+INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:design:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\design-23.2.1.aar\86d531a377bf814df6a7f6243a14e4c0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:design:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\design-23.2.1.aar\86d531a377bf814df6a7f6243a14e4c0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.2.1.aar\84cae5004eeea560bdd08ac5d1281617\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.2.1.aar\84cae5004eeea560bdd08ac5d1281617\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.2.1.aar\d77e2e314ac766bafbfea21c9b8eb87b\AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.2.1.aar\d77e2e314ac766bafbfea21c9b8eb87b\AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.2.1.aar\b182262e0fa6df1e0acff78524ce2222\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-vector-drawable:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.2.1.aar\b182262e0fa6df1e0acff78524ce2222\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:recyclerview-v7:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-23.2.1.aar\fb5fe654fcb2c466d86853ad51fcb928\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-23.2.1.aar\fb5fe654fcb2c466d86853ad51fcb928\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\support-v4-23.2.1.aar\49acfe171b02a89810c16567eb0916bd\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\support-v4-23.2.1.aar\49acfe171b02a89810c16567eb0916bd\AndroidManifest.xml:20:5-43
+INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:23.2.1] C:\Users\L\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.2.1.aar\84cae5004eeea560bdd08ac5d1281617\AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+		INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+		ADDED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml
+		INJECTED from G:\Android\wooridoori\WooriDoori\app\src\main\AndroidManifest.xml

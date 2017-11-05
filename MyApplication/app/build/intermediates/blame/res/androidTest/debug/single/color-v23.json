@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_default.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\3e1cfcadd974a89ab6b4db232a43aeab\\res\\color-v23\\abc_tint_default.xml"
+    },
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_btn_colored_text_material.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\3e1cfcadd974a89ab6b4db232a43aeab\\res\\color-v23\\abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\3e1cfcadd974a89ab6b4db232a43aeab\\res\\color-v23\\abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_btn_colored_borderless_text_material.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\3e1cfcadd974a89ab6b4db232a43aeab\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_edittext.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\3e1cfcadd974a89ab6b4db232a43aeab\\res\\color-v23\\abc_tint_edittext.xml"
+    },
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_switch_track.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\3e1cfcadd974a89ab6b4db232a43aeab\\res\\color-v23\\abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_seek_thumb.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\3e1cfcadd974a89ab6b4db232a43aeab\\res\\color-v23\\abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_spinner.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\3e1cfcadd974a89ab6b4db232a43aeab\\res\\color-v23\\abc_tint_spinner.xml"
+    },
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_btn_checkable.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\3e1cfcadd974a89ab6b4db232a43aeab\\res\\color-v23\\abc_tint_btn_checkable.xml"
+    }
+]

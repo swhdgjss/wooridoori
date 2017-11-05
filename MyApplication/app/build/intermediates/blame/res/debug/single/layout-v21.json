@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\a24b861600eca6ef1a2a2ce102da7d39\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\a24b861600eca6ef1a2a2ce102da7d39\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\a24b861600eca6ef1a2a2ce102da7d39\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "G:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\a24b861600eca6ef1a2a2ce102da7d39\\res\\layout-v21\\notification_template_custom_big.xml"
+    }
+]

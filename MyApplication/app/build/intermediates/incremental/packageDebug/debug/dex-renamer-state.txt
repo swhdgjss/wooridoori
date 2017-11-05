@@ -1,0 +1,4 @@
+#Sun Nov 05 22:24:27 KST 2017
+base.0=G\:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+renamed.0=classes.dex
+file.0=G\:\\Android\\wooridoori\\MyApplication\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex
