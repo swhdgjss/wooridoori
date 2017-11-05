@@ -63,6 +63,7 @@ class PlayRTCActivity : Activity() {
     var channelInfoPopup: PlayRTCChannelView?=null
         private set
 
+
     /*
      * PlayRTC-Handler Class
      * PlayRTC 메소드 , PlayRTC객체의 이벤트 처리
@@ -124,6 +125,8 @@ class PlayRTCActivity : Activity() {
     private var isResetLogViewArea=false
 
     private var zoomRangeBar: PlayRTCVerticalSeekBar?=null
+    private var exposureRangeBar: PlayRTCVerticalSeekBar?=null
+    private var exposureRange: PlayRTCRange<Int>?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -139,6 +142,7 @@ class PlayRTCActivity : Activity() {
         val channelRing=intent.getStringExtra("channelRing")
         val videoCodec=intent.getStringExtra("videoCodec")
         val audioCodec=intent.getStringExtra("audioCodec")
+
 
         // UI 인스턴스 변수 처리
         initUIControls()
@@ -167,9 +171,9 @@ class PlayRTCActivity : Activity() {
 
         // PlayRTC 채널 서비스에서 채멀 목록을 조회하여 리스트에 출력한다.
         this.channelInfoPopup!!.showChannelList()
-
         // 채널 생성 또는 채널 입장하기 위한 팝업 레이어 출력
         this.channelInfoPopup!!.show(600)
+
     }
 
     // Activty의 포커스 여부를 확인
@@ -187,13 +191,15 @@ class PlayRTCActivity : Activity() {
 
             // 4. 영상 스트림 출력을 위한 PlayRTCVideoView 동적 생성
             videoLayer.createVideoView();
+
         }
         */
-
         // Layout XML에 VideoView를 기술한 경우. v2.2.6
         if (hasFocus && videoLayer!!.isInitVideoView == false) {
+
             // 4. 영상 스트림 출력을 위한 PlayRTCVideoView 초기화
             videoLayer!!.initVideoView()
+
         }
     }
 
@@ -205,6 +211,7 @@ class PlayRTCActivity : Activity() {
 
     public override fun onResume() {
         super.onResume()
+
         // 미디어 스트리밍 처리 resume
         if (playRTCHandler != null) playRTCHandler!!.onActivityResume()
     }
@@ -274,11 +281,15 @@ class PlayRTCActivity : Activity() {
         }
     }
 
+
     override fun onConfigurationChanged(newConfig: Configuration) {
+
         when (this.resources.configuration.orientation) {
             Configuration.ORIENTATION_PORTRAIT -> {
+
             }
             Configuration.ORIENTATION_LANDSCAPE -> {
+
             }
         }
         super.onConfigurationChanged(newConfig)
@@ -344,6 +355,7 @@ class PlayRTCActivity : Activity() {
      * Layout 관련 인스턴스 설정 및 이벤트 정의
      */
     private fun initUIControls() {
+
         /* 채널 팝업 뷰 */
         channelInfoPopup=findViewById(R.id.channel_info) as PlayRTCChannelView
 
@@ -362,6 +374,7 @@ class PlayRTCActivity : Activity() {
         txtStatReport=this.findViewById(R.id.txt_stat_report) as TextView
         val text="Local\n ICE:none\n Frame:0x0x0\n Bandwidth[0bps]\n RTT[0]\n eModel[-]\n VFLost[0]\n AFLost[0]\n\nRemote\n ICE:none\n Frame:0x0x0\n Bandwidth[0bps]\n VFLost[0]\n AFLost[0]"
         txtStatReport!!.text=text
+
 
         /* 채널 팝업 버튼 */
         val channelPopup=this.findViewById(R.id.btn_channel) as Button
@@ -407,6 +420,10 @@ class PlayRTCActivity : Activity() {
         /* Menu 기능 버튼*/
         initMenuControls()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 0b8ade7... 줄 정리
     }
 
     /* 카메라 전/후방 전환 버튼 */
@@ -452,6 +469,7 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
     }
 
     /* Peer 채널 종료 버튼 */
@@ -577,15 +595,15 @@ class PlayRTCActivity : Activity() {
         })
         val log=findViewById(R.id.btn_log) as Button
         log.setOnClickListener(object : View.OnClickListener {  //Button->view
-            override fun onClick(v: View) {
-                if (logView!!.isShown == false) {
-                    logView!!.show()
-                    (v as Button).text="로그닫기"
-                } else {
-                    logView!!.hide()
-                    (v as Button).text="로그보기"
+                override fun onClick(v: View) {
+                    if (logView!!.isShown == false) {
+                        logView!!.show()
+                        (v as Button).text="로그닫기"
+                    } else {
+                        logView!!.hide()
+                        (v as Button).text="로그보기"
+                    }
                 }
-            }
 
         })
         val channelPopup=this.findViewById(R.id.btn_channel) as Button
@@ -671,6 +689,7 @@ class PlayRTCActivity : Activity() {
             }
         })
 
+
         zoomRangeBar!!.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -703,6 +722,7 @@ class PlayRTCActivity : Activity() {
             }
         });
     }
+
 
     /* 카메라 Whitebalance 기능 버튼 v2.3.0 */
     private fun initCameraWhitebalanceFunctionUIControls() {
@@ -744,6 +764,7 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
         (this.findViewById(R.id.btn_white_balance_auto) as Button).setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {             //Button->view
                 if (playRTCHandler!!.setCameraWhiteBalance(PlayRTCWhiteBalance.Auto)) {
@@ -852,12 +873,14 @@ class PlayRTCActivity : Activity() {
      * @param degree int 0 , 90, 180, 270
      */
     private fun setCameraRotation(degree: Int) {
+
         if (playRTCHandler != null) {
 
             playRTCHandler!!.setCameraRotation(degree)
             val text=findViewById(R.id.lb_camera_degree) as TextView
             text.text=degree.toString() + "도"
         }
+
     }
 
     private fun initSnapshotControlls() {
@@ -882,6 +905,7 @@ class PlayRTCActivity : Activity() {
                         snapshotLayer!!.setSnapshotImage(image)
                     }
                 } else if (local == false && videoLayer!!.remoteView != null) {
+
                     /*
                          * Snapshot 이미지 요청
                          */
@@ -931,3 +955,5 @@ class PlayRTCActivity : Activity() {
         private val LOG_TAG="PlayRTCActivity"
     }
 }
+
+
