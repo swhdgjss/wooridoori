@@ -28,7 +28,7 @@
 				android:maxLines="20"
 				android:lines="20"
 				android:layout_alignParentLeft="true"
-				android:layout_below="@id/btn_switch_flash"
+
 				android:background="#e0e0e0"/>
 
 
@@ -592,4 +592,12 @@
 		android:layout_marginTop="54dp"
 		android:text="플래쉬전환"
 		android:textSize="13sp" />
+
+	<ImageButton
+		android:id="@+id/btn_menu"
+		android:layout_width="80dp"
+		android:layout_height="35dp"
+		android:src = "@drawable/zoom"
+		/>
+
 </RelativeLayout>

@@ -420,10 +420,6 @@ class PlayRTCActivity : Activity() {
         /* Menu 기능 버튼*/
         initMenuControls()
 
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 0b8ade7... 줄 정리
     }
 
     /* 카메라 전/후방 전환 버튼 */
