@@ -474,27 +474,7 @@
 			android:layout_below="@id/main_area"
 			android:background="#e0e0e0">
 
-			<Button
-				android:id="@+id/btn_log"
-				android:layout_width="82dp"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:textSize="13sp"
-				android:background="#413126"
-				android:textColor="#AC9588"
-				android:text="로그보기" />
 
-			<Button
-				android:id="@+id/btn_channel"
-				android:layout_width="82dp"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:layout_toRightOf="@id/btn_log"
-				android:layout_marginLeft="10dp"
-				android:textSize="13sp"
-				android:background="#413126"
-				android:textColor="#AC9588"
-				android:text="채널팝업" />
 
 			<ImageButton
 				android:id="@+id/btn_chClose"
@@ -508,14 +488,12 @@
 
 			<ImageButton
 				android:id="@+id/btn_show_snapshot"
-				android:layout_width="82dp"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_toLeftOf="@+id/btn_chClose"
-				android:background="#413126"
-				android:textColor="#AC9588"
-				android:text="스냅샷"
-				android:textSize="13sp" />
+				android:background="@drawable/list_btn"
+				android:src="@drawable/capture" />
 		</RelativeLayout>
 	</LinearLayout>
 	<!-- Channel Popup Layer-->
@@ -592,16 +570,39 @@
 		android:id="@+id/btn_menu_layer"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_toRightOf="@id/btn_menu"
-		android:layout_alignBottom="@id/btn_menu"
+		android:layout_alignParentTop="true"
+		android:layout_toEndOf="@+id/btn_menu"
+		android:layout_toRightOf="@+id/btn_menu"
 		android:visibility="gone">
 
 		<ImageButton
 			android:id="@+id/btn_switch_flash"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginBottom="20dp"
 			android:background="@drawable/list_btn"
 			android:src="@drawable/flash" />
+
+		<Button
+			android:id="@+id/btn_log"
+			android:layout_width="70dp"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/btn_switch_flash"
+			android:layout_marginBottom="20dp"
+			android:background="#413126"
+			android:text="로그보기"
+			android:textColor="#AC9588"
+			android:textSize="13sp" />
+
+		<Button
+			android:id="@+id/btn_channel"
+			android:layout_width="70dp"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/btn_log"
+			android:background="#413126"
+			android:text="채널팝업"
+			android:textColor="#AC9588"
+			android:textSize="13sp" />
 
 	</RelativeLayout>
 

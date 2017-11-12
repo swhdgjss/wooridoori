@@ -391,7 +391,7 @@ class PlayRTCActivity : Activity() {
         initSwitchVideoCameraFunctionUIControls()
 
         /* 후방 카메라 사용 시 플래쉬 On/Off 전환 버튼 */
-        initSwitchVideoCameraFlashFunctionUIControls()
+        //initSwitchVideoCameraFlashFunctionUIControls()
 
         /* 로그뷰  토글 버튼 */
         initLogViewFunctionUIControls()
@@ -668,7 +668,7 @@ class PlayRTCActivity : Activity() {
 
     /* 카메라 영상 Zoom 기능 버튼 v2.3.0 */
     private fun initCameraZoomFunctionUIControls() {
-        val btnCameraZoom=this.findViewById(R.id.btn_camera_zoom) as Button
+        val btnCameraZoom=this.findViewById(R.id.btn_camera_zoom) as ImageButton
         zoomRangeBar=this.findViewById(R.id.seekbar_camera_zoom) as PlayRTCVerticalSeekBar
 
         btnCameraZoom.setOnClickListener(object : View.OnClickListener { //Button->view
@@ -735,7 +735,7 @@ class PlayRTCActivity : Activity() {
 
     /* 카메라 Whitebalance 기능 버튼 v2.3.0 */
     private fun initCameraWhitebalanceFunctionUIControls() {
-        val btnCameraWbalance=this.findViewById(R.id.btn_white_balance) as Button
+        val btnCameraWbalance=this.findViewById(R.id.btn_white_balance) as ImageButton
 
         btnCameraWbalance.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
@@ -856,7 +856,7 @@ class PlayRTCActivity : Activity() {
     /* Video View ShowSnapshot 기능 버튼 */
     private fun initVideoViewShowSnapshotFunctionUIControls() {
         /* snapshot 레이어 보기 버튼 */
-        val btnShowSnapshot=this.findViewById(R.id.btn_show_snapshot) as Button
+        val btnShowSnapshot=this.findViewById(R.id.btn_show_snapshot) as ImageButton
 
         btnShowSnapshot.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
