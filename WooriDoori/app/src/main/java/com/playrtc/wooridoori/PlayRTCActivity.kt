@@ -424,7 +424,7 @@ class PlayRTCActivity : Activity() {
 
     /* 카메라 전/후방 전환 버튼 */
     private fun initSwitchVideoCameraFunctionUIControls() {
-        val cameraBtn=this.findViewById(R.id.btn_switch_camera) as Button
+        val cameraBtn=this.findViewById(R.id.btn_switch_camera) as ImageButton
 
         cameraBtn.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
@@ -433,9 +433,9 @@ class PlayRTCActivity : Activity() {
         })
     }
 
-    /* 후방 카메라 사용 시 플래쉬 On/Off 전환 버튼 */
+    /* 후방 카메라 사용 시 플래쉬 On/Off 전환 버튼
     private fun initSwitchVideoCameraFlashFunctionUIControls() {
-        val flashBtn=this.findViewById(R.id.btn_switch_flash) as Button
+        val flashBtn=this.findViewById(R.id.btn_switch_flash) as ImageButton
         /* 후방 카메라 플래쉬 On/Off, 후방 카메라 사용 시 작동  */
 
         flashBtn.setOnClickListener(object : View.OnClickListener {   //Button->viewv
@@ -446,7 +446,7 @@ class PlayRTCActivity : Activity() {
                 playRTCHandler!!.switchBackCameraFlash()
             }
         })
-    }
+    }*/
 
     /* 로그뷰  토글 버튼 */
     private fun initLogViewFunctionUIControls() {
@@ -470,7 +470,7 @@ class PlayRTCActivity : Activity() {
 
     /* Peer 채널 종료 버튼 */
     private fun initChannelCloseFunctionUIControls() {
-        val btnCloseChannel=this.findViewById(R.id.btn_chClose) as Button
+        val btnCloseChannel=this.findViewById(R.id.btn_chClose) as ImageButton
         btnCloseChannel.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
                 if (playRTCHandler != null && playRTCHandler!!.isChannelConnected) {
@@ -589,6 +589,7 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
         val log=findViewById(R.id.btn_log) as Button
         log.setOnClickListener(object : View.OnClickListener {  //Button->view
                 override fun onClick(v: View) {
@@ -611,6 +612,18 @@ class PlayRTCActivity : Activity() {
                 channelInfoPopup!!.show(0)
             }
         }
+
+        val flashBtn=this.findViewById(R.id.btn_switch_flash) as ImageButton
+        /* 후방 카메라 플래쉬 On/Off, 후방 카메라 사용 시 작동  */
+
+        flashBtn.setOnClickListener(object : View.OnClickListener {   //Button->viewv
+            override fun onClick(v: View) {
+                if (playRTCHandler == null) {
+                    return
+                }
+                playRTCHandler!!.switchBackCameraFlash()
+            }
+        })
     }
 
     /* 카메라 영상 추가 회전 각 버튼 v2.2.9 */
