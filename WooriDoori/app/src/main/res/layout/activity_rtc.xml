@@ -4,33 +4,35 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="#9FC2CB">
-	<LinearLayout
+	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical"
 		android:layout_alignParentTop="true">
+
 		<RelativeLayout
 			android:id="@+id/main_area"
 			android:layout_width="match_parent"
-			android:layout_height="0px"
+			android:layout_height="match_parent"
+			android:layout_alignParentTop="true"
+			android:layout_toEndOf="@+id/btn_menu_layer"
+			android:layout_toRightOf="@+id/btn_menu_layer"
 			android:layout_weight="0.82"
-			android:background="#e0e0e0"
-			android:layout_alignParentTop="true">
+			android:background="#e0e0e0">
 
 
 			<TextView
 				android:id="@+id/txt_stat_report"
 				android:layout_width="130dp"
 				android:layout_height="wrap_content"
-				android:textSize="10sp"
-				android:textColor="#000000"
-				android:text=""
-				android:maxLines="20"
-				android:lines="20"
 				android:layout_alignParentLeft="true"
+				android:background="#e0e0e0"
+				android:lines="20"
+				android:maxLines="20"
+				android:text=""
+				android:textColor="#000000"
 
-				android:background="#e0e0e0"/>
-
+				android:textSize="10sp" />
 
 
 			<com.playrtc.wooridoori.view.PlayRTCVideoViewGroup
@@ -47,14 +49,14 @@
 					android:layout_height="match_parent"
 					android:layout_centerHorizontal="true"
 					android:layout_centerVertical="true"
-					android:visibility="visible"/>
+					android:visibility="visible" />
 
 				<com.playrtc.wooridoori.view.LocalVideoView
 					android:id="@+id/local_video"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_centerHorizontal="true"
-					android:layout_centerVertical="true"/>
+					android:layout_centerVertical="true" />
 
 			</com.playrtc.wooridoori.view.PlayRTCVideoViewGroup>
 
@@ -65,12 +67,11 @@
 				android:layout_height="wrap_content"
 				android:layout_alignLeft="@id/videoarea"
 				android:layout_alignParentTop="true"
-				android:gravity="center"
 				android:layout_marginTop="6dp"
-				android:textSize="12sp"
+				android:gravity="center"
+				android:text="미러-Off"
 				android:textColor="#ff0000"
-				android:text="미러-Off">
-			</TextView>
+				android:textSize="12sp"></TextView>
 
 			<Button
 				android:id="@+id/btn_mirror"
@@ -78,8 +79,8 @@
 				android:layout_height="35dp"
 				android:layout_alignLeft="@id/videoarea"
 				android:layout_below="@id/lb_btn_mirror"
-				android:text="미러모드"
 				android:background="#413126"
+				android:text="미러모드"
 				android:textColor="#AC9588"
 				android:textSize="11sp" />
 
@@ -87,9 +88,9 @@
 				android:id="@+id/btn_mirror_layer"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:orientation="vertical"
-				android:layout_toRightOf="@id/btn_mirror"
 				android:layout_alignTop="@id/btn_mirror"
+				android:layout_toRightOf="@id/btn_mirror"
+				android:orientation="vertical"
 				android:visibility="gone">
 
 				<Button
@@ -97,8 +98,8 @@
 					android:layout_width="80dp"
 					android:layout_height="35dp"
 					android:layout_alignParentTop="true"
-					android:textSize="11sp"
-					android:text="미러-On" />
+					android:text="미러-On"
+					android:textSize="11sp" />
 
 				<Button
 					android:id="@+id/btn_mirror_off"
@@ -106,78 +107,10 @@
 					android:layout_height="35dp"
 					android:layout_below="@id/btn_mirror_on"
 					android:layout_marginTop="2dp"
-					android:textSize="11sp"
-					android:text="미러-Off" />
+					android:text="미러-Off"
+					android:textSize="11sp" />
 			</RelativeLayout>
 
-			<!-- v2.2.9 카메라 영상 회전 -->
-			<TextView
-				android:id="@+id/lb_camera_degree"
-				android:layout_width="80dp"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@id/videoarea"
-				android:layout_below="@id/btn_mirror"
-				android:layout_marginTop="6dp"
-				android:gravity="center"
-				android:textSize="12sp"
-				android:textColor="#ff0000"
-				android:text="0도 회전">
-			</TextView>
-			<Button
-				android:id="@+id/btn_camera_degree"
-				android:layout_width="80dp"
-				android:layout_height="35dp"
-				android:layout_alignLeft="@id/videoarea"
-				android:layout_below="@id/lb_camera_degree"
-				android:textSize="11sp"
-				android:background="#413126"
-				android:textColor="#AC9588"
-				android:text="영상회전" />
-			<RelativeLayout
-				android:id="@+id/btn_camera_degree_layer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:orientation="vertical"
-				android:layout_toRightOf="@id/btn_camera_degree"
-				android:layout_alignTop="@id/btn_camera_degree"
-				android:visibility="gone">
-
-				<Button
-					android:id="@+id/btn_camera_0"
-					android:layout_width="70dp"
-					android:layout_height="35dp"
-					android:layout_alignParentTop="true"
-					android:textSize="11sp"
-					android:text="0도" />
-
-				<Button
-					android:id="@+id/btn_camera_90"
-					android:layout_width="70dp"
-					android:layout_height="35dp"
-					android:layout_below="@id/btn_camera_0"
-					android:layout_marginTop="4dp"
-					android:textSize="11sp"
-					android:text="90도" />
-
-				<Button
-					android:id="@+id/btn_camera_180"
-					android:layout_width="70dp"
-					android:layout_height="35dp"
-					android:layout_below="@id/btn_camera_90"
-					android:layout_marginTop="4dp"
-					android:textSize="11sp"
-					android:text="180도" />
-
-				<Button
-					android:id="@+id/btn_camera_270"
-					android:layout_width="70dp"
-					android:layout_height="35dp"
-					android:layout_below="@id/btn_camera_180"
-					android:layout_marginTop="4dp"
-					android:textSize="11sp"
-					android:text="270도" />
-			</RelativeLayout>
-			<!-- v2.2.9 카메라 영상 회전 -->
 
 			<!-- v2.3.0 카메라 Zoom -->
 			<TextView
@@ -185,13 +118,12 @@
 				android:layout_width="80dp"
 				android:layout_height="wrap_content"
 				android:layout_alignLeft="@id/videoarea"
-				android:layout_below="@id/btn_camera_degree"
+				android:layout_below="@id/btn_mirror"
 				android:layout_marginTop="6dp"
-				android:textSize="12sp"
-				android:textColor="#ff0000"
 				android:gravity="center"
-				android:text="Zoom :0">
-			</TextView>
+				android:text="Zoom :0"
+				android:textColor="#ff0000"
+				android:textSize="12sp"></TextView>
 
 			<ImageButton
 				android:id="@+id/btn_camera_zoom"
@@ -201,44 +133,46 @@
 				android:layout_below="@id/lb_camera_zoom"
 				android:background="@drawable/list_btn"
 				android:src="@drawable/zoom" />
+
 			<RelativeLayout
 				android:id="@+id/btn_camera_zoom_layer"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:orientation="vertical"
-				android:layout_toRightOf="@id/btn_camera_zoom"
 				android:layout_centerVertical="true"
+				android:layout_toRightOf="@id/btn_camera_zoom"
+				android:orientation="vertical"
 				android:visibility="gone">
+
 				<TextView
 					android:id="@+id/lb_camera_zoom_max"
 					android:layout_width="wrap_content"
 					android:layout_height="20dp"
-					android:textSize="12sp"
-					android:textColor="#ff0000"
 					android:layout_alignParentTop="true"
 					android:layout_centerHorizontal="true"
-					android:text="0" />
+					android:text="0"
+					android:textColor="#ff0000"
+					android:textSize="12sp" />
 
 				<com.playrtc.wooridoori.view.PlayRTCVerticalSeekBar
 					android:id="@+id/seekbar_camera_zoom"
+					style="@style/VerticalSeekBar"
 					android:layout_width="wrap_content"
 					android:layout_height="240dp"
 					android:layout_below="@id/lb_camera_zoom_max"
 					android:max="0"
 					android:progress="0"
 					android:thumb="@drawable/seekbar_thumb"
-					android:thumbOffset="2dp"
-					style="@style/VerticalSeekBar"/>
+					android:thumbOffset="2dp" />
 
 				<TextView
 					android:id="@+id/lb_camera_zoom_min"
 					android:layout_width="wrap_content"
 					android:layout_height="20dp"
-					android:textSize="12sp"
-					android:textColor="#ff0000"
-					android:layout_centerHorizontal="true"
 					android:layout_below="@id/seekbar_camera_zoom"
-					android:text="0"/>
+					android:layout_centerHorizontal="true"
+					android:text="0"
+					android:textColor="#ff0000"
+					android:textSize="12sp" />
 			</RelativeLayout>
 			<!-- v2.3.0 카메라 Zoom -->
 
@@ -247,13 +181,13 @@
 				android:id="@+id/white_balance_label"
 				android:layout_width="80dp"
 				android:layout_height="wrap_content"
-				android:textSize="12sp"
-				android:layout_below="@id/btn_camera_zoom"
 				android:layout_alignLeft="@id/videoarea"
+				android:layout_below="@id/btn_camera_zoom"
 				android:layout_marginTop="6dp"
-				android:textColor="#ff0000"
 				android:gravity="center"
-				android:text="자동" />
+				android:text="자동"
+				android:textColor="#ff0000"
+				android:textSize="12sp" />
 
 			<ImageButton
 				android:id="@+id/btn_white_balance"
@@ -268,8 +202,8 @@
 				android:id="@+id/btn_white_balance_layer"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_toRightOf="@id/btn_white_balance"
 				android:layout_alignBottom="@id/btn_white_balance"
+				android:layout_toRightOf="@id/btn_white_balance"
 				android:visibility="gone">
 
 				<Button
@@ -277,17 +211,17 @@
 					android:layout_width="100dp"
 					android:layout_height="34dp"
 					android:layout_alignParentLeft="true"
-					android:textSize="12sp"
-					android:text="자동" />
+					android:text="자동"
+					android:textSize="12sp" />
 
 				<Button
 					android:id="@+id/btn_white_balance_incandescent"
 					android:layout_width="100dp"
 					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_auto"
 					android:layout_alignParentLeft="true"
-					android:textSize="12sp"
-					android:text="백열등" />
+					android:layout_below="@id/btn_white_balance_auto"
+					android:text="백열등"
+					android:textSize="12sp" />
 
 				<Button
 					android:id="@+id/btn_white_balance_fluoreScent"
@@ -295,18 +229,18 @@
 					android:layout_height="34dp"
 					android:layout_below="@id/btn_white_balance_auto"
 					android:layout_toRightOf="@id/btn_white_balance_incandescent"
-					android:textSize="12sp"
-					android:text="형광등" />
+					android:text="형광등"
+					android:textSize="12sp" />
 
 
 				<Button
 					android:id="@+id/btn_white_balance_daylight"
 					android:layout_width="100dp"
 					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_incandescent"
 					android:layout_alignParentLeft="true"
-					android:textSize="12sp"
-					android:text="햇빛" />
+					android:layout_below="@id/btn_white_balance_incandescent"
+					android:text="햇빛"
+					android:textSize="12sp" />
 
 				<Button
 					android:id="@+id/btn_white_balance_cloudydaylight"
@@ -314,16 +248,17 @@
 					android:layout_height="34dp"
 					android:layout_below="@id/btn_white_balance_incandescent"
 					android:layout_toRightOf="@id/btn_white_balance_daylight"
-					android:textSize="12sp"
-					android:text="흐림" />
+					android:text="흐림"
+					android:textSize="12sp" />
+
 				<Button
 					android:id="@+id/btn_white_balance_twilight"
 					android:layout_width="100dp"
 					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_daylight"
 					android:layout_alignParentLeft="true"
-					android:textSize="12sp"
-					android:text="저녁빛" />
+					android:layout_below="@id/btn_white_balance_daylight"
+					android:text="저녁빛"
+					android:textSize="12sp" />
 
 				<Button
 					android:id="@+id/btn_white_balance_shade"
@@ -331,124 +266,86 @@
 					android:layout_height="34dp"
 					android:layout_below="@id/btn_white_balance_daylight"
 					android:layout_toRightOf="@id/btn_white_balance_twilight"
-					android:textSize="12sp"
-					android:text="그늘" />
+					android:text="그늘"
+					android:textSize="12sp" />
 
 			</RelativeLayout>
 			<!-- v2.3.0 카메라 white balance -->
 
 			<!-- v2.3.0 카메라 노출 보정 -->
-			<RelativeLayout
-				android:id="@+id/btn_exposure_compensation_layer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:visibility="gone">
-
-				<TextView
-					android:id="@+id/lb_exposure_compensation_max"
-					android:layout_width="wrap_content"
-					android:layout_height="20dp"
-					android:textSize="12sp"
-					android:textColor="#ff0000"
-					android:layout_alignParentTop="true"
-					android:layout_centerHorizontal="true"
-					android:text="0" />
-
-				<com.playrtc.wooridoori.view.PlayRTCVerticalSeekBar
-					android:id="@+id/seekbar_exposure_compensation"
-					android:layout_width="wrap_content"
-					android:layout_height="240dp"
-					android:layout_below="@id/lb_exposure_compensation_max"
-					android:max="0"
-					android:progress="0"
-					android:thumb="@drawable/seekbar_thumb"
-					android:thumbOffset="2dp"
-					style="@style/VerticalSeekBar"/>
-
-				<TextView
-					android:id="@+id/lb_exposure_compensation_min"
-					android:layout_width="wrap_content"
-					android:layout_height="20dp"
-					android:textSize="12sp"
-					android:textColor="#ff0000"
-					android:layout_centerHorizontal="true"
-					android:layout_below="@id/seekbar_exposure_compensation"
-					android:text="0"/>
-			</RelativeLayout>
 			<!-- v2.3.0 카메라 노출 보정 -->
 
 			<com.playrtc.wooridoori.view.PlayRTCLogView
 				android:id="@+id/logtext"
 				android:layout_width="360dp"
 				android:layout_height="match_parent"
-				android:scrollbars="vertical"
 				android:layout_alignParentLeft="true"
-				android:textSize="13sp"
-				android:textColor="#000000"
-				android:text=""
 				android:background="@drawable/log_border"
-				android:visibility="invisible"/>
+				android:scrollbars="vertical"
+				android:text=""
+				android:textColor="#000000"
+				android:textSize="13sp"
+				android:visibility="invisible" />
 
 			<LinearLayout
-				android:orientation="vertical"
-				android:layout_width="100dp"
+				android:layout_width="200dp"
 				android:layout_height="wrap_content"
+				android:layout_alignParentRight="true"
 				android:layout_centerVertical="true"
-				android:layout_alignParentRight="true">
+				android:orientation="vertical">
 
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textSize="16sp"
-					android:textColor="#000000"
+					android:background="#e0e0e0"
 					android:text="Local Mute"
-					android:background="#e0e0e0">
-				</TextView>
+					android:textColor="#000000"
+					android:textSize="16sp"></TextView>
 
-				<Button
+				<ImageButton
 					android:id="@+id/btn_local_vmute"
-					android:layout_width="90dp"
+					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="12sp"
-					android:background="#413126"
-					android:textColor="#AC9588"
-					android:text="VIDOE-OFF" />
+					android:background="@drawable/list_btn"
+					android:src="@drawable/video_off" />
+
 				<Button
 					android:id="@+id/btn_local_amute"
 					android:layout_width="90dp"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10dp"
-					android:textSize="12sp"
 					android:background="#413126"
+					android:text="AUDIO-OFF"
 					android:textColor="#AC9588"
-					android:text="AUDIO-OFF" />
+					android:textSize="12sp" />
+
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10dp"
-					android:textSize="16sp"
-					android:textColor="#000000"
+					android:background="#e0e0e0"
 					android:text="Remote Mute"
-					android:background="#e0e0e0">
-				</TextView>
+					android:textColor="#000000"
+					android:textSize="16sp"></TextView>
+
 				<Button
 					android:id="@+id/btn_remote_vmute"
 					android:layout_width="90dp"
 					android:layout_height="wrap_content"
-					android:textSize="12sp"
 					android:background="#413126"
+					android:text="VIDOE-OFF"
 					android:textColor="#AC9588"
-					android:text="VIDOE-OFF" />
+					android:textSize="12sp" />
+
 				<Button
 					android:id="@+id/btn_remote_amute"
 					android:layout_width="90dp"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10dp"
-					android:textSize="12sp"
 					android:background="#413126"
+					android:text="AUDIO-OFF"
 					android:textColor="#AC9588"
-					android:text="AUDIO-OFF" />
+					android:textSize="12sp" />
 
 			</LinearLayout>
 
@@ -458,44 +355,14 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:layout_centerHorizontal="true"
-				android:layout_centerVertical="true"
+				android:background="#55ffffff"
 				android:orientation="vertical"
-				android:visibility="invisible"
-				android:background="#55ffffff">
-			</com.playrtc.wooridoori.view.PlayRTCSnapshotView>
+				android:visibility="invisible"></com.playrtc.wooridoori.view.PlayRTCSnapshotView>
 
 		</RelativeLayout>
 
-		<RelativeLayout
-			android:id="@+id/controls"
-			android:layout_width="match_parent"
-			android:layout_height="0px"
-			android:layout_weight="0.18"
-			android:layout_below="@id/main_area"
-			android:background="#e0e0e0">
 
-
-
-			<ImageButton
-				android:id="@+id/btn_chClose"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignParentRight="true"
-				android:layout_centerVertical="true"
-				android:layout_marginRight="10dp"
-				android:background="@drawable/list_btn"
-				android:src="@drawable/end" />
-
-			<ImageButton
-				android:id="@+id/btn_show_snapshot"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:layout_toLeftOf="@+id/btn_chClose"
-				android:background="@drawable/list_btn"
-				android:src="@drawable/capture" />
-		</RelativeLayout>
-	</LinearLayout>
+	</RelativeLayout>
 	<!-- Channel Popup Layer-->
 	<include
 		android:id="@+id/channel_info"
@@ -511,13 +378,12 @@
 		android:id="@+id/btn_chat"
 		android:layout_width="80dp"
 		android:layout_height="36dp"
-		android:layout_marginBottom="63dp"
-		android:background="#413126"
-		android:textColor="#AC9588"
-		android:text="채팅하기"
 		android:layout_alignParentBottom="true"
 		android:layout_alignParentLeft="true"
-		android:layout_alignParentStart="true" />
+		android:layout_alignParentStart="true"
+		android:background="#413126"
+		android:text="채팅하기"
+		android:textColor="#AC9588" />
 
 	<EditText
 		android:id="@+id/editText"
@@ -547,11 +413,11 @@
 		android:id="@+id/btn_switch_camera"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_alignParentTop="true"
-		android:layout_marginLeft="11dp"
-		android:layout_marginStart="11dp"
-		android:layout_toEndOf="@+id/btn_chat"
-		android:layout_toRightOf="@+id/btn_chat"
+		android:layout_alignParentBottom="true"
+		android:layout_marginLeft="55dp"
+		android:layout_marginStart="55dp"
+		android:layout_toEndOf="@+id/editText"
+		android:layout_toRightOf="@+id/editText"
 		android:background="@drawable/list_row_bg"
 		android:src="@drawable/cam_change" />
 
@@ -561,8 +427,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
-		android:layout_toEndOf="@+id/textView"
-		android:layout_toRightOf="@+id/textView"
+		android:layout_toEndOf="@+id/btn_switch_camera"
+		android:layout_toRightOf="@+id/btn_switch_camera"
 		android:background="@drawable/list_row_bg"
 		android:src="@drawable/menu" />
 
@@ -605,5 +471,27 @@
 			android:textSize="13sp" />
 
 	</RelativeLayout>
+
+	<ImageButton
+		android:id="@+id/btn_show_snapshot"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentRight="true"
+		android:background="@drawable/list_btn"
+		android:src="@drawable/capture" />
+
+	<ImageButton
+		android:id="@+id/btn_chClose"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_marginLeft="12dp"
+		android:layout_marginStart="12dp"
+		android:layout_toEndOf="@+id/btn_show_snapshot"
+		android:layout_toRightOf="@+id/btn_show_snapshot"
+		android:background="@drawable/list_btn"
+		android:src="@drawable/end" />
 
 </RelativeLayout>

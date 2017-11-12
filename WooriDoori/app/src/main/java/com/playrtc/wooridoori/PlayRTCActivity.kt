@@ -63,7 +63,6 @@ class PlayRTCActivity : Activity() {
     var channelInfoPopup: PlayRTCChannelView?=null
         private set
 
-
     /*
      * PlayRTC-Handler Class
      * PlayRTC 메소드 , PlayRTC객체의 이벤트 처리
@@ -93,7 +92,6 @@ class PlayRTCActivity : Activity() {
     var rtcDataHandler: PlayRTCDataChannelHandler?=null
         private set
 
-
     /*
      * 로그 출력 TextView
      *
@@ -105,7 +103,6 @@ class PlayRTCActivity : Activity() {
      * PlayRTC P2P Status report 출력 TextView
      */
     private var txtStatReport: TextView?=null
-
 
     /*
      * 영상 뷰 Snapshot 이미지 요청 및 이미지 출력을 위한 뷰 그룹
@@ -125,13 +122,10 @@ class PlayRTCActivity : Activity() {
     private var isResetLogViewArea=false
 
     private var zoomRangeBar: PlayRTCVerticalSeekBar?=null
-    private var exposureRangeBar: PlayRTCVerticalSeekBar?=null
-    private var exposureRange: PlayRTCRange<Int>?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rtc)
-
 
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -142,7 +136,6 @@ class PlayRTCActivity : Activity() {
         val channelRing=intent.getStringExtra("channelRing")
         val videoCodec=intent.getStringExtra("videoCodec")
         val audioCodec=intent.getStringExtra("audioCodec")
-
 
         // UI 인스턴스 변수 처리
         initUIControls()
@@ -171,9 +164,9 @@ class PlayRTCActivity : Activity() {
 
         // PlayRTC 채널 서비스에서 채멀 목록을 조회하여 리스트에 출력한다.
         this.channelInfoPopup!!.showChannelList()
+
         // 채널 생성 또는 채널 입장하기 위한 팝업 레이어 출력
         this.channelInfoPopup!!.show(600)
-
     }
 
     // Activty의 포커스 여부를 확인
@@ -196,7 +189,6 @@ class PlayRTCActivity : Activity() {
         */
         // Layout XML에 VideoView를 기술한 경우. v2.2.6
         if (hasFocus && videoLayer!!.isInitVideoView == false) {
-
             // 4. 영상 스트림 출력을 위한 PlayRTCVideoView 초기화
             videoLayer!!.initVideoView()
 
@@ -211,7 +203,6 @@ class PlayRTCActivity : Activity() {
 
     public override fun onResume() {
         super.onResume()
-
         // 미디어 스트리밍 처리 resume
         if (playRTCHandler != null) playRTCHandler!!.onActivityResume()
     }
@@ -280,7 +271,6 @@ class PlayRTCActivity : Activity() {
             alert.show()
         }
     }
-
 
     override fun onConfigurationChanged(newConfig: Configuration) {
 
@@ -355,7 +345,6 @@ class PlayRTCActivity : Activity() {
      * Layout 관련 인스턴스 설정 및 이벤트 정의
      */
     private fun initUIControls() {
-
         /* 채널 팝업 뷰 */
         channelInfoPopup=findViewById(R.id.channel_info) as PlayRTCChannelView
 
@@ -374,7 +363,6 @@ class PlayRTCActivity : Activity() {
         txtStatReport=this.findViewById(R.id.txt_stat_report) as TextView
         val text="Local\n ICE:none\n Frame:0x0x0\n Bandwidth[0bps]\n RTT[0]\n eModel[-]\n VFLost[0]\n AFLost[0]\n\nRemote\n ICE:none\n Frame:0x0x0\n Bandwidth[0bps]\n VFLost[0]\n AFLost[0]"
         txtStatReport!!.text=text
-
 
         /* 채널 팝업 버튼 */
         val channelPopup=this.findViewById(R.id.btn_channel) as Button
@@ -406,7 +394,7 @@ class PlayRTCActivity : Activity() {
         initVideoViewMirrorFunctionUIControls()
 
         /* 카메라 영상 추가 회전 각 버튼 */
-        initCameraDegreeFunctionUIControls()
+        //initCameraDegreeFunctionUIControls()
 
         /* 카메라 영상 Zoom 기능 버튼 */
         initCameraZoomFunctionUIControls()
@@ -419,7 +407,6 @@ class PlayRTCActivity : Activity() {
 
         /* Menu 기능 버튼*/
         initMenuControls()
-
     }
 
     /* 카메라 전/후방 전환 버튼 */
@@ -432,21 +419,6 @@ class PlayRTCActivity : Activity() {
             }
         })
     }
-
-    /* 후방 카메라 사용 시 플래쉬 On/Off 전환 버튼
-    private fun initSwitchVideoCameraFlashFunctionUIControls() {
-        val flashBtn=this.findViewById(R.id.btn_switch_flash) as ImageButton
-        /* 후방 카메라 플래쉬 On/Off, 후방 카메라 사용 시 작동  */
-
-        flashBtn.setOnClickListener(object : View.OnClickListener {   //Button->viewv
-            override fun onClick(v: View) {
-                if (playRTCHandler == null) {
-                    return
-                }
-                playRTCHandler!!.switchBackCameraFlash()
-            }
-        })
-    }*/
 
     /* 로그뷰  토글 버튼 */
     private fun initLogViewFunctionUIControls() {
@@ -465,7 +437,6 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
-
     }
 
     /* Peer 채널 종료 버튼 */
@@ -483,7 +454,7 @@ class PlayRTCActivity : Activity() {
     /* 미디어 스트림 Mute 버튼 */
     private fun initMediaMuteFunctionUIControls() {
         /* Local Video Mute 버튼 */
-        val btnMuteLVideo=this.findViewById(R.id.btn_local_vmute) as Button
+        val btnMuteLVideo=this.findViewById(R.id.btn_local_vmute) as ImageButton
         /* Local Video Mute 처리시 로컬 영상 스트림은 화면에 출력이 안되며 상대방에게 전달이 되지 않는다. */
         btnMuteLVideo.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
@@ -541,7 +512,6 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
-
     }
 
     /* 로컬뷰 미러 모드 전환 버튼 */
@@ -603,6 +573,7 @@ class PlayRTCActivity : Activity() {
                 }
 
         })
+
         val channelPopup=this.findViewById(R.id.btn_channel) as Button
         channelPopup.setOnClickListener {
             if (channelInfoPopup!!.isShown) {
@@ -622,46 +593,6 @@ class PlayRTCActivity : Activity() {
                     return
                 }
                 playRTCHandler!!.switchBackCameraFlash()
-            }
-        })
-    }
-
-    /* 카메라 영상 추가 회전 각 버튼 v2.2.9 */
-    private fun initCameraDegreeFunctionUIControls() {
-        val btnCameraDegree=this.findViewById(R.id.btn_camera_degree) as Button
-        btnCameraDegree.setOnClickListener(object : View.OnClickListener {  //Button->view
-            override fun onClick(v: View) {
-                val layer=findViewById(R.id.btn_camera_degree_layer) as RelativeLayout
-                if (layer.isShown) {
-                    layer.visibility=View.GONE
-                } else {
-                    hideFuntionUILayer()
-                    layer.visibility=View.VISIBLE
-                }
-            }
-        })
-        val cameraRotation0=findViewById(R.id.btn_camera_0) as Button
-        cameraRotation0.setOnClickListener(object : View.OnClickListener {  //Button->view
-            override fun onClick(v: View) {
-                setCameraRotation(0)
-            }
-        })
-        val cameraRotation90=this.findViewById(R.id.btn_camera_90) as Button
-        cameraRotation90.setOnClickListener(object : View.OnClickListener {   //Button->view
-            override fun onClick(v: View) {
-                setCameraRotation(90)
-            }
-        })
-        val cameraRotation180=this.findViewById(R.id.btn_camera_180) as Button
-        cameraRotation180.setOnClickListener(object : View.OnClickListener {   //Button->view
-            override fun onClick(v: View) {
-                setCameraRotation(180)
-            }
-        })
-        val cameraRotation270=this.findViewById(R.id.btn_camera_270) as Button
-        cameraRotation270.setOnClickListener(object : View.OnClickListener {   //Button->view
-            override fun onClick(v: View) {
-                setCameraRotation(270)
             }
         })
     }
@@ -692,15 +623,12 @@ class PlayRTCActivity : Activity() {
                     (findViewById(R.id.lb_camera_zoom_min) as TextView).text=zoomRange.minValue.toString() + ""
                     (findViewById(R.id.lb_camera_zoom) as TextView).text="Zoom: " + zoomLevel
 
-
                     layer.visibility=View.VISIBLE
                 }
             }
         })
 
-
         zoomRangeBar!!.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
-
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser == false) {
                     return
@@ -713,7 +641,6 @@ class PlayRTCActivity : Activity() {
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
-
         })
     }
 
@@ -732,14 +659,12 @@ class PlayRTCActivity : Activity() {
         });
     }
 
-
     /* 카메라 Whitebalance 기능 버튼 v2.3.0 */
     private fun initCameraWhitebalanceFunctionUIControls() {
         val btnCameraWbalance=this.findViewById(R.id.btn_white_balance) as ImageButton
 
         btnCameraWbalance.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
-
                 if (playRTCHandler == null) {
                     return
                 }
@@ -747,11 +672,10 @@ class PlayRTCActivity : Activity() {
                 if (layer.isShown) {
                     layer.visibility=View.GONE
                 } else {
-
-                    hideFuntionUILayer()
-
                     val whiteBalance=playRTCHandler!!.cameraWhiteBalance
                     var labelText: String?=null
+
+                    hideFuntionUILayer()
 
                     if (whiteBalance == PlayRTCWhiteBalance.Auto) {
                         labelText="자동"
@@ -773,7 +697,6 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
-
         (this.findViewById(R.id.btn_white_balance_auto) as Button).setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {             //Button->view
                 if (playRTCHandler!!.setCameraWhiteBalance(PlayRTCWhiteBalance.Auto)) {
@@ -862,7 +785,6 @@ class PlayRTCActivity : Activity() {
             override fun onClick(v: View) {
                 if (snapshotLayer!!.isShown == false) {
                     hideFuntionUILayer()
-
                     snapshotLayer!!.visibility=View.VISIBLE
                 }
             }
@@ -871,35 +793,19 @@ class PlayRTCActivity : Activity() {
 
     private fun hideFuntionUILayer() {
         (findViewById(R.id.btn_mirror_layer) as RelativeLayout).visibility=View.GONE
-        (findViewById(R.id.btn_camera_degree_layer) as RelativeLayout).visibility=View.GONE
+       // (findViewById(R.id.btn_camera_degree_layer) as RelativeLayout).visibility=View.GONE    ->영상회전
         (findViewById(R.id.btn_camera_zoom_layer) as RelativeLayout).visibility=View.GONE
         (findViewById(R.id.btn_white_balance_layer) as RelativeLayout).visibility=View.GONE
         (findViewById(R.id.btn_exposure_compensation_layer) as RelativeLayout).visibility=View.GONE
     }
 
-    /**
-     * 카메라 영상 회전 기능. v2.2.9
-     * @param degree int 0 , 90, 180, 270
-     */
-    private fun setCameraRotation(degree: Int) {
-
-        if (playRTCHandler != null) {
-
-            playRTCHandler!!.setCameraRotation(degree)
-            val text=findViewById(R.id.lb_camera_degree) as TextView
-            text.text=degree.toString() + "도"
-        }
-
-    }
-
+    /*스냅샷*/
     private fun initSnapshotControlls() {
         if (snapshotLayer != null && videoLayer != null) {
-
             // Snapshot 버튼과 이미지 배치등의 자식 요소를 동적으로 생성하여 Layout 구성
             // Snapshot 요청과 이미지를 전달하기 위한 인터페이스 등록
             snapshotLayer!!.createControls { local ->
                 if (local && videoLayer!!.localView != null) {
-
                     /*
                          * Snapshot 이미지 요청
                          */
@@ -945,7 +851,6 @@ class PlayRTCActivity : Activity() {
         // 4:3 = width:height ,  width = ( 4 * height) / 3
         val width=4.0f * height / 3.0f
 
-
         val logLayoutparam=RelativeLayout.LayoutParams(width.toInt(), height.toInt())
         logLayoutparam.addRule(RelativeLayout.CENTER_VERTICAL)
         logLayoutparam.addRule(RelativeLayout.CENTER_HORIZONTAL)
@@ -957,12 +862,9 @@ class PlayRTCActivity : Activity() {
         videoLayer!!.layoutParams=videoLayoutparam
 
         isResetLogViewArea=true
-
     }
 
     companion object {
         private val LOG_TAG="PlayRTCActivity"
     }
 }
-
-
