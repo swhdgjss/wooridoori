@@ -1,9 +1,13 @@
 package com.example.l.myapplication
 
 import android.app.Activity
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableString
 import android.text.method.ScrollingMovementMethod
+import android.text.style.ImageSpan
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -14,6 +18,8 @@ import java.io.DataOutputStream
 import java.io.IOException
 import java.net.InetAddress
 import java.net.Socket
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class Client : Activity() {
     internal var ip = "192.168.193.11" //서버 단말기의 IP주소..
@@ -62,6 +68,7 @@ class Client : Activity() {
                     while (true) {
                         try {
                             msg = `is`.readUTF() //서버 부터 메세지가 전송되면 이를 UTF형식으로 읽어서 String 으로 리턴
+                            changeEmoticon(msg)
                             //서버로부터 읽어들인 메시지msg를 TextView에 출력..
                             //안드로이드는 오직 main Thread 만이 UI를 변경할 수 있기에
                             //네트워크 작업을 하는 이 Thread에서는 TextView의 글씨를 직접 변경할 수 없음.
@@ -102,6 +109,53 @@ class Client : Activity() {
                 ).start() //Thread 실행..
             }
         }
+    }
+
+    fun changeEmoticon(text : String) : SpannableString {
+        var result : SpannableString = SpannableString(text)
+        val pattern : Pattern = Pattern.compile("\\((.*?)\\)")
+        val match : Matcher = pattern.matcher(text)
+
+        while(match.find()) {
+            var start : Int = match.start()
+            var end : Int = match.end()
+            var temp : String = match.group(1)
+            var drawable : Drawable
+
+            while(temp.contains("(")) {
+                start = start + temp.indexOf("(") + 1
+                temp = temp.substring(temp.indexOf("(") + 1)
+            }
+
+            when(temp) {
+                "good" ->  {
+                    drawable = resources.getDrawable(R.drawable.good)
+                    drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                "ok" -> {
+                    drawable = resources.getDrawable(R.drawable.ok)
+                    drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                "flower" -> {
+                    drawable = resources.getDrawable(R.drawable.flower)
+                    drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                "heart" -> {
+                    drawable = resources.getDrawable(R.drawable.heart)
+                    drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                "merong" -> {
+                    drawable = resources.getDrawable(R.drawable.merong)
+                    drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+            }
+        }
+        return result
     }
 
     companion object {
