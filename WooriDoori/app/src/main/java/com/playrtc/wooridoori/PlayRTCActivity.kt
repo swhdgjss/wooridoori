@@ -545,7 +545,7 @@ class PlayRTCActivity : Activity() {
         })
     }
 
-    //메뉴~
+    //메뉴 버튼
     private fun initMenuControls() {
         val btnMenu=this.findViewById(R.id.btn_menu) as ImageButton
         btnMenu.setOnClickListener(object : View.OnClickListener {  //Button->view
@@ -796,7 +796,6 @@ class PlayRTCActivity : Activity() {
        // (findViewById(R.id.btn_camera_degree_layer) as RelativeLayout).visibility=View.GONE    ->영상회전
         (findViewById(R.id.btn_camera_zoom_layer) as RelativeLayout).visibility=View.GONE
         (findViewById(R.id.btn_white_balance_layer) as RelativeLayout).visibility=View.GONE
-        (findViewById(R.id.btn_exposure_compensation_layer) as RelativeLayout).visibility=View.GONE
     }
 
     /*스냅샷*/

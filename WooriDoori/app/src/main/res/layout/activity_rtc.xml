@@ -15,8 +15,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:layout_alignParentTop="true"
-			android:layout_toEndOf="@+id/btn_menu_layer"
-			android:layout_toRightOf="@+id/btn_menu_layer"
+
 			android:layout_weight="0.82"
 			android:background="#e0e0e0">
 
@@ -307,17 +306,15 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:background="@drawable/list_btn"
-					android:src="@drawable/video_off" />
+					android:src="@drawable/btn_setting" />
 
-				<Button
+				<ImageButton
 					android:id="@+id/btn_local_amute"
-					android:layout_width="90dp"
+					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10dp"
-					android:background="#413126"
-					android:text="AUDIO-OFF"
-					android:textColor="#AC9588"
-					android:textSize="12sp" />
+					android:background="@drawable/list_btn"
+					android:src="@drawable/btn_setting2" />" />
 
 				<TextView
 					android:layout_width="match_parent"
