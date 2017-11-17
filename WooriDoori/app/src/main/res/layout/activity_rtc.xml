@@ -59,220 +59,15 @@
 
 			</com.playrtc.wooridoori.view.PlayRTCVideoViewGroup>
 
-			<!-- 영상 미러모드 -->
-			<TextView
-				android:id="@+id/lb_btn_mirror"
-				android:layout_width="80dp"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@id/videoarea"
-				android:layout_alignParentTop="true"
-				android:layout_marginTop="6dp"
-				android:gravity="center"
-				android:text="미러-Off"
-				android:textColor="#ff0000"
-				android:textSize="12sp"></TextView>
 
-			<Button
-				android:id="@+id/btn_mirror"
-				android:layout_width="80dp"
-				android:layout_height="35dp"
-				android:layout_alignLeft="@id/videoarea"
-				android:layout_below="@id/lb_btn_mirror"
-				android:background="#413126"
-				android:text="미러모드"
-				android:textColor="#AC9588"
-				android:textSize="11sp" />
-
-			<RelativeLayout
-				android:id="@+id/btn_mirror_layer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignTop="@id/btn_mirror"
-				android:layout_toRightOf="@id/btn_mirror"
-				android:orientation="vertical"
-				android:visibility="gone">
-
-				<Button
-					android:id="@+id/btn_mirror_on"
-					android:layout_width="80dp"
-					android:layout_height="35dp"
-					android:layout_alignParentTop="true"
-					android:text="미러-On"
-					android:textSize="11sp" />
-
-				<Button
-					android:id="@+id/btn_mirror_off"
-					android:layout_width="80dp"
-					android:layout_height="35dp"
-					android:layout_below="@id/btn_mirror_on"
-					android:layout_marginTop="2dp"
-					android:text="미러-Off"
-					android:textSize="11sp" />
-			</RelativeLayout>
 
 
 			<!-- v2.3.0 카메라 Zoom -->
-			<TextView
-				android:id="@+id/lb_camera_zoom"
-				android:layout_width="80dp"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@id/videoarea"
-				android:layout_below="@id/btn_mirror"
-				android:layout_marginTop="6dp"
-				android:gravity="center"
-				android:text="Zoom :0"
-				android:textColor="#ff0000"
-				android:textSize="12sp"></TextView>
 
-			<ImageButton
-				android:id="@+id/btn_camera_zoom"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@id/videoarea"
-				android:layout_below="@id/lb_camera_zoom"
-				android:background="@drawable/list_btn"
-				android:src="@drawable/zoom" />
-
-			<RelativeLayout
-				android:id="@+id/btn_camera_zoom_layer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:layout_toRightOf="@id/btn_camera_zoom"
-				android:orientation="vertical"
-				android:visibility="gone">
-
-				<TextView
-					android:id="@+id/lb_camera_zoom_max"
-					android:layout_width="wrap_content"
-					android:layout_height="20dp"
-					android:layout_alignParentTop="true"
-					android:layout_centerHorizontal="true"
-					android:text="0"
-					android:textColor="#ff0000"
-					android:textSize="12sp" />
-
-				<com.playrtc.wooridoori.view.PlayRTCVerticalSeekBar
-					android:id="@+id/seekbar_camera_zoom"
-					style="@style/VerticalSeekBar"
-					android:layout_width="wrap_content"
-					android:layout_height="240dp"
-					android:layout_below="@id/lb_camera_zoom_max"
-					android:max="0"
-					android:progress="0"
-					android:thumb="@drawable/seekbar_thumb"
-					android:thumbOffset="2dp" />
-
-				<TextView
-					android:id="@+id/lb_camera_zoom_min"
-					android:layout_width="wrap_content"
-					android:layout_height="20dp"
-					android:layout_below="@id/seekbar_camera_zoom"
-					android:layout_centerHorizontal="true"
-					android:text="0"
-					android:textColor="#ff0000"
-					android:textSize="12sp" />
-			</RelativeLayout>
 			<!-- v2.3.0 카메라 Zoom -->
 
 			<!-- v2.3.0 카메라 white balance -->
-			<TextView
-				android:id="@+id/white_balance_label"
-				android:layout_width="80dp"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@id/videoarea"
-				android:layout_below="@id/btn_camera_zoom"
-				android:layout_marginTop="6dp"
-				android:gravity="center"
-				android:text="자동"
-				android:textColor="#ff0000"
-				android:textSize="12sp" />
 
-			<ImageButton
-				android:id="@+id/btn_white_balance"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@id/videoarea"
-				android:layout_below="@id/white_balance_label"
-				android:background="@drawable/list_btn"
-				android:src="@drawable/filter" />
-
-			<RelativeLayout
-				android:id="@+id/btn_white_balance_layer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBottom="@id/btn_white_balance"
-				android:layout_toRightOf="@id/btn_white_balance"
-				android:visibility="gone">
-
-				<Button
-					android:id="@+id/btn_white_balance_auto"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_alignParentLeft="true"
-					android:text="자동"
-					android:textSize="12sp" />
-
-				<Button
-					android:id="@+id/btn_white_balance_incandescent"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_alignParentLeft="true"
-					android:layout_below="@id/btn_white_balance_auto"
-					android:text="백열등"
-					android:textSize="12sp" />
-
-				<Button
-					android:id="@+id/btn_white_balance_fluoreScent"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_auto"
-					android:layout_toRightOf="@id/btn_white_balance_incandescent"
-					android:text="형광등"
-					android:textSize="12sp" />
-
-
-				<Button
-					android:id="@+id/btn_white_balance_daylight"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_alignParentLeft="true"
-					android:layout_below="@id/btn_white_balance_incandescent"
-					android:text="햇빛"
-					android:textSize="12sp" />
-
-				<Button
-					android:id="@+id/btn_white_balance_cloudydaylight"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_incandescent"
-					android:layout_toRightOf="@id/btn_white_balance_daylight"
-					android:text="흐림"
-					android:textSize="12sp" />
-
-				<Button
-					android:id="@+id/btn_white_balance_twilight"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_alignParentLeft="true"
-					android:layout_below="@id/btn_white_balance_daylight"
-					android:text="저녁빛"
-					android:textSize="12sp" />
-
-				<Button
-					android:id="@+id/btn_white_balance_shade"
-					android:layout_width="100dp"
-					android:layout_height="34dp"
-					android:layout_below="@id/btn_white_balance_daylight"
-					android:layout_toRightOf="@id/btn_white_balance_twilight"
-					android:text="그늘"
-					android:textSize="12sp" />
-
-			</RelativeLayout>
-			<!-- v2.3.0 카메라 white balance -->
-
-			<!-- v2.3.0 카메라 노출 보정 -->
-			<!-- v2.3.0 카메라 노출 보정 -->
 
 			<com.playrtc.wooridoori.view.PlayRTCLogView
 				android:id="@+id/logtext"
@@ -287,10 +82,11 @@
 				android:visibility="invisible" />
 
 			<LinearLayout
-				android:layout_width="200dp"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_alignParentEnd="true"
 				android:layout_alignParentRight="true"
-				android:layout_centerVertical="true"
+				android:layout_below="@+id/txt_stat_report"
 				android:orientation="vertical">
 
 				<TextView
@@ -370,41 +166,9 @@
 		android:layout_alignParentStart="true"
 		android:layout_alignParentTop="true"
 		android:visibility="invisible" />
+	<!-- Channel Popup Layer-->
 
-	<Button
-		android:id="@+id/btn_chat"
-		android:layout_width="80dp"
-		android:layout_height="36dp"
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentStart="true"
-		android:background="#413126"
-		android:text="채팅하기"
-		android:textColor="#AC9588" />
 
-	<EditText
-		android:id="@+id/editText"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_above="@+id/btn_chat"
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentStart="true"
-		android:ems="10"
-		android:inputType="textPersonName"
-		android:text="Name"
-		android:visibility="invisible" />
-
-	<TextView
-		android:id="@+id/textView"
-		android:layout_width="210dp"
-		android:layout_height="50dp"
-		android:layout_above="@+id/editText"
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentStart="true"
-		android:text="text"
-		android:textSize="20sp"
-		android:scrollbars="vertical"
-		android:visibility="invisible" />
 
 	<ImageButton
 		android:id="@+id/btn_switch_camera"
@@ -413,19 +177,18 @@
 		android:layout_alignParentBottom="true"
 		android:layout_marginLeft="55dp"
 		android:layout_marginStart="55dp"
-		android:layout_toEndOf="@+id/editText"
-		android:layout_toRightOf="@+id/editText"
 		android:background="@drawable/list_row_bg"
 		android:src="@drawable/cam_change" />
 
 
+	<!-- 메뉴 -->
 	<ImageButton
 		android:id="@+id/btn_menu"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
-		android:layout_toEndOf="@+id/btn_switch_camera"
-		android:layout_toRightOf="@+id/btn_switch_camera"
+		android:layout_marginEnd="26dp"
+		android:layout_marginRight="26dp"
 		android:background="@drawable/list_row_bg"
 		android:src="@drawable/menu" />
 
@@ -462,12 +225,259 @@
 			android:layout_width="70dp"
 			android:layout_height="wrap_content"
 			android:layout_below="@id/btn_log"
+			android:layout_marginBottom="20dp"
 			android:background="#413126"
 			android:text="채널팝업"
 			android:textColor="#AC9588"
 			android:textSize="13sp" />
 
+
+		<!-- v2.3.0 카메라 white balance -->
+
+		<TextView
+			android:id="@+id/white_balance_label"
+			android:layout_width="80dp"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/btn_channel"
+			android:layout_marginEnd="40dp"
+			android:layout_marginRight="40dp"
+			android:gravity="center"
+			android:text="자동"
+			android:textColor="#ff0000"
+			android:textSize="12sp" />
+
+		<ImageButton
+			android:id="@+id/btn_white_balance"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/white_balance_label"
+			android:background="@drawable/list_btn"
+			android:src="@drawable/filter" />
+
+		<RelativeLayout
+			android:id="@+id/btn_white_balance_layer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignBottom="@id/btn_white_balance"
+			android:layout_toRightOf="@id/btn_white_balance"
+			android:visibility="gone">
+
+			<Button
+				android:id="@+id/btn_white_balance_auto"
+				android:layout_width="100dp"
+				android:layout_height="34dp"
+				android:layout_alignParentLeft="true"
+				android:text="자동"
+				android:textSize="12sp" />
+
+			<Button
+				android:id="@+id/btn_white_balance_incandescent"
+				android:layout_width="100dp"
+				android:layout_height="34dp"
+				android:layout_alignParentLeft="true"
+				android:layout_below="@id/btn_white_balance_auto"
+				android:text="백열등"
+				android:textSize="12sp" />
+
+			<Button
+				android:id="@+id/btn_white_balance_fluoreScent"
+				android:layout_width="100dp"
+				android:layout_height="34dp"
+				android:layout_below="@id/btn_white_balance_auto"
+				android:layout_toRightOf="@id/btn_white_balance_incandescent"
+				android:text="형광등"
+				android:textSize="12sp" />
+
+
+			<Button
+				android:id="@+id/btn_white_balance_daylight"
+				android:layout_width="100dp"
+				android:layout_height="34dp"
+				android:layout_alignParentLeft="true"
+				android:layout_below="@id/btn_white_balance_incandescent"
+				android:text="햇빛"
+				android:textSize="12sp" />
+
+			<Button
+				android:id="@+id/btn_white_balance_cloudydaylight"
+				android:layout_width="100dp"
+				android:layout_height="34dp"
+				android:layout_below="@id/btn_white_balance_incandescent"
+				android:layout_toRightOf="@id/btn_white_balance_daylight"
+				android:text="흐림"
+				android:textSize="12sp" />
+
+			<Button
+				android:id="@+id/btn_white_balance_twilight"
+				android:layout_width="100dp"
+				android:layout_height="34dp"
+				android:layout_alignParentLeft="true"
+				android:layout_below="@id/btn_white_balance_daylight"
+				android:text="저녁빛"
+				android:textSize="12sp" />
+
+			<Button
+				android:id="@+id/btn_white_balance_shade"
+				android:layout_width="100dp"
+				android:layout_height="34dp"
+				android:layout_below="@id/btn_white_balance_daylight"
+				android:layout_toRightOf="@id/btn_white_balance_twilight"
+				android:text="그늘"
+				android:textSize="12sp" />
+
+		</RelativeLayout>
+		<!-- v2.3.0 카메라 white balance -->
+
+
+		<!-- zoom -->
+		<TextView
+			android:id="@+id/lb_camera_zoom"
+			android:layout_width="80dp"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/btn_white_balance"
+			android:text="Zoom :0"
+			android:textColor="#ff0000"
+			android:textSize="12sp"></TextView>
+
+		<ImageButton
+			android:id="@+id/btn_camera_zoom"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/lb_camera_zoom"
+			android:background="@drawable/list_btn"
+			android:src="@drawable/zoom" />
+
+		<RelativeLayout
+			android:id="@+id/btn_camera_zoom_layer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
+			android:layout_toRightOf="@id/btn_camera_zoom"
+			android:orientation="vertical"
+			android:visibility="gone">
+
+			<TextView
+				android:id="@+id/lb_camera_zoom_max"
+				android:layout_width="wrap_content"
+				android:layout_height="20dp"
+				android:layout_alignParentTop="true"
+				android:layout_centerHorizontal="true"
+				android:text="0"
+				android:textColor="#ff0000"
+				android:textSize="12sp" />
+
+			<com.playrtc.wooridoori.view.PlayRTCVerticalSeekBar
+				android:id="@+id/seekbar_camera_zoom"
+				style="@style/VerticalSeekBar"
+				android:layout_width="wrap_content"
+				android:layout_height="240dp"
+				android:layout_below="@id/lb_camera_zoom_max"
+				android:max="0"
+				android:progress="0"
+				android:thumb="@drawable/seekbar_thumb"
+				android:thumbOffset="2dp" />
+
+			<TextView
+				android:id="@+id/lb_camera_zoom_min"
+				android:layout_width="wrap_content"
+				android:layout_height="20dp"
+				android:layout_below="@id/seekbar_camera_zoom"
+				android:layout_centerHorizontal="true"
+				android:text="0"
+				android:textColor="#ff0000"
+				android:textSize="12sp" />
+		</RelativeLayout>
+		<!-- zoom -->
+
+		<!-- 영상 미러모드 -->
+		<TextView
+			android:id="@+id/lb_btn_mirror"
+			android:layout_width="80dp"
+			android:layout_height="wrap_content"
+
+			android:layout_below="@id/btn_camera_zoom"
+			android:text="미러-Off"
+			android:textColor="#ff0000"
+			android:textSize="12sp"></TextView>
+
+		<Button
+			android:id="@+id/btn_mirror"
+			android:layout_width="80dp"
+			android:layout_height="35dp"
+			android:layout_below="@id/lb_btn_mirror"
+			android:layout_marginBottom="20dp"
+			android:background="#413126"
+			android:text="미러모드"
+			android:textColor="#AC9588"
+			android:textSize="11sp" />
+
+		<RelativeLayout
+			android:id="@+id/btn_mirror_layer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignTop="@id/btn_mirror"
+			android:layout_toRightOf="@id/btn_mirror"
+			android:orientation="vertical"
+			android:visibility="gone">
+
+			<Button
+				android:id="@+id/btn_mirror_on"
+				android:layout_width="80dp"
+				android:layout_height="35dp"
+				android:layout_alignParentTop="true"
+				android:text="미러-On"
+				android:textSize="11sp" />
+
+			<Button
+				android:id="@+id/btn_mirror_off"
+				android:layout_width="80dp"
+				android:layout_height="35dp"
+				android:layout_below="@id/btn_mirror_on"
+				android:layout_marginTop="2dp"
+				android:text="미러-Off"
+				android:textSize="11sp" />
+		</RelativeLayout>
+		<!-- 영상 미러모드 -->
+
+
+		<!-- 채팅 -->
+		<ImageButton
+			android:id="@+id/btn_chat"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true"
+			android:layout_below="@id/btn_mirror"
+			android:background="@drawable/list_row_bg"
+			android:src="@drawable/chatting" />
+
+		<EditText
+			android:id="@+id/editText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_above="@+id/btn_chat"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true"
+			android:ems="10"
+			android:inputType="textPersonName"
+			android:text="Name"
+			android:visibility="invisible" />
+
+		<TextView
+			android:id="@+id/textView"
+			android:layout_width="210dp"
+			android:layout_height="50dp"
+			android:layout_above="@+id/editText"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true"
+			android:scrollbars="vertical"
+			android:text="text"
+			android:textSize="20sp"
+			android:visibility="invisible" />
+		<!-- 채팅 -->
+
 	</RelativeLayout>
+	<!-- 메뉴 -->
 
 	<ImageButton
 		android:id="@+id/btn_show_snapshot"
@@ -490,5 +500,7 @@
 		android:layout_toRightOf="@+id/btn_show_snapshot"
 		android:background="@drawable/list_btn"
 		android:src="@drawable/end" />
+
+
 
 </RelativeLayout>
