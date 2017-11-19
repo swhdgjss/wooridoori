@@ -24,6 +24,19 @@ import com.sktelecom.playrtc.exception.RequiredParameterMissingException
 import com.sktelecom.playrtc.exception.UnsupportedPlatformVersionException
 import com.sktelecom.playrtc.util.PlayRTCRange
 import com.sktelecom.playrtc.util.ui.PlayRTCVideoView
+import android.widget.Toast
+import android.graphics.Bitmap.CompressFormat
+import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Environment
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 /*
  * PlayRTC를 구현한 Activity Class
@@ -142,7 +155,7 @@ class PlayRTCActivity : Activity() {
 
         initSnapshotControlls()
 
-        chatting()
+        //chatting()
 
         playRTCHandler=PlayRTCHandler(this)
         try {
@@ -391,16 +404,16 @@ class PlayRTCActivity : Activity() {
         initMediaMuteFunctionUIControls()
 
         /* 로컬뷰 미러 모드 전환 버튼 */
-        initVideoViewMirrorFunctionUIControls()
+        //initVideoViewMirrorFunctionUIControls()
 
         /* 카메라 영상 추가 회전 각 버튼 */
         //initCameraDegreeFunctionUIControls()
 
         /* 카메라 영상 Zoom 기능 버튼 */
-        initCameraZoomFunctionUIControls()
+        //initCameraZoomFunctionUIControls()
 
         /* 카메라 Whitebalance 기능 버튼 */
-        initCameraWhitebalanceFunctionUIControls()
+        //initCameraWhitebalanceFunctionUIControls()
 
         /* Video View ShowSnapshot 기능 버튼 */
         initVideoViewShowSnapshotFunctionUIControls()
@@ -469,7 +482,7 @@ class PlayRTCActivity : Activity() {
         })
 
         /* Local Audio Mute 버튼 */
-        val btnMuteLAudio=this.findViewById(R.id.btn_local_amute) as Button
+        val btnMuteLAudio=this.findViewById(R.id.btn_local_amute) as ImageButton
         /* Local Audio Mute 처리시 로컬 음성 스트림은 상대방에게 전달이 되지 않는다. */
         btnMuteLAudio.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
@@ -514,36 +527,7 @@ class PlayRTCActivity : Activity() {
         })
     }
 
-    /* 로컬뷰 미러 모드 전환 버튼 */
-    private fun initVideoViewMirrorFunctionUIControls() {
-        val btnMirror=this.findViewById(R.id.btn_mirror) as Button
 
-        btnMirror.setOnClickListener(object : View.OnClickListener {  //Button->view
-            override fun onClick(v: View) {
-                val layer=findViewById(R.id.btn_mirror_layer) as RelativeLayout
-                if (layer.isShown) {
-                    layer.visibility=View.GONE
-                } else {
-                    hideFuntionUILayer()
-                    layer.visibility=View.VISIBLE
-                }
-            }
-        })
-        (this.findViewById(R.id.btn_mirror_on) as Button).setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View) {   //Button->view
-                (findViewById(R.id.lb_btn_mirror) as TextView).text="미러-On"
-                val view=videoLayer!!.localView
-                view.isMirror=true
-            }
-        })
-        (this.findViewById(R.id.btn_mirror_off) as Button).setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View) {   //Button->view
-                (findViewById(R.id.lb_btn_mirror) as TextView).text="미러-Off"
-                val view=videoLayer!!.localView
-                view.isMirror=false
-            }
-        })
-    }
 
     //메뉴 버튼
     private fun initMenuControls() {
@@ -595,72 +579,8 @@ class PlayRTCActivity : Activity() {
                 playRTCHandler!!.switchBackCameraFlash()
             }
         })
-    }
 
-    /* 카메라 영상 Zoom 기능 버튼 v2.3.0 */
-    private fun initCameraZoomFunctionUIControls() {
-        val btnCameraZoom=this.findViewById(R.id.btn_camera_zoom) as ImageButton
-        zoomRangeBar=this.findViewById(R.id.seekbar_camera_zoom) as PlayRTCVerticalSeekBar
-
-        btnCameraZoom.setOnClickListener(object : View.OnClickListener { //Button->view
-            override fun onClick(v: View) {
-
-                if (playRTCHandler == null) {
-                    return
-                }
-                val layer=findViewById(R.id.btn_camera_zoom_layer) as RelativeLayout
-                if (layer.isShown) {
-                    layer.visibility=View.GONE
-                } else {
-
-                    hideFuntionUILayer()
-
-                    val zoomRange=playRTCHandler!!.cameraZoomRange
-                    val zoomLevel=playRTCHandler!!.currentCameraZoom
-                    zoomRangeBar!!.maximum=zoomRange.maxValue
-                    zoomRangeBar!!.setProgressAndThumb(zoomLevel)
-                    (findViewById(R.id.lb_camera_zoom_max) as TextView).text=zoomRange.maxValue.toString() + ""
-                    (findViewById(R.id.lb_camera_zoom_min) as TextView).text=zoomRange.minValue.toString() + ""
-                    (findViewById(R.id.lb_camera_zoom) as TextView).text="Zoom: " + zoomLevel
-
-                    layer.visibility=View.VISIBLE
-                }
-            }
-        })
-
-        zoomRangeBar!!.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser == false) {
-                    return
-                }
-                zoomRangeBar!!.setProgressAndThumb(progress)
-                (findViewById(R.id.lb_camera_zoom) as TextView).text="Zoom: " + progress
-                playRTCHandler!!.setCameraZoom(progress)
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {}
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {}
-        })
-    }
-
-    /*채팅 버튼*/
-    private fun chatting() {
-        val text=findViewById(R.id.btn_chat) as Button
-        val edit=findViewById(R.id.editText) as EditText
-        val txt=findViewById(R.id.textView) as TextView
-        txt.movementMethod = ScrollingMovementMethod()
-        text.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View) {
-                edit.setVisibility(View.VISIBLE)
-                txt.setVisibility(View.VISIBLE)
-                Toast.makeText(this@PlayRTCActivity, "메시지", Toast.LENGTH_SHORT).show()
-            }
-        });
-    }
-
-    /* 카메라 Whitebalance 기능 버튼 v2.3.0 */
-    private fun initCameraWhitebalanceFunctionUIControls() {
+        /* 필터 서브 버튼 */
         val btnCameraWbalance=this.findViewById(R.id.btn_white_balance) as ImageButton
 
         btnCameraWbalance.setOnClickListener(object : View.OnClickListener {  //Button->view
@@ -774,6 +694,94 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
+        /*zoom*/
+        val btnCameraZoom=this.findViewById(R.id.btn_camera_zoom) as ImageButton
+        zoomRangeBar=this.findViewById(R.id.seekbar_camera_zoom) as PlayRTCVerticalSeekBar
+
+        btnCameraZoom.setOnClickListener(object : View.OnClickListener { //Button->view
+            override fun onClick(v: View) {
+
+                if (playRTCHandler == null) {
+                    return
+                }
+                val layer=findViewById(R.id.btn_camera_zoom_layer) as RelativeLayout
+                if (layer.isShown) {
+                    layer.visibility=View.GONE
+                } else {
+
+                    hideFuntionUILayer()
+
+                    val zoomRange=playRTCHandler!!.cameraZoomRange
+                    val zoomLevel=playRTCHandler!!.currentCameraZoom
+                    zoomRangeBar!!.maximum=zoomRange.maxValue
+                    zoomRangeBar!!.setProgressAndThumb(zoomLevel)
+                    (findViewById(R.id.lb_camera_zoom_max) as TextView).text=zoomRange.maxValue.toString() + ""
+                    (findViewById(R.id.lb_camera_zoom_min) as TextView).text=zoomRange.minValue.toString() + ""
+                    (findViewById(R.id.lb_camera_zoom) as TextView).text="Zoom: " + zoomLevel
+
+                    layer.visibility=View.VISIBLE
+                }
+            }
+        })
+
+        zoomRangeBar!!.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                if (fromUser == false) {
+                    return
+                }
+                zoomRangeBar!!.setProgressAndThumb(progress)
+                (findViewById(R.id.lb_camera_zoom) as TextView).text="Zoom: " + progress
+                playRTCHandler!!.setCameraZoom(progress)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+        })
+
+
+        /* 로컬뷰 미러 모드 전환 버튼 */
+        val btnMirror=this.findViewById(R.id.btn_mirror) as Button
+
+        btnMirror.setOnClickListener(object : View.OnClickListener {  //Button->view
+            override fun onClick(v: View) {
+                val layer=findViewById(R.id.btn_mirror_layer) as RelativeLayout
+                if (layer.isShown) {
+                    layer.visibility=View.GONE
+                } else {
+                    hideFuntionUILayer()
+                    layer.visibility=View.VISIBLE
+                }
+            }
+        })
+        (this.findViewById(R.id.btn_mirror_on) as Button).setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {   //Button->view
+                (findViewById(R.id.lb_btn_mirror) as TextView).text="미러-On"
+                val view=videoLayer!!.localView
+                view.isMirror=true
+            }
+        })
+        (this.findViewById(R.id.btn_mirror_off) as Button).setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {   //Button->view
+                (findViewById(R.id.lb_btn_mirror) as TextView).text="미러-Off"
+                val view=videoLayer!!.localView
+                view.isMirror=false
+            }
+        })
+
+        /*채팅 기능*/
+        val text=findViewById(R.id.btn_chat) as ImageButton
+        val edit=findViewById(R.id.editText) as EditText
+        val txt=findViewById(R.id.textView) as TextView
+        txt.movementMethod = ScrollingMovementMethod()
+        text.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
+                edit.setVisibility(View.VISIBLE)
+                txt.setVisibility(View.VISIBLE)
+                Toast.makeText(this@PlayRTCActivity, "메시지", Toast.LENGTH_SHORT).show()
+            }
+        });
     }
 
     /* Video View ShowSnapshot 기능 버튼 */
@@ -817,6 +825,70 @@ class PlayRTCActivity : Activity() {
                                  * Snapshot 이미지 출력
                                  */
                         snapshotLayer!!.setSnapshotImage(image)
+
+
+
+                        var button:Button
+                        var container:LinearLayout
+
+
+                        fun onCreate(savedInstanceState: Bundle?) {
+                            super.onCreate(savedInstanceState)
+                            setContentView(R.layout.activity_main)
+
+                            var button=findViewById(R.id.btn_show_snapshot)as ImageButton
+                            container=findViewById(R.id.snapshot_area) as LinearLayout
+
+                            button.setOnClickListener {
+                                // TODO Auto-generated method stub
+
+
+                                val folder="Test_Directory" // 폴더 이름
+
+                                try {
+
+                                    // 현재 날짜로 파일을 저장하기
+                                    val formatter=SimpleDateFormat("yyyyMMddHHmmss")
+
+                                    // 년월일시분초
+                                    val currentTime_1=Date()
+                                    val dateString=formatter.format(currentTime_1)
+                                    val sdCardPath=Environment.getExternalStorageDirectory()
+                                    val dirs=File(Environment.getExternalStorageDirectory(), folder)
+
+
+                                    if (!dirs.exists()) { // 원하는 경로에 폴더가 있는지 확인
+                                        dirs.mkdirs() // Test 폴더 생성
+                                        Log.d("CAMERA_TEST", "Directory Created")
+
+                                    }
+
+                                    container.buildDrawingCache()
+                                    val captureView=container.drawingCache
+                                    val fos: FileOutputStream
+                                    val save: String
+                                    try {
+                                        save=sdCardPath.path + "/" + folder + "/" + dateString + ".jpg"
+                                        // 저장 경로
+                                        fos=FileOutputStream(save)
+                                        captureView.compress(Bitmap.CompressFormat.JPEG, 100, fos) // 캡쳐
+                                        // 미디어 스캐너를 통해 모든 미디어 리스트를 갱신시킨다.
+                                        sendBroadcast(Intent(Intent.ACTION_MEDIA_MOUNTED,
+                                                Uri.parse("file://" + Environment.getExternalStorageDirectory())))
+
+                                    } catch (e: FileNotFoundException) {
+                                        e.printStackTrace()
+                                    }
+                                    Toast.makeText(applicationContext, dateString + ".jpg 저장",
+                                            Toast.LENGTH_LONG).show()
+                                } catch (e: Exception) {
+                                    // TODO: handle exception
+                                    Log.e("Screen", "" + e.toString())
+                                }
+                            }
+                        }
+
+
                     }
                 } else if (local == false && videoLayer!!.remoteView != null) {
 
@@ -832,6 +904,31 @@ class PlayRTCActivity : Activity() {
                                  * Snapshot 이미지 출력
                                  */
                         snapshotLayer!!.setSnapshotImage(image)
+
+                        fun saveBitmaptoJpeg(bitmap: Bitmap, folder: String, name: String) {
+                            val ex_storage=Environment.getExternalStorageDirectory().absolutePath
+                            // Get Absolute Path in External Sdcard
+                            val foler_name="/$folder/"
+                            val file_name=name + ".jpg"
+                            val string_path=ex_storage + foler_name
+                            val file_path: File
+
+                            try {
+                                file_path=File(string_path)
+                                if (!file_path.isDirectory) {
+                                    file_path.mkdirs()
+                                }
+                                val out=FileOutputStream(string_path + file_name)
+
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+                                out.close()
+
+                            } catch (exception: FileNotFoundException) {
+                                Log.e("FileNotFoundException", exception.message)
+                            } catch (exception: IOException) {
+                                Log.e("IOException", exception.message)
+                            }
+                        }
                     }
                 }
             }
