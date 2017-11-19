@@ -1,10 +1,9 @@
 package com.example.l.myapplication
 
 import android.app.Activity
-import android.content.Context
 import android.graphics.drawable.Drawable
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
 import android.text.SpannableString
 import android.text.method.ScrollingMovementMethod
 import android.text.style.ImageSpan
@@ -22,16 +21,17 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class Client : Activity() {
-    internal var ip = "192.168.193.11" //서버 단말기의 IP주소..
+    internal var ip = "192.168.198.58" //서버 단말기의 IP주소..
     //본 예제는 Genymotion 에뮬레이터 2대로 테스한 예제입니다.
     //Genymotion을 실행하면 각 에뮬레이터의 IP를 확인할 수 있습니다.
     internal lateinit var socket: Socket     //클라이언트의 소켓
-    internal lateinit var `is`: DataInputStream
-    internal var os: DataOutputStream? = null
+    internal lateinit var inputStream: DataInputStream
+    internal var outputStream: DataOutputStream? = null
     internal lateinit var text_msg: TextView  //서버로 부터 받은 메세지를 보여주는 TextView
     internal lateinit var edit_msg: EditText  //서버로 전송할 메세지를 작성하는 EditText
     internal lateinit var edit_ip: EditText   //서버의 IP를 작성할 수 있는 EditText
     internal var msg = ""
+    var msgs : SpannableString = SpannableString("")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +57,8 @@ class Client : Activity() {
                         socket = Socket(InetAddress.getByName(ip), PORT)
                         //여기까지 왔다는 것을 예외가 발생하지 않았다는 것이므로 소켓 연결 성공..
                         //서버와 메세지를 주고받을 통로 구축
-                        `is` = DataInputStream(socket.getInputStream())
-                        os = DataOutputStream(socket.getOutputStream())
+                        inputStream = DataInputStream(socket.getInputStream())
+                        outputStream = DataOutputStream(socket.getOutputStream())
                     } catch (e: IOException) {
                         // TODO Auto-generated catch block
                         e.printStackTrace()
@@ -67,15 +67,18 @@ class Client : Activity() {
                     //서버와 접속이 끊길 때까지 무한반복하면서 서버의 메세지 수신
                     while (true) {
                         try {
-                            msg = `is`.readUTF() //서버 부터 메세지가 전송되면 이를 UTF형식으로 읽어서 String 으로 리턴
-                            changeEmoticon(msg)
+                            msg = inputStream.readUTF() //서버 부터 메세지가 전송되면 이를 UTF형식으로 읽어서 String 으로 리턴
+                            System.out.println(msg)
+                            msgs = changeEmoticon(msg)
+                            System.out.println(msgs)
                             //서버로부터 읽어들인 메시지msg를 TextView에 출력..
                             //안드로이드는 오직 main Thread 만이 UI를 변경할 수 있기에
                             //네트워크 작업을 하는 이 Thread에서는 TextView의 글씨를 직접 변경할 수 없음.
                             //runOnUiThread()는 별도의 Thread가 main Thread에게 UI 작업을 요청하는 메소드임.
                             runOnUiThread {
                                 // TODO Auto-generated method stub
-                                text_msg.append("\n 상대방 : " + msg)
+                                //text_msg.append("\n 상대방 : " + msgs)
+                                text_msg.setText(msgs)
                             }
                             //////////////////////////////////////////////////////////////////////////
                         } catch (e: IOException) {
@@ -89,18 +92,17 @@ class Client : Activity() {
             R.id.btn_send_client //서버로 메세지 전송하기...
             -> {
                 val msg = edit_msg.text.toString()
-
                 text_msg.append("\n 나 : " + msg)
                 edit_msg.setText("")
-                if (os == null) return    //서버와 연결되어 있지 않다면 전송불가..
+                if (outputStream == null) return    //서버와 연결되어 있지 않다면 전송불가..
                 //네트워크 작업이므로 Thread 생성
                 Thread(Runnable {
                     // TODO Auto-generated method stub
                     //서버로 보낼 메세지 EditText로 부터 얻어오기
 
                     try {
-                        os!!.writeUTF(msg)  //서버로 메세지 보내기.UTF 방식으로(한글 전송가능...)
-                        os!!.flush()        //다음 메세지 전송을 위해 연결통로의 버퍼를 지워주는 메소드..
+                        outputStream!!.writeUTF(msg)  //서버로 메세지 보내기.UTF 방식으로(한글 전송가능...)
+                        outputStream!!.flush()        //다음 메세지 전송을 위해 연결통로의 버퍼를 지워주는 메소드..
                     } catch (e: IOException) {
                         // TODO Auto-generated catch block
                         e.printStackTrace()
@@ -111,48 +113,39 @@ class Client : Activity() {
         }
     }
 
-    fun changeEmoticon(text : String) : SpannableString {
-        var result : SpannableString = SpannableString(text)
-        val pattern : Pattern = Pattern.compile("\\((.*?)\\)")
-        val match : Matcher = pattern.matcher(text)
+    fun changeEmoticon(text : String) : SpannableString{
+        var result = SpannableString(text)
+        var drawable : Drawable
 
-        while(match.find()) {
-            var start : Int = match.start()
-            var end : Int = match.end()
-            var temp : String = match.group(1)
-            var drawable : Drawable
-
-            while(temp.contains("(")) {
-                start = start + temp.indexOf("(") + 1
-                temp = temp.substring(temp.indexOf("(") + 1)
+        when(text) {
+            "(good)" ->  {
+                drawable = resources.getDrawable(R.drawable.good)
+                drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
             }
-
-            when(temp) {
-                "good" ->  {
-                    drawable = resources.getDrawable(R.drawable.good)
-                    drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
-                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                "ok" -> {
-                    drawable = resources.getDrawable(R.drawable.ok)
-                    drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
-                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                "flower" -> {
-                    drawable = resources.getDrawable(R.drawable.flower)
-                    drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
-                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                "heart" -> {
-                    drawable = resources.getDrawable(R.drawable.heart)
-                    drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
-                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                "merong" -> {
-                    drawable = resources.getDrawable(R.drawable.merong)
-                    drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
-                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
+            "(ok)" -> {
+                System.out.println("OK")
+                drawable = resources.getDrawable(R.drawable.ok)
+                drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            "(flower)" -> {
+                drawable = resources.getDrawable(R.drawable.flower)
+                drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            "(heart)" -> {
+                drawable = resources.getDrawable(R.drawable.heart)
+                drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            "(merong)" -> {
+                drawable = resources.getDrawable(R.drawable.merong)
+                drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            else -> {
+                result = SpannableString(text)
             }
         }
         return result

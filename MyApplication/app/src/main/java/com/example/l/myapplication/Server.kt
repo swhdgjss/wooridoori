@@ -1,13 +1,11 @@
 package com.example.l.myapplication
 
 import android.app.Activity
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -18,8 +16,8 @@ import java.net.Socket
 class Server:Activity() {
     internal lateinit var serversocket:ServerSocket
     internal lateinit var socket:Socket
-    internal lateinit var `is`:DataInputStream
-    internal var os:DataOutputStream? = null
+    internal lateinit var inputStream:DataInputStream
+    internal var outputStream:DataOutputStream? = null
     internal lateinit var text_msg:TextView //클라이언트로부터 받을 메세지를 표시하는 TextView
     internal lateinit var edit_msg:EditText //클라이언트로 전송할 메세지를 작성하는 EditText
     internal var msg = ""
@@ -40,7 +38,7 @@ class Server:Activity() {
             ->
                 //Android API14버전이상 부터 네트워크 작업은 무조건 별도의 Thread에서 실행 해야함.
                 Thread(object:Runnable {
-                    public override fun run() {
+                    override fun run() {
                         // TODO Auto-generated method stub
                         try {
                             //서버소켓 생성.
@@ -56,8 +54,8 @@ class Server:Activity() {
 
                             //여기 까지 왔다는 것은 클라이언트가 접속했다는 것을 의미하므로
                             //클라이언트와 데이터를 주고 받기 위한 통로구축..
-                            `is` = DataInputStream(socket.getInputStream()) //클라이언트로 부터 메세지를 받기 위한 통로
-                            os = DataOutputStream(socket.getOutputStream()) //클라이언트로 메세지를 보내기 위한 통로
+                            inputStream = DataInputStream(socket.getInputStream()) //클라이언트로 부터 메세지를 받기 위한 통로
+                            outputStream = DataOutputStream(socket.getOutputStream()) //클라이언트로 메세지를 보내기 위한 통로
                         } catch (e:IOException) {
                             // TODO Auto-generated catch block
                             e.printStackTrace()
@@ -66,7 +64,7 @@ class Server:Activity() {
                         //클라이언트가 접속을 끊을 때까지 무한반복하면서 클라이언트의 메세지 수신
                         while (isConnected) {
                             try {
-                                msg = `is`.readUTF()
+                                msg = inputStream.readUTF()
                             } catch (e:IOException) {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace()
@@ -92,7 +90,7 @@ class Server:Activity() {
 
                 text_msg.append("\n 나 : " + msg)
                 edit_msg.setText("")
-                if (os == null) return  //클라이언트와 연결되어 있지 않다면 전송불가..
+                if (outputStream == null) return  //클라이언트와 연결되어 있지 않다면 전송불가..
                 //네트워크 작업이므로 Thread 생성
                 Thread(object:Runnable {
                     public override fun run() {
@@ -100,8 +98,8 @@ class Server:Activity() {
                         //클라이언트로 보낼 메세지 EditText로 부터 얻어오기
 
                         try {
-                            os!!.writeUTF(msg) //클라이언트로 메세지 보내기.UTF 방식으로(한글 전송가능...)
-                            os!!.flush()   //다음 메세지 전송을 위해 연결통로의 버퍼를 지워주는 메소드..
+                            outputStream!!.writeUTF(msg) //클라이언트로 메세지 보내기.UTF 방식으로(한글 전송가능...)
+                            outputStream!!.flush()   //다음 메세지 전송을 위해 연결통로의 버퍼를 지워주는 메소드..
                         } catch (e:IOException) {
                             // TODO Auto-generated catch block
                             e.printStackTrace()
@@ -116,4 +114,3 @@ class Server:Activity() {
         internal val PORT = 10001
     }
 }
-
