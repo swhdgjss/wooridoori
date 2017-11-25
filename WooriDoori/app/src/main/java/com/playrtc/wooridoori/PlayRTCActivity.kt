@@ -30,10 +30,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Environment
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -806,6 +803,13 @@ class PlayRTCActivity : Activity() {
         (findViewById(R.id.btn_white_balance_layer) as RelativeLayout).visibility=View.GONE
     }
 
+    private fun refreshGallery(file: File) {
+        val mediaScanIntent=Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
+        mediaScanIntent.data=Uri.fromFile(file)
+        sendBroadcast(mediaScanIntent)
+    }
+
+
     /*스냅샷*/
     private fun initSnapshotControlls() {
         if (snapshotLayer != null && videoLayer != null) {
@@ -826,66 +830,27 @@ class PlayRTCActivity : Activity() {
                                  */
                         snapshotLayer!!.setSnapshotImage(image)
 
+                        try {
+                            val sdCard=Environment.getExternalStorageDirectory()
+                            val dir=File(sdCard.absolutePath + "/test")
 
+                            dir.mkdirs()
 
-                        var button:Button
-                        var container:LinearLayout
+                            val fileName = System.currentTimeMillis().toString() + ".png"
+                            val outFile=File(dir, fileName)
 
+                            Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
+                            var out=FileOutputStream(outFile)
+                            Toast.makeText(this, "2", Toast.LENGTH_SHORT).show()
+                            image.compress(Bitmap.CompressFormat.PNG, 100, out)
+                            Toast.makeText(this, "3", Toast.LENGTH_SHORT).show()
+                            //bitmap = 갤러리또는 리소스에서 불러온 비트맵 파일에 포맷
+                            out.close()
 
-                        fun onCreate(savedInstanceState: Bundle?) {
-                            super.onCreate(savedInstanceState)
-                            setContentView(R.layout.activity_main)
-
-                            var button=findViewById(R.id.btn_show_snapshot)as ImageButton
-                            container=findViewById(R.id.snapshot_area) as LinearLayout
-
-                            button.setOnClickListener {
-                                // TODO Auto-generated method stub
-
-
-                                val folder="Test_Directory" // 폴더 이름
-
-                                try {
-
-                                    // 현재 날짜로 파일을 저장하기
-                                    val formatter=SimpleDateFormat("yyyyMMddHHmmss")
-
-                                    // 년월일시분초
-                                    val currentTime_1=Date()
-                                    val dateString=formatter.format(currentTime_1)
-                                    val sdCardPath=Environment.getExternalStorageDirectory()
-                                    val dirs=File(Environment.getExternalStorageDirectory(), folder)
-
-
-                                    if (!dirs.exists()) { // 원하는 경로에 폴더가 있는지 확인
-                                        dirs.mkdirs() // Test 폴더 생성
-                                        Log.d("CAMERA_TEST", "Directory Created")
-
-                                    }
-
-                                    container.buildDrawingCache()
-                                    val captureView=container.drawingCache
-                                    val fos: FileOutputStream
-                                    val save: String
-                                    try {
-                                        save=sdCardPath.path + "/" + folder + "/" + dateString + ".jpg"
-                                        // 저장 경로
-                                        fos=FileOutputStream(save)
-                                        captureView.compress(Bitmap.CompressFormat.JPEG, 100, fos) // 캡쳐
-                                        // 미디어 스캐너를 통해 모든 미디어 리스트를 갱신시킨다.
-                                        sendBroadcast(Intent(Intent.ACTION_MEDIA_MOUNTED,
-                                                Uri.parse("file://" + Environment.getExternalStorageDirectory())))
-
-                                    } catch (e: FileNotFoundException) {
-                                        e.printStackTrace()
-                                    }
-                                    Toast.makeText(applicationContext, dateString + ".jpg 저장",
-                                            Toast.LENGTH_LONG).show()
-                                } catch (e: Exception) {
-                                    // TODO: handle exception
-                                    Log.e("Screen", "" + e.toString())
-                                }
-                            }
+                            refreshGallery(outFile)
+                        } catch (e: Exception) {
+                            Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
+                            e.printStackTrace()
                         }
 
 
@@ -905,30 +870,7 @@ class PlayRTCActivity : Activity() {
                                  */
                         snapshotLayer!!.setSnapshotImage(image)
 
-                        fun saveBitmaptoJpeg(bitmap: Bitmap, folder: String, name: String) {
-                            val ex_storage=Environment.getExternalStorageDirectory().absolutePath
-                            // Get Absolute Path in External Sdcard
-                            val foler_name="/$folder/"
-                            val file_name=name + ".jpg"
-                            val string_path=ex_storage + foler_name
-                            val file_path: File
 
-                            try {
-                                file_path=File(string_path)
-                                if (!file_path.isDirectory) {
-                                    file_path.mkdirs()
-                                }
-                                val out=FileOutputStream(string_path + file_name)
-
-                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
-                                out.close()
-
-                            } catch (exception: FileNotFoundException) {
-                                Log.e("FileNotFoundException", exception.message)
-                            } catch (exception: IOException) {
-                                Log.e("IOException", exception.message)
-                            }
-                        }
                     }
                 }
             }
