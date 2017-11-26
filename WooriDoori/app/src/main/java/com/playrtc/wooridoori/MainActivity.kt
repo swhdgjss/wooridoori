@@ -71,8 +71,8 @@ class MainActivity : Activity() {
             super.onBackPressed()
         } else {
             val alert=AlertDialog.Builder(this)
-            alert.setTitle("PlayRTC Sample")
-            alert.setMessage("PlatRTC Sample App을 종료하겠습니까?")
+            alert.setTitle("WooriDoori")
+            alert.setMessage("WooriDoori App을 종료하겠습니까?")
 
             alert.setPositiveButton("종료") { dialog, which ->
                 dialog.dismiss()

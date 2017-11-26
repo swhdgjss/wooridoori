@@ -10,18 +10,15 @@ import android.text.style.ImageSpan
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.IOException
 import java.net.InetAddress
 import java.net.Socket
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 class Client : Activity() {
-    internal var ip = "192.168.198.58" //서버 단말기의 IP주소..
+    internal var ip = "192.168.199.240" //서버 단말기의 IP주소..
     //본 예제는 Genymotion 에뮬레이터 2대로 테스한 예제입니다.
     //Genymotion을 실행하면 각 에뮬레이터의 IP를 확인할 수 있습니다.
     internal lateinit var socket: Socket     //클라이언트의 소켓
@@ -68,16 +65,16 @@ class Client : Activity() {
                     while (true) {
                         try {
                             msg = inputStream.readUTF() //서버 부터 메세지가 전송되면 이를 UTF형식으로 읽어서 String 으로 리턴
-                            System.out.println(msg)
                             msgs = changeEmoticon(msg)
-                            System.out.println(msgs)
+                            //var text = SpannableString(text_msg.text)
+                            //text = TextUtils.concat(text, msgs) as SpannableString
                             //서버로부터 읽어들인 메시지msg를 TextView에 출력..
                             //안드로이드는 오직 main Thread 만이 UI를 변경할 수 있기에
                             //네트워크 작업을 하는 이 Thread에서는 TextView의 글씨를 직접 변경할 수 없음.
                             //runOnUiThread()는 별도의 Thread가 main Thread에게 UI 작업을 요청하는 메소드임.
                             runOnUiThread {
                                 // TODO Auto-generated method stub
-                                //text_msg.append("\n 상대방 : " + msgs)
+                                //text_msg.append("\n 상대방 : " + msg)
                                 text_msg.setText(msgs)
                             }
                             //////////////////////////////////////////////////////////////////////////

@@ -28,6 +28,7 @@ import android.widget.Toast
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Environment
 import java.io.*
@@ -256,8 +257,8 @@ class PlayRTCActivity : Activity() {
         } else {
             // 만약 채널에 입장한 상태이면 먼저 채널을 종료한다.
             val alert=AlertDialog.Builder(this)
-            alert.setTitle("PlayRTC")
-            alert.setMessage("PlayRTC를 종료하겠습니까?")
+            alert.setTitle("WooriDoori")
+            alert.setMessage("WooriDoori를 종료하겠습니까?")
 
             alert.setPositiveButton("종료") { dialog, which ->
                 dialog.dismiss()
@@ -464,61 +465,89 @@ class PlayRTCActivity : Activity() {
     /* 미디어 스트림 Mute 버튼 */
     private fun initMediaMuteFunctionUIControls() {
         /* Local Video Mute 버튼 */
+        var setMute_LV = false
         val btnMuteLVideo=this.findViewById(R.id.btn_local_vmute) as ImageButton
         /* Local Video Mute 처리시 로컬 영상 스트림은 화면에 출력이 안되며 상대방에게 전달이 되지 않는다. */
         btnMuteLVideo.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
-                val b=v as Button
                 if (playRTCHandler != null) {
-                    val text=b.text as String
-                    val setMute=text.endsWith("-OFF")
-                    playRTCHandler!!.setLocalVideoPause(setMute)
-                    b.text=if (setMute == true) "VIDEO-ON" else "VIDEO-OFF"
+                    if(setMute_LV == false) {
+                        setMute_LV = true
+                    } else {
+                        setMute_LV = false
+                    }
+                    playRTCHandler!!.setLocalVideoPause(setMute_LV)
+                    if (setMute_LV == true) {
+                        btnMuteLVideo.setImageResource(R.drawable.video_on)
+                    } else {
+                        btnMuteLVideo.setImageResource(R.drawable.video_off)
+                    }
                 }
             }
         })
 
         /* Local Audio Mute 버튼 */
+        var setMute_LA = false
         val btnMuteLAudio=this.findViewById(R.id.btn_local_amute) as ImageButton
         /* Local Audio Mute 처리시 로컬 음성 스트림은 상대방에게 전달이 되지 않는다. */
         btnMuteLAudio.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
-                val b=v as Button
                 if (playRTCHandler != null) {
-                    val text=b.text as String
-                    val setMute=text.endsWith("-OFF")
-                    playRTCHandler!!.setLocalAudioMute(setMute)
-                    b.text=if (setMute == true) "AUDIO-ON" else "AUDIO-OFF"
+                    if(setMute_LA == false) {
+                        setMute_LA = true
+                    } else {
+                        setMute_LA = false
+                    }
+                    playRTCHandler!!.setLocalAudioMute(setMute_LA)
+                    if (setMute_LA == true) {
+                        btnMuteLAudio.setImageResource(R.drawable.audio_on)
+                    } else {
+                        btnMuteLAudio.setImageResource(R.drawable.audio_off)
+                    }
                 }
             }
         })
 
         /* Remote Video Mute 버튼 */
-        val btnMuteRVideo=this.findViewById(R.id.btn_remote_vmute) as Button
+        var setMute_RV = false
+        val btnMuteRVideo=this.findViewById(R.id.btn_remote_vmute) as ImageButton
         /* Remote Video Mute 처리시 상대방의 영상 스트림은 수신되나 화면에는 출력이 되지 않는다. */
         btnMuteRVideo.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
-                val b=v as Button
                 if (playRTCHandler != null) {
-                    val text=b.text as String
-                    val setMute=text.endsWith("-OFF")
-                    playRTCHandler!!.setRemoteVideoPause(setMute)
-                    b.text=if (setMute == true) "VIDEO-ON" else "VIDEO-OFF"
+                    if(setMute_RV == false) {
+                        setMute_RV = true
+                    } else {
+                        setMute_RV = false
+                    }
+                    playRTCHandler!!.setRemoteVideoPause(setMute_RV)
+                    if (setMute_RV == true) {
+                        btnMuteRVideo.setImageResource(R.drawable.video_on)
+                    } else {
+                        btnMuteRVideo.setImageResource(R.drawable.video_off)
+                    }
                 }
             }
         })
 
         /* Remote Audio Mute 버튼 */
-        val btnMuteRAudio=this.findViewById(R.id.btn_remote_amute) as Button
+        var setMute_RA = false
+        val btnMuteRAudio=this.findViewById(R.id.btn_remote_amute) as ImageButton
         /* Remote Video Mute 처리시 상대방 영상 스트림은 수신되나 소리는 출력되지 않는다. */
         btnMuteRAudio.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
-                val b=v as Button
                 if (playRTCHandler != null) {
-                    val text=b.text as String
-                    val setMute=text.endsWith("-OFF")
-                    playRTCHandler!!.setRemoteAudioMute(setMute)
-                    b.text=if (setMute == true) "AUDIO-ON" else "AUDIO-OFF"
+                    if(setMute_RA == false) {
+                        setMute_RA = true
+                    } else {
+                        setMute_RA = false
+                    }
+                    playRTCHandler!!.setRemoteAudioMute(setMute_RA)
+                    if (setMute_RA == true) {
+                        btnMuteRAudio.setImageResource(R.drawable.audio_on)
+                    } else {
+                        btnMuteRAudio.setImageResource(R.drawable.audio_off)
+                    }
                 }
             }
         })
