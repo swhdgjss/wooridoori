@@ -868,11 +868,11 @@ class PlayRTCActivity : Activity() {
                             val fileName = System.currentTimeMillis().toString() + ".png"
                             val outFile=File(dir, fileName)
 
-                            Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
                             var out=FileOutputStream(outFile)
-                            Toast.makeText(this, "2", Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(this, "2", Toast.LENGTH_SHORT).show()
                             image.compress(Bitmap.CompressFormat.PNG, 100, out)
-                            Toast.makeText(this, "3", Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(this, "3", Toast.LENGTH_SHORT).show()
                             //bitmap = 갤러리또는 리소스에서 불러온 비트맵 파일에 포맷
                             out.close()
 
@@ -898,8 +898,30 @@ class PlayRTCActivity : Activity() {
                                  * Snapshot 이미지 출력
                                  */
                         snapshotLayer!!.setSnapshotImage(image)
+                        try {
+                            val sdCard=Environment.getExternalStorageDirectory()
+                            val dir=File(sdCard.absolutePath + "/test")
 
+                            dir.mkdirs()
 
+                            val fileName = System.currentTimeMillis().toString() + ".png"
+                            val outFile=File(dir, fileName)
+
+                            //Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
+                            var out=FileOutputStream(outFile)
+                            //Toast.makeText(this, "2", Toast.LENGTH_SHORT).show()
+                            image.compress(Bitmap.CompressFormat.PNG, 100, out)
+                            //Toast.makeText(this, "3", Toast.LENGTH_SHORT).show()
+                            //bitmap = 갤러리또는 리소스에서 불러온 비트맵 파일에 포맷
+                            out.close()
+
+                            refreshGallery(outFile)
+                        } catch (e: Exception) {
+                            Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
+                            e.printStackTrace()
+                        }
+
+                        
                     }
                 }
             }
