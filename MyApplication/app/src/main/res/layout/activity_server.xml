@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="start">
+    android:gravity="start"
+    >
 
     <Button
         android:id="@+id/btn_start_server"
@@ -30,12 +31,13 @@
     <TextView
         android:id="@+id/text_massage_from_client"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/label_message_from_client"
         android:layout_marginTop="18dp"
         android:gravity="center"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:textAlignment="viewStart" />
 
     <TextView
         android:id="@+id/label_message_to_client"
@@ -68,4 +70,70 @@
         android:layout_marginTop="50dp"
         android:text="SEND"
         android:onClick="mOnClick"/>
+
+    <ImageButton
+        android:id="@+id/btn_good"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/text_massage_from_client"
+        android:background="@android:color/transparent"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/good" />
+
+    <ImageButton
+        android:id="@+id/btn_cong"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/btn_send_server"
+        android:layout_below="@+id/text_massage_from_client"
+        android:background="@drawable/ic_launcher_foreground"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/cong" />
+
+    <ImageButton
+        android:id="@+id/btn_flower"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/text_massage_from_client"
+        android:layout_toEndOf="@+id/btn_ok"
+        android:background="@drawable/ic_launcher_foreground"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/flower" />
+
+    <ImageButton
+        android:id="@+id/btn_heart"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/text_massage_from_client"
+        android:layout_toEndOf="@+id/btn_merong"
+        android:background="@drawable/ic_launcher_foreground"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/heart" />
+
+    <ImageButton
+        android:id="@+id/btn_merong"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/text_massage_from_client"
+        android:layout_toEndOf="@+id/btn_cong"
+        android:background="@drawable/ic_launcher_foreground"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/merong" />
+
+    <ImageButton
+        android:id="@+id/btn_ok"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/text_massage_from_client"
+        android:layout_toEndOf="@+id/btn_good"
+        android:background="@drawable/ic_launcher_foreground"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ok" />
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.text.SpannableString
 import android.text.method.ScrollingMovementMethod
 import android.text.style.ImageSpan
 import android.view.View
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
 
@@ -40,13 +41,14 @@ class Client : Activity() {
         edit_msg = findViewById<View>(R.id.edit_message_to_server) as EditText
         edit_ip = findViewById<View>(R.id.edit_addressofserver) as EditText
         edit_ip.setText(ip)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
 
     //Button 클릭시 자동으로 호출되는 callback 메소드
     fun mOnClick(v: View) {
         when (v.id) {
-            R.id.btn_connectserver//서버에 접속하고 서버로 부터 메세지 수신하기
-            ->
+            //서버에 접속하고 서버로 부터 메세지 수신하기
+            R.id.btn_connectserver -> {
                 //Android API14버전이상 부터 네트워크 작업은 무조건 별도의 Thread에서 실행 해야함.
                 Thread(Runnable {
                     // TODO Auto-generated method stub
@@ -87,8 +89,9 @@ class Client : Activity() {
                     }//while
                 }//run method...
                 ).start()//Thread 실행..
-            R.id.btn_send_client //서버로 메세지 전송하기...
-            -> {
+            }
+            //서버로 메세지 전송하기...
+            R.id.btn_send_client -> {
                 val msg = edit_msg.text.toString()
                 send(msg)
 
@@ -106,6 +109,49 @@ class Client : Activity() {
                         e.printStackTrace()
                     }
                 }//run method..
+                ).start() //Thread 실행..
+            }
+            else -> {
+                when(v.id) {
+                    R.id.btn_good -> {
+                        msg = "(good)"
+                        send(msg)
+                    }
+                    R.id.btn_flower -> {
+                        msg = "(flower)"
+                        send(msg)
+                    }R.id.btn_heart -> {
+                        msg = "(heart)"
+                        send(msg)
+                    }
+                    R.id.btn_cong -> {
+                        msg = "(cong)"
+                        send(msg)
+                    }
+                    R.id.btn_merong -> {
+                        msg = "(merong)"
+                        send(msg)
+                    }
+                    R.id.btn_ok -> {
+                        msg = "(ok)"
+                        send(msg)
+                    }
+                }
+
+                if (outputStream == null) return    //서버와 연결되어 있지 않다면 전송불가..
+                //네트워크 작업이므로 Thread 생성
+                Thread(Runnable {
+                    // TODO Auto-generated method stub
+                    //서버로 보낼 메세지 EditText로 부터 얻어오기
+
+                    try {
+                        outputStream!!.writeUTF(msg)  //서버로 메세지 보내기.UTF 방식으로(한글 전송가능...)
+                        outputStream!!.flush()        //다음 메세지 전송을 위해 연결통로의 버퍼를 지워주는 메소드..
+                    } catch (e: IOException) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace()
+                    }
+                }
                 ).start() //Thread 실행..
             }
         }
@@ -160,12 +206,24 @@ class Client : Activity() {
         text_msg.append(send)
         text_msg.append(msgs)
         text_msg.append("\n")
+        scrollBottom(text_msg)
     }
 
     fun recieve() {
         text_msg.append(reci)
         text_msg.append(msgs)
         text_msg.append("\n")
+        scrollBottom(text_msg)
+    }
+
+    fun scrollBottom(textView : TextView) {
+        var scrollY = textView.layout.getLineTop(textView.lineCount) - textView.height
+
+        if(scrollY > 0) {
+            textView.scrollTo(0, scrollY)
+        } else {
+            textView.scrollTo(0, 0)
+        }
     }
 
     companion object {

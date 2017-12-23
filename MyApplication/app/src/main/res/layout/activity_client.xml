@@ -77,4 +77,70 @@
         android:layout_below="@+id/btn_send_client"
         android:gravity="center"
         android:hint="Enter the address of server" />
+
+    <ImageButton
+        android:id="@+id/btn_good"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/btn_ok"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/transparent"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/good" />
+
+    <ImageButton
+        android:id="@+id/btn_cong"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/text_massage_from_server"
+        android:layout_toEndOf="@+id/btn_flower"
+        android:background="@drawable/ic_launcher_foreground"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/cong" />
+
+    <ImageButton
+        android:id="@+id/btn_flower"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/text_massage_from_server"
+        android:layout_toEndOf="@+id/btn_ok"
+        android:background="@drawable/ic_launcher_foreground"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/flower" />
+
+    <ImageButton
+        android:id="@+id/btn_heart"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/text_massage_from_server"
+        android:layout_toEndOf="@+id/btn_merong"
+        android:background="@drawable/ic_launcher_foreground"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/heart" />
+
+    <ImageButton
+        android:id="@+id/btn_merong"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/btn_connectserver"
+        android:layout_below="@+id/text_massage_from_server"
+        android:background="@drawable/ic_launcher_foreground"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/merong" />
+
+    <ImageButton
+        android:id="@+id/btn_ok"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/text_massage_from_server"
+        android:layout_toEndOf="@+id/btn_good"
+        android:background="@drawable/ic_launcher_foreground"
+        android:onClick="mOnClick"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ok" />
 </RelativeLayout>
