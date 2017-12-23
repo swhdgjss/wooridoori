@@ -393,7 +393,7 @@ class PlayRTCActivity : Activity() {
         //initSwitchVideoCameraFlashFunctionUIControls()
 
         /* 로그뷰  토글 버튼 */
-        initLogViewFunctionUIControls()
+        //initLogViewFunctionUIControls()
 
         /* Peer 채널 퇴장/종료 버튼 */
         initChannelCloseFunctionUIControls()
@@ -431,7 +431,7 @@ class PlayRTCActivity : Activity() {
         })
     }
 
-    /* 로그뷰  토글 버튼 */
+    /* 로그뷰  토글 버튼
     private fun initLogViewFunctionUIControls() {
         /* 로그뷰  토글 버튼 이벤트 처리 */
         val btnLog=this.findViewById(R.id.btn_log) as Button
@@ -448,7 +448,7 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
-    }
+    }*/
 
     /* Peer 채널 종료 버튼 */
     private fun initChannelCloseFunctionUIControls() {
