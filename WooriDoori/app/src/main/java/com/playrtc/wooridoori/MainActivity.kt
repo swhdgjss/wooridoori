@@ -94,7 +94,7 @@ class MainActivity : Activity() {
         this.findViewById(R.id.btn_go_sample2).setOnClickListener{
             excutePlayRTCSample()
         }
-
+/*
         (findViewById(R.id.radio_ring_group) as RadioGroup).setOnCheckedChangeListener { group, checkedId ->
             if (checkedId == R.id.radio_ring_false) {
                 channelRing="false"
@@ -117,7 +117,7 @@ class MainActivity : Activity() {
             } else {
                 audioCodec="opus"
             }
-        }
+        }*/
     }
 
     @TargetApi(23)
