@@ -1,8 +1,12 @@
 package com.example.l.myapplication
 
 import android.app.Activity
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.method.ScrollingMovementMethod
+import android.text.style.ImageSpan
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -22,6 +26,9 @@ class Server:Activity() {
     internal lateinit var edit_msg:EditText //클라이언트로 전송할 메세지를 작성하는 EditText
     internal var msg = ""
     internal var isConnected = true
+    var msgs : SpannableString = SpannableString("")
+    val send : SpannableString = SpannableString("나 : ")
+    val reci : SpannableString = SpannableString("상대방 : ")
 
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +72,7 @@ class Server:Activity() {
                         while (isConnected) {
                             try {
                                 msg = inputStream.readUTF()
+                                msgs = changeEmoticon(msg)
                             } catch (e:IOException) {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace()
@@ -77,7 +85,7 @@ class Server:Activity() {
                             runOnUiThread(object:Runnable {
                                 public override fun run() {
                                     // TODO Auto-generated method stub
-                                    text_msg.append("\n 상대방 : " + msg)
+                                    recieve()
                                 }
                             })
                             /////////////////////////////////////////////////////////////////////////////
@@ -87,9 +95,8 @@ class Server:Activity() {
             R.id.btn_send_server // 클라이언트로 메세지 전송하기.
             -> {
                 val msg = edit_msg.getText().toString()
+                send(msg)
 
-                text_msg.append("\n 나 : " + msg)
-                edit_msg.setText("")
                 if (outputStream == null) return  //클라이언트와 연결되어 있지 않다면 전송불가..
                 //네트워크 작업이므로 Thread 생성
                 Thread(object:Runnable {
@@ -108,6 +115,63 @@ class Server:Activity() {
                 }).start() //Thread 실행..
             }
         }
+    }
+
+    fun changeEmoticon(text : String) : SpannableString {
+        var result = SpannableString(text)
+        var drawable : Drawable
+
+        when(text) {
+            "(good)" ->  {
+                drawable = resources.getDrawable(R.drawable.good)
+                drawable.setBounds(0, 0, 60, 60)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+            }
+            "(ok)" -> {
+                System.out.println("OK")
+                drawable = resources.getDrawable(R.drawable.ok)
+                drawable.setBounds(0, 0, 60, 60)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            "(flower)" -> {
+                drawable = resources.getDrawable(R.drawable.flower)
+                drawable.setBounds(0, 0, 60, 60)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            "(heart)" -> {
+                drawable = resources.getDrawable(R.drawable.heart)
+                drawable.setBounds(0, 0, 60, 60)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            "(merong)" -> {
+                drawable = resources.getDrawable(R.drawable.merong)
+                drawable.setBounds(0, 0, 60, 60)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            "(cong)" -> {
+                drawable = resources.getDrawable(R.drawable.cong)
+                drawable.setBounds(0, 0, 60, 60)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            else -> {
+                result = SpannableString(text)
+            }
+        }
+        return result
+    }
+
+    fun send(msg : String) {
+        edit_msg.text.clear()
+        msgs = changeEmoticon(msg)
+        text_msg.append(send)
+        text_msg.append(msgs)
+        text_msg.append("\n")
+    }
+
+    fun recieve() {
+        text_msg.append(reci)
+        text_msg.append(msgs)
+        text_msg.append("\n")
     }
 
     companion object {

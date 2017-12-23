@@ -18,7 +18,7 @@ import java.net.InetAddress
 import java.net.Socket
 
 class Client : Activity() {
-    internal var ip = "192.168.199.240" //서버 단말기의 IP주소..
+    internal var ip = "192.168.193.140" //서버 단말기의 IP주소..
     //본 예제는 Genymotion 에뮬레이터 2대로 테스한 예제입니다.
     //Genymotion을 실행하면 각 에뮬레이터의 IP를 확인할 수 있습니다.
     internal lateinit var socket: Socket     //클라이언트의 소켓
@@ -29,6 +29,8 @@ class Client : Activity() {
     internal lateinit var edit_ip: EditText   //서버의 IP를 작성할 수 있는 EditText
     internal var msg = ""
     var msgs : SpannableString = SpannableString("")
+    val send : SpannableString = SpannableString("나 : ")
+    val reci : SpannableString = SpannableString("상대방 : ")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,8 +76,7 @@ class Client : Activity() {
                             //runOnUiThread()는 별도의 Thread가 main Thread에게 UI 작업을 요청하는 메소드임.
                             runOnUiThread {
                                 // TODO Auto-generated method stub
-                                //text_msg.append("\n 상대방 : " + msg)
-                                text_msg.setText(msgs)
+                                recieve()
                             }
                             //////////////////////////////////////////////////////////////////////////
                         } catch (e: IOException) {
@@ -89,8 +90,8 @@ class Client : Activity() {
             R.id.btn_send_client //서버로 메세지 전송하기...
             -> {
                 val msg = edit_msg.text.toString()
-                text_msg.append("\n 나 : " + msg)
-                edit_msg.setText("")
+                send(msg)
+
                 if (outputStream == null) return    //서버와 연결되어 있지 않다면 전송불가..
                 //네트워크 작업이므로 Thread 생성
                 Thread(Runnable {
@@ -117,28 +118,33 @@ class Client : Activity() {
         when(text) {
             "(good)" ->  {
                 drawable = resources.getDrawable(R.drawable.good)
-                drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                drawable.setBounds(0, 0, 60, 60)
                 result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
             }
             "(ok)" -> {
                 System.out.println("OK")
                 drawable = resources.getDrawable(R.drawable.ok)
-                drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                drawable.setBounds(0, 0, 60, 60)
                 result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
             "(flower)" -> {
                 drawable = resources.getDrawable(R.drawable.flower)
-                drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                drawable.setBounds(0, 0, 60, 60)
                 result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
             "(heart)" -> {
                 drawable = resources.getDrawable(R.drawable.heart)
-                drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                drawable.setBounds(0, 0, 60, 60)
                 result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
             "(merong)" -> {
                 drawable = resources.getDrawable(R.drawable.merong)
-                drawable.setBounds(0, 0, drawable.intrinsicHeight, drawable.intrinsicWidth)
+                drawable.setBounds(0, 0, 60, 60)
+                result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            "(cong)" -> {
+                drawable = resources.getDrawable(R.drawable.cong)
+                drawable.setBounds(0, 0, 60, 60)
                 result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
             else -> {
@@ -146,6 +152,20 @@ class Client : Activity() {
             }
         }
         return result
+    }
+
+    fun send(msg : String) {
+        edit_msg.text.clear()
+        msgs = changeEmoticon(msg)
+        text_msg.append(send)
+        text_msg.append(msgs)
+        text_msg.append("\n")
+    }
+
+    fun recieve() {
+        text_msg.append(reci)
+        text_msg.append(msgs)
+        text_msg.append("\n")
     }
 
     companion object {
