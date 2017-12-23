@@ -188,8 +188,7 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentStart="true"
-		android:layout_below="@+id/btn_chClose"
-		android:layout_marginTop="23dp"
+		android:layout_below="@+id/btn_menu_layer"
 		android:background="@drawable/list_row_bg"
 		android:src="@drawable/menu" />
 
@@ -197,10 +196,13 @@
 		android:id="@+id/btn_menu_layer"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_alignLeft="@+id/btn_switch_camera"
 		android:layout_alignParentTop="true"
-		android:layout_toEndOf="@+id/btn_menu"
-		android:layout_toRightOf="@+id/btn_menu"
-		android:visibility="gone">
+		android:layout_alignStart="@+id/btn_switch_camera"
+		android:layout_below="@id/btn_menu"
+		android:layout_marginLeft="13dp"
+		android:layout_marginStart="13dp"
+		android:visibility="invisible">
 
 		<ImageButton
 			android:id="@+id/btn_switch_flash"
@@ -484,9 +486,9 @@
 		android:id="@+id/btn_show_snapshot"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentEnd="true"
-		android:layout_alignParentRight="true"
+		android:layout_above="@+id/btn_switch_camera"
+		android:layout_toEndOf="@+id/btn_menu"
+		android:layout_toRightOf="@+id/btn_menu"
 		android:background="@drawable/list_btn"
 		android:src="@drawable/capture" />
 
@@ -494,11 +496,9 @@
 		android:id="@+id/btn_chClose"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_alignParentTop="true"
-		android:layout_marginLeft="12dp"
-		android:layout_marginStart="12dp"
-		android:layout_toEndOf="@+id/btn_show_snapshot"
-		android:layout_toRightOf="@+id/btn_show_snapshot"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentRight="true"
+		android:layout_below="@+id/btn_menu_layer"
 		android:background="@drawable/list_btn"
 		android:src="@drawable/end" />
 
