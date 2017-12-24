@@ -816,9 +816,7 @@ class PlayRTCActivity : Activity() {
             }
         });
 
-        fun chat() {
-            
-        }
+
     }
 
     /* Video View ShowSnapshot 기능 버튼 */
@@ -871,13 +869,13 @@ class PlayRTCActivity : Activity() {
                         snapshotLayer!!.setSnapshotImage(image)
 
                         try {
-                            val sdCard=Environment.getExternalStorageDirectory()
-                            val dir=File(sdCard.absolutePath + "/test")
+                            val sdCard=Environment.getExternalStorageDirectory()   //저장소 디렉토리 받아오기
+                            val dir=File(sdCard.absolutePath + "/test")     //위치+하위디렉토리에 빈파일 만들기
 
                             dir.mkdirs()
 
-                            val fileName = System.currentTimeMillis().toString() + ".png"
-                            val outFile=File(dir, fileName)
+                            val fileName = System.currentTimeMillis().toString() + ".png" //현재시간으로 사진 이름 저장
+                            val outFile=File(dir, fileName)                 //dir 위치에다가 fileName이라는 파일을 만든다
 
                             //Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
                             var out=FileOutputStream(outFile)
@@ -887,7 +885,7 @@ class PlayRTCActivity : Activity() {
                             //bitmap = 갤러리또는 리소스에서 불러온 비트맵 파일에 포맷
                             out.close()
 
-                            refreshGallery(outFile)
+                            refreshGallery(outFile)                                        //갤러리 갱신
                         } catch (e: Exception) {
                             Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
                             e.printStackTrace()
