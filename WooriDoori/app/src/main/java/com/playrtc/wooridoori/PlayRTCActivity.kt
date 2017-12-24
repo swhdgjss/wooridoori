@@ -797,24 +797,28 @@ class PlayRTCActivity : Activity() {
         })
 
         /*채팅 기능*/
-        val text=findViewById(R.id.btn_chat) as ImageButton
+        val chat=findViewById(R.id.btn_chat) as ImageButton
         val edit=findViewById(R.id.editText) as EditText
         val txt=findViewById(R.id.textView) as TextView
-        val server=findViewById(R.id.btn_server) as Button
-        val client=findViewById(R.id.btn_client) as Button
-        val send=findViewById(R.id.btn_send) as Button
+        val btn_server=findViewById(R.id.btn_server) as Button
+        val btn_client=findViewById(R.id.btn_client) as Button
+        val btn_send=findViewById(R.id.btn_send) as Button
 
         txt.movementMethod = ScrollingMovementMethod()
-        text.setOnClickListener(object : View.OnClickListener {
+        chat.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 edit.setVisibility(View.VISIBLE)
                 txt.setVisibility(View.VISIBLE)
-                server.setVisibility(View.VISIBLE)
-                client.setVisibility(View.VISIBLE)
-                send.setVisibility(View.VISIBLE)
+                btn_server.setVisibility(View.VISIBLE)
+                btn_client.setVisibility(View.VISIBLE)
+                btn_send.setVisibility(View.VISIBLE)
                 Toast.makeText(this@PlayRTCActivity, "메시지", Toast.LENGTH_SHORT).show()
             }
         });
+
+        fun chat() {
+            
+        }
     }
 
     /* Video View ShowSnapshot 기능 버튼 */

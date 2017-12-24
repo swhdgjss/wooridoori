@@ -486,7 +486,7 @@
 			android:layout_above="@+id/textView"
 			android:layout_alignEnd="@+id/btn_chat"
 			android:layout_alignRight="@+id/btn_chat"
-			android:text="Button"
+			android:text="서버"
 			android:visibility="invisible" />
 
 		<Button
@@ -496,7 +496,7 @@
 			android:layout_above="@+id/textView"
 			android:layout_toEndOf="@+id/btn_mirror"
 			android:layout_toRightOf="@+id/btn_mirror"
-			android:text="Button"
+			android:text="클라"
 			android:visibility="invisible" />
 
 		<Button
@@ -506,7 +506,7 @@
 			android:layout_above="@+id/btn_server"
 			android:layout_toLeftOf="@+id/btn_channel"
 			android:layout_toStartOf="@+id/btn_channel"
-			android:text="Button"
+			android:text="전송"
 			android:visibility="invisible" />
 
 		<!-- 채팅 -->
