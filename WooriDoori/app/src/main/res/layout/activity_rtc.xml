@@ -414,17 +414,15 @@
 			android:textColor="#ff0000"
 			android:textSize="12sp"></TextView>
 
-		<Button
+		<ImageButton
 			android:id="@+id/btn_mirror"
-			android:layout_width="80dp"
-			android:layout_height="35dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:layout_below="@id/lb_btn_mirror"
-			android:layout_marginLeft="60dp"
 			android:layout_marginBottom="20dp"
-			android:background="#413126"
-			android:text="미러모드"
-			android:textColor="#AC9588"
-			android:textSize="11sp" />
+			android:layout_marginLeft="60dp"
+			android:background="@drawable/list_btn"
+			android:src="@drawable/lr" />
 
 		<RelativeLayout
 			android:id="@+id/btn_mirror_layer"
