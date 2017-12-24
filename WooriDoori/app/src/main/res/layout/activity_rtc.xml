@@ -188,7 +188,6 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentStart="true"
-		android:layout_below="@+id/btn_menu_layer"
 		android:background="@drawable/list_row_bg"
 		android:src="@drawable/menu" />
 
@@ -487,7 +486,6 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentEnd="true"
 		android:layout_alignParentRight="true"
-		android:layout_below="@+id/btn_menu_layer"
 		android:background="@drawable/list_btn"
 		android:src="@drawable/end" />
 
