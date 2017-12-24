@@ -29,12 +29,19 @@ import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Environment
+import android.provider.Telephony.Carriers.PORT
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ImageSpan
 import java.io.*
+import java.net.InetAddress
+import java.net.ServerSocket
+import java.net.Socket
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 /*
  * PlayRTC를 구현한 Activity Class
@@ -130,9 +137,16 @@ class PlayRTCActivity : Activity() {
      * 영상 뷰를 사용하지 않는 경우 로그 뷰를 화면 중앙에 1회 위치 시키기 위한 변수
      * onWindowFocusChanged에서 로그뷰 Layout을 조정 하므로 필요함.
      */
-    private var isResetLogViewArea=false
+    //private var isResetLogViewArea=false
 
     private var zoomRangeBar: PlayRTCVerticalSeekBar?=null
+
+    internal lateinit var serversocket:ServerSocket
+    internal lateinit var socket: Socket
+    internal lateinit var inputStream:DataInputStream
+    internal var outputStream:DataOutputStream? = null
+    internal var ip = "192.168.193.140" //서버 단말기의 IP주소..
+    internal var isConnected = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -193,7 +207,7 @@ class PlayRTCActivity : Activity() {
         // Layout XML을 사용하지 않고 소스 코드에서 직접 샹성하는 경우
         if (hasFocus && videoLayer.isCreatedVideoView() == false) {
 
-            // 4. 영상 스트림 출력을 위한 PlayRTCVideoView 동적 생성
+            // 영상 스트림 출력을 위한 PlayRTCVideoView 동적 생성
             videoLayer.createVideoView();
 
         }
@@ -284,7 +298,6 @@ class PlayRTCActivity : Activity() {
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
-
         when (this.resources.configuration.orientation) {
             Configuration.ORIENTATION_PORTRAIT -> {
 
@@ -553,8 +566,6 @@ class PlayRTCActivity : Activity() {
         })
     }
 
-
-
     //메뉴 버튼
     private fun initMenuControls() {
         val btnMenu=this.findViewById(R.id.btn_menu) as ImageButton
@@ -643,6 +654,7 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
         (this.findViewById(R.id.btn_white_balance_auto) as Button).setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {             //Button->view
                 if (playRTCHandler!!.setCameraWhiteBalance(PlayRTCWhiteBalance.Auto)) {
@@ -650,6 +662,7 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
         (this.findViewById(R.id.btn_white_balance_incandescent) as Button).setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {                  //Button->view
 
@@ -662,6 +675,7 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
         (this.findViewById(R.id.btn_white_balance_fluoreScent) as Button).setOnClickListener(object : View.OnClickListener {    //Button->view
             override fun onClick(v: View) {
                 if (playRTCHandler!!.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.FluoreScent) == false) {
@@ -673,6 +687,7 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
         (this.findViewById(R.id.btn_white_balance_daylight) as Button).setOnClickListener(object : View.OnClickListener {   //Button->view
             override fun onClick(v: View) {
 
@@ -685,6 +700,7 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
         (this.findViewById(R.id.btn_white_balance_cloudydaylight) as Button).setOnClickListener(object : View.OnClickListener {   //Button->view
             override fun onClick(v: View) {
 
@@ -697,6 +713,7 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
         (this.findViewById(R.id.btn_white_balance_twilight) as Button).setOnClickListener(object : View.OnClickListener {    //Button->view
             override fun onClick(v: View) {
 
@@ -709,6 +726,7 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
         (this.findViewById(R.id.btn_white_balance_shade) as Button).setOnClickListener(object : View.OnClickListener {   //Button->view
             override fun onClick(v: View) {
                 if (playRTCHandler!!.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.Shade) == false) {
@@ -797,18 +815,18 @@ class PlayRTCActivity : Activity() {
         })
 
         /*채팅 기능*/
-        val chat=findViewById(R.id.btn_chat) as ImageButton
-        val edit=findViewById(R.id.editText) as EditText
-        val txt=findViewById(R.id.textView) as TextView
-        val btn_server=findViewById(R.id.btn_server) as Button
-        val btn_client=findViewById(R.id.btn_client) as Button
-        val btn_send=findViewById(R.id.btn_send) as Button
+        val chat = findViewById(R.id.btn_chat) as ImageButton
+        val edit = findViewById(R.id.editText) as EditText
+        val text = findViewById(R.id.textView) as TextView
+        val btn_server = findViewById(R.id.btn_server) as Button
+        val btn_client = findViewById(R.id.btn_client) as Button
+        val btn_send = findViewById(R.id.btn_send) as Button
 
-        txt.movementMethod = ScrollingMovementMethod()
+        text.movementMethod = ScrollingMovementMethod()
         chat.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 edit.setVisibility(View.VISIBLE)
-                txt.setVisibility(View.VISIBLE)
+                text.setVisibility(View.VISIBLE)
                 btn_server.setVisibility(View.VISIBLE)
                 btn_client.setVisibility(View.VISIBLE)
                 btn_send.setVisibility(View.VISIBLE)
@@ -816,7 +834,207 @@ class PlayRTCActivity : Activity() {
             }
         });
 
+<<<<<<< HEAD
 
+=======
+        var msg = ""
+        var msgs = SpannableString("")
+        val send = SpannableString("나 : ")
+        val reci = SpannableString("상대방 : ")
+
+        fun changeEmoticon(text : String) : SpannableString {
+            var result = SpannableString(text)
+            var drawable : Drawable
+
+            when(text) {
+                "(good)" ->  {
+                    drawable = resources.getDrawable(R.drawable.good)
+                    drawable.setBounds(0, 0, 60, 60)
+                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+                }
+                "(ok)" -> {
+                    System.out.println("OK")
+                    drawable = resources.getDrawable(R.drawable.ok)
+                    drawable.setBounds(0, 0, 60, 60)
+                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                "(flower)" -> {
+                    drawable = resources.getDrawable(R.drawable.flower)
+                    drawable.setBounds(0, 0, 60, 60)
+                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                "(heart)" -> {
+                    drawable = resources.getDrawable(R.drawable.heart)
+                    drawable.setBounds(0, 0, 60, 60)
+                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                "(merong)" -> {
+                    drawable = resources.getDrawable(R.drawable.merong)
+                    drawable.setBounds(0, 0, 60, 60)
+                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                "(cong)" -> {
+                    drawable = resources.getDrawable(R.drawable.cong)
+                    drawable.setBounds(0, 0, 60, 60)
+                    result.setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BASELINE), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                else -> {
+                    result = SpannableString(text)
+                }
+            }
+            return result
+        }
+
+        fun scrollBottom(textView : TextView) {
+            var scrollY = textView.layout.getLineTop(textView.lineCount) - textView.height
+
+            if(scrollY > 0) {
+                textView.scrollTo(0, scrollY)
+            } else {
+                textView.scrollTo(0, 0)
+            }
+        }
+
+        fun send(msg : String) {
+            edit.text.clear()
+            msgs = changeEmoticon(msg)
+            text.append(send)
+            text.append(msgs)
+            text.append("\n")
+            scrollBottom(text)
+        }
+
+        fun recieve() {
+            text.append(reci)
+            text.append(msgs)
+            text.append("\n")
+            scrollBottom(text)
+        }
+
+        btn_server.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(p0: View?) {
+                //Android API14버전이상 부터 네트워크 작업은 무조건 별도의 Thread에서 실행 해야함.
+                Thread(object : Runnable {
+                    override fun run() {
+                        // TODO Auto-generated method stub
+                        try {
+                            //서버소켓 생성.
+                            serversocket = ServerSocket(PORT)
+                        } catch (e: IOException) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace()
+                        }
+
+                        try {
+                            //서버에 접속하는 클라이언트 소켓 얻어오기(클라이언트가 접속하면 클라이언트 소켓 리턴)
+                            socket = serversocket.accept() //서버는 클라이언트가 접속할 때까지 여기서 대기...
+
+                            //여기 까지 왔다는 것은 클라이언트가 접속했다는 것을 의미하므로
+                            //클라이언트와 데이터를 주고 받기 위한 통로구축..
+                            inputStream = DataInputStream(socket.getInputStream()) //클라이언트로 부터 메세지를 받기 위한 통로
+                            outputStream = DataOutputStream(socket.getOutputStream()) //클라이언트로 메세지를 보내기 위한 통로
+                        } catch (e: IOException) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace()
+                        }
+
+                        //클라이언트가 접속을 끊을 때까지 무한반복하면서 클라이언트의 메세지 수신
+                        while (isConnected) {
+                            try {
+                                msg = inputStream.readUTF()
+                                msgs = changeEmoticon(msg)
+                            } catch (e: IOException) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace()
+                            }
+
+                            //클라이언트로부터 읽어들인 메시지msg를 TextView에 출력..
+                            //안드로이드는 오직 main Thread 만이 UI를 변경할 수 있기에
+                            //네트워크 작업을 하는 이 Thread에서는 TextView의 글씨를 직접 변경할 수 없음.
+                            //runOnUiThread()는 별도의 Thread가 main Thread에게 UI 작업을 요청하는 메소드임.
+                            runOnUiThread(object : Runnable {
+                                public override fun run() {
+                                    // TODO Auto-generated method stub
+                                    recieve()
+                                }
+                            })
+                            /////////////////////////////////////////////////////////////////////////////
+                        }//while..
+                    }//run method...
+                }).start() //Thread 실행..
+            }
+        })
+
+        btn_client.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(p0: View?) {
+                Toast.makeText(applicationContext, "IP를 입력해주세요", Toast.LENGTH_SHORT).show()
+                btn_send.setOnClickListener(object : View.OnClickListener {
+                    override fun onClick(p0: View?) {
+                        if(socket.isConnected) {
+                            val msg = edit.text.toString()
+                            send(msg)
+
+                            if (outputStream == null) return    //서버와 연결되어 있지 않다면 전송불가..
+                            //네트워크 작업이므로 Thread 생성
+                            Thread(Runnable {
+                                // TODO Auto-generated method stub
+                                //서버로 보낼 메세지 EditText로 부터 얻어오기
+
+                                try {
+                                    outputStream!!.writeUTF(msg)  //서버로 메세지 보내기.UTF 방식으로(한글 전송가능...)
+                                    outputStream!!.flush()        //다음 메세지 전송을 위해 연결통로의 버퍼를 지워주는 메소드..
+                                } catch (e: IOException) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace()
+                                }
+                            }//run method..
+                            ).start() //Thread 실행..
+                        } else {
+                            Thread(Runnable {
+                                // TODO Auto-generated method stub
+                                try {
+                                    ip = edit.text.toString()//IP 주소가 작성되어 있는 EditText에서 서버 IP 얻어오기
+                                    //서버와 연결하는 소켓 생성..
+                                    socket = Socket(InetAddress.getByName(ip), PORT)
+                                    //여기까지 왔다는 것을 예외가 발생하지 않았다는 것이므로 소켓 연결 성공..
+                                    //서버와 메세지를 주고받을 통로 구축
+                                    inputStream = DataInputStream(socket.getInputStream())
+                                    outputStream = DataOutputStream(socket.getOutputStream())
+                                } catch (e: IOException) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace()
+                                }
+
+                                //서버와 접속이 끊길 때까지 무한반복하면서 서버의 메세지 수신
+                                while (true) {
+                                    try {
+                                        msg = inputStream.readUTF() //서버 부터 메세지가 전송되면 이를 UTF형식으로 읽어서 String 으로 리턴
+                                        msgs = changeEmoticon(msg)
+                                        //var text = SpannableString(text_msg.text)
+                                        //text = TextUtils.concat(text, msgs) as SpannableString
+                                        //서버로부터 읽어들인 메시지msg를 TextView에 출력..
+                                        //안드로이드는 오직 main Thread 만이 UI를 변경할 수 있기에
+                                        //네트워크 작업을 하는 이 Thread에서는 TextView의 글씨를 직접 변경할 수 없음.
+                                        //runOnUiThread()는 별도의 Thread가 main Thread에게 UI 작업을 요청하는 메소드임.
+                                        runOnUiThread {
+                                            // TODO Auto-generated method stub
+                                            recieve()
+                                        }
+                                        //////////////////////////////////////////////////////////////////////////
+                                    } catch (e: IOException) {
+                                        // TODO Auto-generated catch block
+                                        e.printStackTrace()
+                                    }
+
+                                }//while
+                            }//run method...
+                            ).start()//Thread 실행..
+                        }
+                    }
+                })
+            }
+        })
+>>>>>>> 6fe74bbdec79b56c28afe0a04a5b052e578ea93d
     }
 
     /* Video View ShowSnapshot 기능 버튼 */
@@ -846,7 +1064,6 @@ class PlayRTCActivity : Activity() {
         mediaScanIntent.data=Uri.fromFile(file)
         sendBroadcast(mediaScanIntent)
     }
-
 
     /*스냅샷*/
     private fun initSnapshotControlls() {
@@ -890,22 +1107,19 @@ class PlayRTCActivity : Activity() {
                             Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
                             e.printStackTrace()
                         }
-
-
                     }
                 } else if (local == false && videoLayer!!.remoteView != null) {
-
                     /*
-                         * Snapshot 이미지 요청
-                         */
+                     * Snapshot 이미지 요청
+                     */
                     videoLayer!!.remoteView.snapshot { image ->
                         val w=image.width
                         val h=image.height
                         Log.e("SNAP-SHOT", "snapshot Bitmap[" + w + "x" + h + "].....")
 
                         /*
-                                 * Snapshot 이미지 출력
-                                 */
+                         * Snapshot 이미지 출력
+                         */
                         snapshotLayer!!.setSnapshotImage(image)
                         try {
                             val sdCard=Environment.getExternalStorageDirectory()
@@ -929,15 +1143,13 @@ class PlayRTCActivity : Activity() {
                             Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
                             e.printStackTrace()
                         }
-
-                        
                     }
                 }
             }
         }
     }
 
-    private fun resetLogViewArea() {
+    /*private fun resetLogViewArea() {
         if (isResetLogViewArea == true) {
             return
         }
@@ -960,9 +1172,10 @@ class PlayRTCActivity : Activity() {
         videoLayer!!.layoutParams=videoLayoutparam
 
         isResetLogViewArea=true
-    }
+    }*/
 
     companion object {
         private val LOG_TAG="PlayRTCActivity"
+        val PORT : Int = 10001
     }
 }

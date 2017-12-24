@@ -507,6 +507,72 @@
 			android:text="전송"
 			android:visibility="invisible" />
 
+		<ImageButton
+			android:id="@+id/btn_merong"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_above="@+id/btn_send"
+			android:layout_alignLeft="@+id/btn_client"
+			android:layout_alignStart="@+id/btn_client"
+			android:background="@android:color/transparent"
+			android:scaleType="fitCenter"
+			android:src="@drawable/merong" />
+
+		<ImageButton
+			android:id="@+id/btn_heart"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_alignTop="@+id/btn_merong"
+			android:layout_toLeftOf="@+id/btn_merong"
+			android:layout_toStartOf="@+id/btn_merong"
+			android:background="@android:color/transparent"
+			android:scaleType="fitCenter"
+			android:src="@drawable/heart" />
+
+		<ImageButton
+			android:id="@+id/btn_flower"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_above="@+id/btn_merong"
+			android:layout_alignLeft="@+id/btn_heart"
+			android:layout_alignStart="@+id/btn_heart"
+			android:background="@android:color/transparent"
+			android:scaleType="fitCenter"
+			android:src="@drawable/flower" />
+
+		<ImageButton
+			android:id="@+id/btn_cong"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_above="@+id/btn_merong"
+			android:layout_toEndOf="@+id/btn_heart"
+			android:layout_toRightOf="@+id/btn_heart"
+			android:background="@android:color/transparent"
+			android:scaleType="fitCenter"
+			android:src="@drawable/cong" />
+
+		<ImageButton
+			android:id="@+id/btn_good"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_alignTop="@+id/btn_cong"
+			android:layout_toEndOf="@+id/btn_merong"
+			android:layout_toRightOf="@+id/btn_merong"
+			android:background="@android:color/transparent"
+			android:scaleType="fitCenter"
+			android:src="@drawable/good" />
+
+		<ImageButton
+			android:id="@+id/btn_ok"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_alignEnd="@+id/editText"
+			android:layout_alignRight="@+id/editText"
+			android:layout_below="@+id/btn_cong"
+			android:background="@android:color/transparent"
+			android:scaleType="fitCenter"
+			android:src="@drawable/ok" />
+
 		<!-- 채팅 -->
 
 	</RelativeLayout>
@@ -528,6 +594,5 @@
 		android:layout_alignParentRight="true"
 		android:background="@drawable/list_btn"
 		android:src="@drawable/end" />
-
 
 </RelativeLayout>
