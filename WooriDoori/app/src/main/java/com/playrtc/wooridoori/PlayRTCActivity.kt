@@ -570,7 +570,7 @@ class PlayRTCActivity : Activity() {
             }
         })
 
-        val log=findViewById(R.id.btn_log) as Button
+        /*val log=findViewById(R.id.btn_log) as Button
         log.setOnClickListener(object : View.OnClickListener {  //Button->view
                 override fun onClick(v: View) {
                     if (logView!!.isShown == false) {
@@ -582,7 +582,7 @@ class PlayRTCActivity : Activity() {
                     }
                 }
 
-        })
+        })*/
 
         val channelPopup=this.findViewById(R.id.btn_channel) as Button
         channelPopup.setOnClickListener {

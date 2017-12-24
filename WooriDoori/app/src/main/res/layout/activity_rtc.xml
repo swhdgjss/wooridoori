@@ -199,7 +199,6 @@
 		android:layout_alignLeft="@+id/btn_switch_camera"
 		android:layout_alignParentTop="true"
 		android:layout_alignStart="@+id/btn_switch_camera"
-		android:layout_below="@id/btn_menu"
 		android:layout_marginLeft="13dp"
 		android:layout_marginStart="13dp"
 		android:visibility="invisible">
@@ -218,7 +217,6 @@
 			android:id="@+id/btn_channel"
 			android:layout_width="70dp"
 			android:layout_height="wrap_content"
-			android:layout_below="@id/btn_log"
 			android:layout_marginBottom="20dp"
 			android:background="#413126"
 			android:text="채널팝업"
