@@ -800,11 +800,18 @@ class PlayRTCActivity : Activity() {
         val text=findViewById(R.id.btn_chat) as ImageButton
         val edit=findViewById(R.id.editText) as EditText
         val txt=findViewById(R.id.textView) as TextView
+        val server=findViewById(R.id.btn_server) as Button
+        val client=findViewById(R.id.btn_client) as Button
+        val send=findViewById(R.id.btn_send) as Button
+
         txt.movementMethod = ScrollingMovementMethod()
         text.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 edit.setVisibility(View.VISIBLE)
                 txt.setVisibility(View.VISIBLE)
+                server.setVisibility(View.VISIBLE)
+                client.setVisibility(View.VISIBLE)
+                send.setVisibility(View.VISIBLE)
                 Toast.makeText(this@PlayRTCActivity, "메시지", Toast.LENGTH_SHORT).show()
             }
         });

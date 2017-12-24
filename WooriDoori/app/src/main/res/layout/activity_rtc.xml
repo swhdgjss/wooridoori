@@ -201,8 +201,10 @@
 			android:id="@+id/btn_switch_flash"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="60dp"
-			android:layout_marginBottom="20dp"
+			android:layout_alignLeft="@+id/lb_btn_mirror"
+			android:layout_alignStart="@+id/lb_btn_mirror"
+			android:layout_below="@+id/btn_camera_zoom_layer"
+			android:layout_marginTop="16dp"
 			android:background="@drawable/list_btn"
 			android:src="@drawable/flash" />
 
@@ -223,10 +225,9 @@
 			android:id="@+id/btn_channel"
 			android:layout_width="70dp"
 			android:layout_height="wrap_content"
-			android:layout_above="@+id/textView"
-			android:layout_alignLeft="@+id/btn_chat"
-			android:layout_alignStart="@+id/btn_chat"
-			android:layout_marginBottom="22dp"
+			android:layout_alignBottom="@+id/btn_chat"
+			android:layout_alignEnd="@+id/textView"
+			android:layout_alignRight="@+id/textView"
 			android:background="#413126"
 			android:text="채널팝업"
 			android:textColor="#AC9588"
@@ -239,7 +240,10 @@
 			android:id="@+id/white_balance_label"
 			android:layout_width="80dp"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="60dp"
+			android:layout_alignBaseline="@+id/lb_btn_mirror"
+			android:layout_alignBottom="@+id/lb_btn_mirror"
+			android:layout_toEndOf="@+id/lb_btn_mirror"
+			android:layout_toRightOf="@+id/lb_btn_mirror"
 			android:gravity="center"
 			android:text="자동"
 			android:textColor="#ff0000"
@@ -249,9 +253,10 @@
 			android:id="@+id/btn_white_balance"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="60dp"
-			android:layout_marginBottom="20dp"
-			android:layout_below="@id/white_balance_label"
+			android:layout_alignEnd="@+id/btn_camera_zoom"
+			android:layout_alignRight="@+id/btn_camera_zoom"
+			android:layout_below="@+id/white_balance_label"
+			android:layout_marginTop="20dp"
 			android:background="@drawable/list_btn"
 			android:src="@drawable/filter" />
 
@@ -260,7 +265,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_alignBottom="@id/btn_white_balance"
-			android:layout_toRightOf="@id/btn_white_balance"
+			android:layout_toEndOf="@+id/btn_camera_zoom_layer"
+			android:layout_toRightOf="@+id/btn_camera_zoom_layer"
 			android:visibility="gone">
 
 			<Button
@@ -347,11 +353,10 @@
 			android:id="@+id/btn_camera_zoom"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_alignEnd="@+id/lb_camera_zoom"
-			android:layout_alignRight="@+id/lb_camera_zoom"
-			android:layout_below="@id/lb_camera_zoom"
-			android:layout_marginBottom="20dp"
-			android:layout_marginLeft="60dp"
+			android:layout_alignLeft="@+id/lb_camera_zoom"
+			android:layout_alignStart="@+id/lb_camera_zoom"
+			android:layout_alignTop="@+id/btn_switch_flash"
+			android:layout_marginTop="12dp"
 			android:background="@android:color/transparent"
 			android:src="@drawable/zoom" />
 
@@ -472,6 +477,36 @@
 			android:scrollbars="vertical"
 			android:text="text"
 			android:textSize="20sp"
+			android:visibility="invisible" />
+
+		<Button
+			android:id="@+id/btn_server"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_above="@+id/textView"
+			android:layout_alignEnd="@+id/btn_chat"
+			android:layout_alignRight="@+id/btn_chat"
+			android:text="Button"
+			android:visibility="invisible" />
+
+		<Button
+			android:id="@+id/btn_client"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_above="@+id/textView"
+			android:layout_toEndOf="@+id/btn_mirror"
+			android:layout_toRightOf="@+id/btn_mirror"
+			android:text="Button"
+			android:visibility="invisible" />
+
+		<Button
+			android:id="@+id/btn_send"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_above="@+id/btn_server"
+			android:layout_toLeftOf="@+id/btn_channel"
+			android:layout_toStartOf="@+id/btn_channel"
+			android:text="Button"
 			android:visibility="invisible" />
 
 		<!-- 채팅 -->
