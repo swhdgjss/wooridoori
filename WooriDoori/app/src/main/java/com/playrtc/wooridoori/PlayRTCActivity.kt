@@ -768,7 +768,7 @@ class PlayRTCActivity : Activity() {
 
 
         /* 로컬뷰 미러 모드 전환 버튼 */
-        val btnMirror=this.findViewById(R.id.btn_mirror) as Button
+        val btnMirror=this.findViewById(R.id.btn_mirror) as ImageButton
 
         btnMirror.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
