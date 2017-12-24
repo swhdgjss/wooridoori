@@ -11,6 +11,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -19,7 +20,7 @@ import java.net.InetAddress
 import java.net.Socket
 
 class Client : Activity() {
-    internal var ip = "192.168.193.140" //서버 단말기의 IP주소..
+    internal var ip = "192.168.194.151" //서버 단말기의 IP주소..
     //본 예제는 Genymotion 에뮬레이터 2대로 테스한 예제입니다.
     //Genymotion을 실행하면 각 에뮬레이터의 IP를 확인할 수 있습니다.
     internal lateinit var socket: Socket     //클라이언트의 소켓
@@ -47,9 +48,8 @@ class Client : Activity() {
     //Button 클릭시 자동으로 호출되는 callback 메소드
     fun mOnClick(v: View) {
         when (v.id) {
-            //서버에 접속하고 서버로 부터 메세지 수신하기
+        //서버에 접속하고 서버로 부터 메세지 수신하기
             R.id.btn_connectserver -> {
-                //Android API14버전이상 부터 네트워크 작업은 무조건 별도의 Thread에서 실행 해야함.
                 Thread(Runnable {
                     // TODO Auto-generated method stub
                     try {
@@ -90,7 +90,7 @@ class Client : Activity() {
                 }//run method...
                 ).start()//Thread 실행..
             }
-            //서버로 메세지 전송하기...
+        //서버로 메세지 전송하기...
             R.id.btn_send_client -> {
                 val msg = edit_msg.text.toString()
                 send(msg)
@@ -121,9 +121,9 @@ class Client : Activity() {
                         msg = "(flower)"
                         send(msg)
                     }R.id.btn_heart -> {
-                        msg = "(heart)"
-                        send(msg)
-                    }
+                    msg = "(heart)"
+                    send(msg)
+                }
                     R.id.btn_cong -> {
                         msg = "(cong)"
                         send(msg)
