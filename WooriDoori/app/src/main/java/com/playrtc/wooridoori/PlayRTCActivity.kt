@@ -834,9 +834,6 @@ class PlayRTCActivity : Activity() {
             }
         });
 
-<<<<<<< HEAD
-
-=======
         var msg = ""
         var msgs = SpannableString("")
         val send = SpannableString("나 : ")
@@ -1034,7 +1031,6 @@ class PlayRTCActivity : Activity() {
                 })
             }
         })
->>>>>>> 6fe74bbdec79b56c28afe0a04a5b052e578ea93d
     }
 
     /* Video View ShowSnapshot 기능 버튼 */
