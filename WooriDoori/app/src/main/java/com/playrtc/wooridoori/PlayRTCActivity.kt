@@ -389,7 +389,7 @@ class PlayRTCActivity : Activity() {
         txtStatReport!!.text=text
 
         /* 채널 팝업 버튼 */
-        val channelPopup=this.findViewById(R.id.btn_channel) as Button
+        val channelPopup=this.findViewById(R.id.btn_channel) as ImageButton
         channelPopup.setOnClickListener {
             if (channelInfoPopup!!.isShown) {
                 channelInfoPopup!!.hide(0)
@@ -431,6 +431,9 @@ class PlayRTCActivity : Activity() {
 
         /* Menu 기능 버튼*/
         initMenuControls()
+
+        /*Sticker 보내기 버튼*/
+        initStickerControls()
     }
 
     /* 카메라 전/후방 전환 버튼 */
@@ -566,6 +569,21 @@ class PlayRTCActivity : Activity() {
         })
     }
 
+    private fun initStickerControls() {
+        val btnSticker=this.findViewById(R.id.btn_sticker) as ImageButton
+        btnSticker.setOnClickListener(object : View.OnClickListener {  //Button->view
+            override fun onClick(v: View) {
+                val layer=findViewById(R.id.btn_sticker_layer) as RelativeLayout
+                if (layer.isShown) {
+                    layer.visibility=View.GONE
+                } else {
+                    hideFuntionUILayer()
+                    layer.visibility=View.VISIBLE
+                }
+            }
+        })
+    }
+
     //메뉴 버튼
     private fun initMenuControls() {
         val btnMenu=this.findViewById(R.id.btn_menu) as ImageButton
@@ -595,7 +613,7 @@ class PlayRTCActivity : Activity() {
 
         })*/
 
-        val channelPopup=this.findViewById(R.id.btn_channel) as Button
+        val channelPopup=this.findViewById(R.id.btn_channel) as ImageButton
         channelPopup.setOnClickListener {
             if (channelInfoPopup!!.isShown) {
                 channelInfoPopup!!.hide(0)
@@ -821,19 +839,34 @@ class PlayRTCActivity : Activity() {
         val btn_server = findViewById(R.id.btn_server) as Button
         val btn_client = findViewById(R.id.btn_client) as Button
         val btn_send = findViewById(R.id.btn_send) as Button
+        val btn_sticker = findViewById(R.id.btn_sticker) as ImageButton
 
         text.movementMethod = ScrollingMovementMethod()
         chat.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
-                edit.setVisibility(View.VISIBLE)
-                text.setVisibility(View.VISIBLE)
-                btn_server.setVisibility(View.VISIBLE)
-                btn_client.setVisibility(View.VISIBLE)
-                btn_send.setVisibility(View.VISIBLE)
-                Toast.makeText(this@PlayRTCActivity, "메시지", Toast.LENGTH_SHORT).show()
+                if(edit.isShown) {
+                    edit.setVisibility(View.GONE)
+                    text.setVisibility(View.GONE)
+                    btn_server.setVisibility(View.GONE)
+                    btn_client.setVisibility(View.GONE)
+                    btn_send.setVisibility(View.GONE)
+                    btn_sticker.setVisibility(View.GONE)
+                } else {
+                    edit.setVisibility(View.VISIBLE)
+                    text.setVisibility(View.VISIBLE)
+                    btn_server.setVisibility(View.VISIBLE)
+                    btn_client.setVisibility(View.VISIBLE)
+                    btn_send.setVisibility(View.VISIBLE)
+                    btn_sticker.setVisibility(View.VISIBLE)
+                    Toast.makeText(this@PlayRTCActivity, "메시지", Toast.LENGTH_SHORT).show()
+                }
             }
         });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8e57ebfff1554f088e1f097482e553b7f9e02e8d
         var msg = ""
         var msgs = SpannableString("")
         val send = SpannableString("나 : ")
@@ -1031,6 +1064,10 @@ class PlayRTCActivity : Activity() {
                 })
             }
         })
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8e57ebfff1554f088e1f097482e553b7f9e02e8d
     }
 
     /* Video View ShowSnapshot 기능 버튼 */

@@ -194,8 +194,22 @@
 		android:id="@+id/btn_menu_layer"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
 		android:layout_alignParentTop="true"
 		android:visibility="invisible">
+
+		<TextView
+			android:id="@+id/lb_switch_flash"
+			android:layout_width="54dp"
+			android:layout_height="wrap_content"
+			android:layout_above="@+id/btn_camera_zoom"
+			android:layout_alignLeft="@+id/btn_chat"
+			android:layout_alignStart="@+id/btn_chat"
+			android:gravity="center"
+			android:text="플래쉬"
+			android:textColor="#ff0000"
+			android:textSize="12sp"></TextView>
 
 		<ImageButton
 			android:id="@+id/btn_switch_flash"
@@ -204,7 +218,7 @@
 			android:layout_alignLeft="@+id/lb_btn_mirror"
 			android:layout_alignStart="@+id/lb_btn_mirror"
 			android:layout_below="@+id/btn_camera_zoom_layer"
-			android:layout_marginTop="16dp"
+			android:layout_marginTop="17dp"
 			android:background="@drawable/list_btn"
 			android:src="@drawable/flash" />
 
@@ -218,27 +232,36 @@
 			android:layout_alignParentStart="true"
 			android:ems="10"
 			android:inputType="textPersonName"
-			android:text="Name"
 			android:visibility="invisible" />
 
-		<Button
-			android:id="@+id/btn_channel"
-			android:layout_width="70dp"
+		<TextView
+			android:id="@+id/lb_channel"
+			android:layout_width="54dp"
 			android:layout_height="wrap_content"
-			android:layout_alignBottom="@+id/btn_chat"
-			android:layout_alignEnd="@+id/textView"
-			android:layout_alignRight="@+id/textView"
-			android:background="#413126"
+			android:layout_above="@+id/btn_chat"
+			android:layout_alignLeft="@+id/btn_camera_zoom"
+			android:layout_alignStart="@+id/btn_camera_zoom"
+			android:gravity="center"
 			android:text="채널팝업"
-			android:textColor="#AC9588"
-			android:textSize="13sp" />
+			android:textColor="#ff0000"
+			android:textSize="12sp"></TextView>
+
+		<ImageButton
+			android:id="@+id/btn_channel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignLeft="@+id/lb_channel"
+			android:layout_alignStart="@+id/lb_channel"
+			android:layout_below="@+id/lb_channel"
+			android:background="@drawable/list_row_bg"
+			android:src="@drawable/channel_pop" />
 
 
 		<!-- v2.3.0 카메라 white balance -->
 
 		<TextView
 			android:id="@+id/white_balance_label"
-			android:layout_width="80dp"
+			android:layout_width="54dp"
 			android:layout_height="wrap_content"
 			android:layout_alignBaseline="@+id/lb_btn_mirror"
 			android:layout_alignBottom="@+id/lb_btn_mirror"
@@ -253,10 +276,9 @@
 			android:id="@+id/btn_white_balance"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_alignEnd="@+id/btn_camera_zoom"
-			android:layout_alignRight="@+id/btn_camera_zoom"
 			android:layout_below="@+id/white_balance_label"
-			android:layout_marginTop="20dp"
+			android:layout_toEndOf="@+id/lb_btn_mirror"
+			android:layout_toRightOf="@+id/lb_btn_mirror"
 			android:background="@drawable/list_btn"
 			android:src="@drawable/filter" />
 
@@ -339,7 +361,7 @@
 		<!-- zoom -->
 		<TextView
 			android:id="@+id/lb_camera_zoom"
-			android:layout_width="80dp"
+			android:layout_width="54dp"
 			android:layout_height="wrap_content"
 			android:layout_below="@+id/btn_white_balance_layer"
 			android:layout_toEndOf="@+id/lb_btn_mirror"
@@ -353,10 +375,9 @@
 			android:id="@+id/btn_camera_zoom"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_alignLeft="@+id/lb_camera_zoom"
-			android:layout_alignStart="@+id/lb_camera_zoom"
+			android:layout_alignEnd="@+id/btn_white_balance"
+			android:layout_alignRight="@+id/btn_white_balance"
 			android:layout_alignTop="@+id/btn_switch_flash"
-			android:layout_marginTop="12dp"
 			android:background="@android:color/transparent"
 			android:src="@drawable/zoom" />
 
@@ -405,10 +426,11 @@
 		<!-- 영상 미러모드 -->
 		<TextView
 			android:id="@+id/lb_btn_mirror"
-			android:layout_width="80dp"
+			android:layout_width="54dp"
 			android:layout_height="wrap_content"
-			android:layout_below="@id/btn_camera_zoom"
-			android:layout_marginLeft="60dp"
+			android:layout_alignLeft="@+id/btn_mirror"
+			android:layout_alignStart="@+id/btn_mirror"
+			android:layout_below="@+id/btn_camera_zoom"
 			android:gravity="center"
 			android:text="미러-Off"
 			android:textColor="#ff0000"
@@ -454,15 +476,25 @@
 
 
 		<!-- 채팅 -->
+		<TextView
+			android:id="@+id/lb_chat"
+			android:layout_width="54dp"
+			android:layout_height="wrap_content"
+			android:layout_above="@+id/btn_chat"
+			android:layout_alignLeft="@+id/btn_chat"
+			android:layout_alignStart="@+id/btn_chat"
+			android:gravity="center"
+			android:text="채팅하기"
+			android:textColor="#ff0000"
+			android:textSize="12sp"></TextView>
+
 		<ImageButton
 			android:id="@+id/btn_chat"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentStart="true"
-			android:layout_marginLeft="60dp"
-			android:layout_marginBottom="20dp"
-			android:layout_below="@id/btn_mirror"
+			android:layout_alignEnd="@+id/btn_switch_flash"
+			android:layout_alignRight="@+id/btn_switch_flash"
+			android:layout_below="@+id/btn_mirror"
 			android:background="@drawable/list_row_bg"
 			android:src="@drawable/chatting" />
 
@@ -471,7 +503,9 @@
 			android:layout_width="220dp"
 			android:layout_height="50dp"
 			android:layout_above="@+id/editText"
-			android:layout_centerHorizontal="true"
+			android:layout_alignEnd="@+id/lb_channel"
+			android:layout_alignRight="@+id/lb_channel"
+			android:layout_marginTop="10dp"
 			android:scrollbars="vertical"
 			android:text="text"
 			android:textSize="20sp"
@@ -482,8 +516,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_above="@+id/textView"
-			android:layout_alignEnd="@+id/btn_chat"
-			android:layout_alignRight="@+id/btn_chat"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true"
 			android:text="서버"
 			android:visibility="invisible" />
 
@@ -492,8 +526,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_above="@+id/textView"
-			android:layout_toEndOf="@+id/btn_mirror"
-			android:layout_toRightOf="@+id/btn_mirror"
+			android:layout_alignEnd="@+id/btn_chat"
+			android:layout_alignRight="@+id/btn_chat"
 			android:text="클라"
 			android:visibility="invisible" />
 
@@ -501,77 +535,92 @@
 			android:id="@+id/btn_send"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_above="@+id/btn_server"
-			android:layout_toLeftOf="@+id/btn_channel"
-			android:layout_toStartOf="@+id/btn_channel"
+			android:layout_above="@+id/textView"
+			android:layout_toEndOf="@+id/lb_chat"
+			android:layout_toRightOf="@+id/lb_chat"
 			android:text="전송"
 			android:visibility="invisible" />
 
+
+		<!--sticker 보내기 버튼-->
 		<ImageButton
-			android:id="@+id/btn_merong"
-			android:layout_width="50dp"
-			android:layout_height="50dp"
+			android:id="@+id/btn_sticker"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:layout_above="@+id/btn_send"
-			android:layout_alignLeft="@+id/btn_client"
-			android:layout_alignStart="@+id/btn_client"
-			android:background="@android:color/transparent"
-			android:scaleType="fitCenter"
-			android:src="@drawable/merong" />
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true"
+			android:background="@drawable/list_row_bg"
+			android:src="@drawable/sticker"
+			android:visibility="invisible" />
 
-		<ImageButton
-			android:id="@+id/btn_heart"
-			android:layout_width="50dp"
-			android:layout_height="50dp"
-			android:layout_alignTop="@+id/btn_merong"
-			android:layout_toLeftOf="@+id/btn_merong"
-			android:layout_toStartOf="@+id/btn_merong"
-			android:background="@android:color/transparent"
-			android:scaleType="fitCenter"
-			android:src="@drawable/heart" />
+		<RelativeLayout
+			android:id="@+id/btn_sticker_layer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentEnd="true"
+			android:layout_alignParentRight="true"
+			android:layout_alignTop="@+id/btn_sticker"
+			android:visibility="invisible">
 
-		<ImageButton
-			android:id="@+id/btn_flower"
-			android:layout_width="50dp"
-			android:layout_height="50dp"
-			android:layout_above="@+id/btn_merong"
-			android:layout_alignLeft="@+id/btn_heart"
-			android:layout_alignStart="@+id/btn_heart"
-			android:background="@android:color/transparent"
-			android:scaleType="fitCenter"
-			android:src="@drawable/flower" />
+			<ImageButton
+				android:id="@+id/btn_merong"
+				android:layout_width="50dp"
+				android:layout_height="50dp"
+				android:background="@android:color/transparent"
+				android:scaleType="fitCenter"
+				android:src="@drawable/merong" />
 
-		<ImageButton
-			android:id="@+id/btn_cong"
-			android:layout_width="50dp"
-			android:layout_height="50dp"
-			android:layout_above="@+id/btn_merong"
-			android:layout_toEndOf="@+id/btn_heart"
-			android:layout_toRightOf="@+id/btn_heart"
-			android:background="@android:color/transparent"
-			android:scaleType="fitCenter"
-			android:src="@drawable/cong" />
+			<ImageButton
+				android:id="@+id/btn_heart"
+				android:layout_width="50dp"
+				android:layout_height="50dp"
+				android:layout_alignTop="@+id/btn_merong"
+				android:layout_toRightOf="@+id/btn_merong"
+				android:background="@android:color/transparent"
+				android:scaleType="fitCenter"
+				android:src="@drawable/heart" />
 
-		<ImageButton
-			android:id="@+id/btn_good"
-			android:layout_width="50dp"
-			android:layout_height="50dp"
-			android:layout_alignTop="@+id/btn_cong"
-			android:layout_toEndOf="@+id/btn_merong"
-			android:layout_toRightOf="@+id/btn_merong"
-			android:background="@android:color/transparent"
-			android:scaleType="fitCenter"
-			android:src="@drawable/good" />
+			<ImageButton
+				android:id="@+id/btn_flower"
+				android:layout_width="50dp"
+				android:layout_height="50dp"
+				android:layout_alignTop="@+id/btn_heart"
+				android:layout_toRightOf="@+id/btn_heart"
+				android:background="@android:color/transparent"
+				android:scaleType="fitCenter"
+				android:src="@drawable/flower" />
 
-		<ImageButton
-			android:id="@+id/btn_ok"
-			android:layout_width="50dp"
-			android:layout_height="50dp"
-			android:layout_alignEnd="@+id/editText"
-			android:layout_alignRight="@+id/editText"
-			android:layout_below="@+id/btn_cong"
-			android:background="@android:color/transparent"
-			android:scaleType="fitCenter"
-			android:src="@drawable/ok" />
+			<ImageButton
+				android:id="@+id/btn_cong"
+				android:layout_width="50dp"
+				android:layout_height="50dp"
+				android:layout_alignTop="@+id/btn_flower"
+				android:layout_toRightOf="@+id/btn_flower"
+				android:background="@android:color/transparent"
+				android:scaleType="fitCenter"
+				android:src="@drawable/cong" />
+
+			<ImageButton
+				android:id="@+id/btn_good"
+				android:layout_width="50dp"
+				android:layout_height="50dp"
+				android:layout_alignTop="@+id/btn_cong"
+				android:layout_toRightOf="@+id/btn_cong"
+				android:background="@android:color/transparent"
+				android:scaleType="fitCenter"
+				android:src="@drawable/good" />
+
+			<ImageButton
+				android:id="@+id/btn_ok"
+				android:layout_width="50dp"
+				android:layout_height="50dp"
+				android:layout_alignTop="@+id/btn_good"
+				android:layout_toRightOf="@+id/btn_good"
+				android:background="@android:color/transparent"
+				android:scaleType="fitCenter"
+				android:src="@drawable/ok" />
+		</RelativeLayout>
 
 		<!-- 채팅 -->
 
