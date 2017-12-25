@@ -132,12 +132,6 @@ class PlayRTCActivity : Activity() {
      */
     private var isCloesActivity = false
 
-    /*
-     * 영상 뷰를 사용하지 않는 경우 로그 뷰를 화면 중앙에 1회 위치 시키기 위한 변수
-     * onWindowFocusChanged에서 로그뷰 Layout을 조정 하므로 필요함.
-     */
-    //private var isResetLogViewArea=false
-
     private var zoomRangeBar: PlayRTCVerticalSeekBar? = null
 
     internal lateinit var serversocket: ServerSocket
@@ -204,20 +198,9 @@ class PlayRTCActivity : Activity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
 
-        /*
-        // Layout XML을 사용하지 않고 소스 코드에서 직접 샹성하는 경우
-        if (hasFocus && videoLayer.isCreatedVideoView() == false) {
-
-            // 영상 스트림 출력을 위한 PlayRTCVideoView 동적 생성
-            videoLayer.createVideoView();
-
-        }
-        */
         // Layout XML에 VideoView를 기술한 경우. v2.2.6
         if (hasFocus && videoLayer!!.isInitVideoView == false) {
-            // 4. 영상 스트림 출력을 위한 PlayRTCVideoView 초기화
             videoLayer!!.initVideoView()
-
         }
     }
 
@@ -257,7 +240,7 @@ class PlayRTCActivity : Activity() {
         Log.e(LOG_TAG, "onBackPressed===============================")
 
         // 채널 팝업이 보여지는 상태에서 onBackPressed()가 호출 되면
-        // 팝업 창을 닫기 만 한다.
+        // 팝업 창을 닫기만 한다.
         if (channelInfoPopup!!.isShown) {
             channelInfoPopup!!.hide(0)
             return
@@ -295,16 +278,6 @@ class PlayRTCActivity : Activity() {
             }
             alert.show()
         }
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        when (this.resources.configuration.orientation) {
-            Configuration.ORIENTATION_PORTRAIT -> {
-            }
-            Configuration.ORIENTATION_LANDSCAPE -> {
-            }
-        }
-        super.onConfigurationChanged(newConfig)
     }
 
     /*
@@ -376,9 +349,6 @@ class PlayRTCActivity : Activity() {
         /*video 스트림 출력을 위한 PlayRTCVideoView의 부모 ViewGroup */
         videoLayer = findViewById(R.id.videoarea) as PlayRTCVideoViewGroup
 
-        /* 로그 출력 TextView */
-        //logView = this.findViewById(R.id.logtext) as PlayRTCLogView
-
         snapshotLayer = this.findViewById(R.id.snapshot_area) as PlayRTCSnapshotView
 
         /* PlayRTC P2P Status report 출력 TextView */
@@ -400,29 +370,11 @@ class PlayRTCActivity : Activity() {
         /* 카메라 전/후방 전환 버튼 */
         initSwitchVideoCameraFunctionUIControls()
 
-        /* 후방 카메라 사용 시 플래쉬 On/Off 전환 버튼 */
-        //initSwitchVideoCameraFlashFunctionUIControls()
-
-        /* 로그뷰  토글 버튼 */
-        //initLogViewFunctionUIControls()
-
         /* Peer 채널 퇴장/종료 버튼 */
         initChannelCloseFunctionUIControls()
 
         /* 미디어 스트림 Mute 버튼 */
         initMediaMuteFunctionUIControls()
-
-        /* 로컬뷰 미러 모드 전환 버튼 */
-        //initVideoViewMirrorFunctionUIControls()
-
-        /* 카메라 영상 추가 회전 각 버튼 */
-        //initCameraDegreeFunctionUIControls()
-
-        /* 카메라 영상 Zoom 기능 버튼 */
-        //initCameraZoomFunctionUIControls()
-
-        /* 카메라 Whitebalance 기능 버튼 */
-        //initCameraWhitebalanceFunctionUIControls()
 
         /* Video View ShowSnapshot 기능 버튼 */
         initVideoViewShowSnapshotFunctionUIControls()
@@ -442,28 +394,10 @@ class PlayRTCActivity : Activity() {
         })
     }
 
-    /* 로그뷰  토글 버튼
-    private fun initLogViewFunctionUIControls() {
-        /* 로그뷰  토글 버튼 이벤트 처리 */
-        val btnLog=this.findViewById(R.id.btn_log) as Button
-
-        btnLog.setOnClickListener(object : View.OnClickListener {
-            //Button->view
-            override fun onClick(v: View) {
-                if (logView!!.isShown == false) {
-                    logView!!.show()
-                    (v as Button).text="로그닫기"
-                } else {
-                    logView!!.hide()
-                    (v as Button).text="로그보기"
-                }
-            }
-        })
-    }*/
-
     /* Peer 채널 종료 버튼 */
     private fun initChannelCloseFunctionUIControls() {
         val btnCloseChannel = this.findViewById(R.id.btn_chClose) as ImageButton
+
         btnCloseChannel.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
                 if (playRTCHandler != null && playRTCHandler!!.isChannelConnected) {
@@ -478,6 +412,7 @@ class PlayRTCActivity : Activity() {
         /* Local Video Mute 버튼 */
         var setMute_LV = false
         val btnMuteLVideo = this.findViewById(R.id.btn_local_vmute) as ImageButton
+
         /* Local Video Mute 처리시 로컬 영상 스트림은 화면에 출력이 안되며 상대방에게 전달이 되지 않는다. */
         btnMuteLVideo.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
@@ -500,6 +435,7 @@ class PlayRTCActivity : Activity() {
         /* Local Audio Mute 버튼 */
         var setMute_LA = false
         val btnMuteLAudio = this.findViewById(R.id.btn_local_amute) as ImageButton
+
         /* Local Audio Mute 처리시 로컬 음성 스트림은 상대방에게 전달이 되지 않는다. */
         btnMuteLAudio.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
@@ -522,6 +458,7 @@ class PlayRTCActivity : Activity() {
         /* Remote Video Mute 버튼 */
         var setMute_RV = false
         val btnMuteRVideo = this.findViewById(R.id.btn_remote_vmute) as ImageButton
+
         /* Remote Video Mute 처리시 상대방의 영상 스트림은 수신되나 화면에는 출력이 되지 않는다. */
         btnMuteRVideo.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
@@ -544,6 +481,7 @@ class PlayRTCActivity : Activity() {
         /* Remote Audio Mute 버튼 */
         var setMute_RA = false
         val btnMuteRAudio = this.findViewById(R.id.btn_remote_amute) as ImageButton
+
         /* Remote Video Mute 처리시 상대방 영상 스트림은 수신되나 소리는 출력되지 않는다. */
         btnMuteRAudio.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
@@ -567,6 +505,7 @@ class PlayRTCActivity : Activity() {
     //메뉴 버튼
     private fun initMenuControls() {
         val btnMenu = this.findViewById(R.id.btn_menu) as ImageButton
+
         btnMenu.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
                 val layer = findViewById(R.id.btn_menu_layer) as RelativeLayout
@@ -579,24 +518,12 @@ class PlayRTCActivity : Activity() {
             }
         })
 
-        /*val log=findViewById(R.id.btn_log) as Button
-        log.setOnClickListener(object : View.OnClickListener {  //Button->view
-                override fun onClick(v: View) {
-                    if (logView!!.isShown == false) {
-                        logView!!.show()
-                        (v as Button).text="로그닫기"
-                    } else {
-                        logView!!.hide()
-                        (v as Button).text="로그보기"
-                    }
-                }
-
-        })*/
-
         val btnSticker = this.findViewById(R.id.btn_sticker) as ImageButton
+
         btnSticker.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
                 val layer = findViewById(R.id.btn_sticker_layer) as RelativeLayout
+
                 if (layer.isShown) {
                     layer.visibility = View.GONE
                 } else {
@@ -607,6 +534,7 @@ class PlayRTCActivity : Activity() {
         })
 
         val channelPopup = this.findViewById(R.id.btn_channel) as ImageButton
+
         channelPopup.setOnClickListener {
             if (channelInfoPopup!!.isShown) {
                 channelInfoPopup!!.hide(0)
@@ -617,7 +545,6 @@ class PlayRTCActivity : Activity() {
         }
 
         val flashBtn = this.findViewById(R.id.btn_switch_flash) as ImageButton
-        /* 후방 카메라 플래쉬 On/Off, 후방 카메라 사용 시 작동  */
 
         flashBtn.setOnClickListener(object : View.OnClickListener {   //Button->viewv
             override fun onClick(v: View) {
@@ -637,6 +564,7 @@ class PlayRTCActivity : Activity() {
                     return
                 }
                 val layer = findViewById(R.id.btn_white_balance_layer) as RelativeLayout
+
                 if (layer.isShown) {
                     layer.visibility = View.GONE
                 } else {
@@ -820,6 +748,7 @@ class PlayRTCActivity : Activity() {
         btnMirror.setOnClickListener(object : View.OnClickListener {  //Button->view
             override fun onClick(v: View) {
                 val layer = findViewById(R.id.btn_mirror_layer) as RelativeLayout
+
                 if (layer.isShown) {
                     layer.visibility = View.GONE
                 } else {
@@ -828,11 +757,13 @@ class PlayRTCActivity : Activity() {
                 }
             }
         })
+
         (this.findViewById(R.id.btn_mirror_on) as Button).setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {   //Button->view
                 val layer = findViewById(R.id.btn_mirror_layer) as RelativeLayout
-                (findViewById(R.id.lb_btn_mirror) as TextView).text = "미러-On"
                 val view = videoLayer!!.localView
+
+                (findViewById(R.id.lb_btn_mirror) as TextView).text = "미러-On"
                 view.isMirror = true
                 layer.visibility = View.GONE
             }
@@ -841,8 +772,9 @@ class PlayRTCActivity : Activity() {
         (this.findViewById(R.id.btn_mirror_off) as Button).setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {   //Button->view
                 val layer = findViewById(R.id.btn_mirror_layer) as RelativeLayout
-                (findViewById(R.id.lb_btn_mirror) as TextView).text = "미러-Off"
                 val view = videoLayer!!.localView
+
+                (findViewById(R.id.lb_btn_mirror) as TextView).text = "미러-Off"
                 view.isMirror = false
                 layer.visibility = View.GONE
             }
@@ -956,7 +888,7 @@ class PlayRTCActivity : Activity() {
 
         btn_server.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                Toast.makeText(applicationContext,"기다려 주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "기다려 주세요.", Toast.LENGTH_SHORT).show()
                 server_stack = 1
                 //Android API14버전이상 부터 네트워크 작업은 무조건 별도의 Thread에서 실행 해야함.
                 Thread(object : Runnable {
@@ -1065,18 +997,18 @@ class PlayRTCActivity : Activity() {
                         }//run method...
                         ).start()//Thread 실행..
                     }
-                } else if(server_stack == 1) {
+                } else if (server_stack == 1) {
                     val msg = edit.getText().toString()
                     send(msg)
 
                     if (outputStream == null) return  //클라이언트와 연결되어 있지 않다면 전송불가..
                     //네트워크 작업이므로 Thread 생성
-                    Thread(object:Runnable {
+                    Thread(object : Runnable {
                         override fun run() {
                             try {
                                 outputStream!!.writeUTF(msg) //클라이언트로 메세지 보내기.UTF 방식으로(한글 전송가능...)
                                 outputStream!!.flush()   //다음 메세지 전송을 위해 연결통로의 버퍼를 지워주는 메소드..
-                            } catch (e:IOException) {
+                            } catch (e: IOException) {
                                 e.printStackTrace()
                             }
                         }
@@ -1094,7 +1026,7 @@ class PlayRTCActivity : Activity() {
 
         btn_good.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                if(server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
+                if (server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
                     msg = "(good)"
                     send(msg)
 
@@ -1115,7 +1047,7 @@ class PlayRTCActivity : Activity() {
 
         btn_ok.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                if(server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
+                if (server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
                     msg = "(ok)"
                     send(msg)
 
@@ -1136,7 +1068,7 @@ class PlayRTCActivity : Activity() {
 
         btn_flower.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                if(server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
+                if (server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
                     msg = "(flower)"
                     send(msg)
 
@@ -1157,7 +1089,7 @@ class PlayRTCActivity : Activity() {
 
         btn_heart.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                if(server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
+                if (server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
                     msg = "(heart)"
                     send(msg)
 
@@ -1178,7 +1110,7 @@ class PlayRTCActivity : Activity() {
 
         btn_cong.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                if(server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
+                if (server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
                     msg = "(cong)"
                     send(msg)
 
@@ -1199,7 +1131,7 @@ class PlayRTCActivity : Activity() {
 
         btn_merong.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                if(server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
+                if (server_stack == 1 || (client_stack == 1 && send_stack != 0)) {
                     msg = "(merong)"
                     send(msg)
 
@@ -1236,7 +1168,6 @@ class PlayRTCActivity : Activity() {
 
     private fun hideFuntionUILayer() {
         (findViewById(R.id.btn_mirror_layer) as RelativeLayout).visibility = View.GONE
-        // (findViewById(R.id.btn_camera_degree_layer) as RelativeLayout).visibility=View.GONE    ->영상회전
         (findViewById(R.id.btn_camera_zoom_layer) as RelativeLayout).visibility = View.GONE
         (findViewById(R.id.btn_white_balance_layer) as RelativeLayout).visibility = View.GONE
     }
@@ -1255,8 +1186,8 @@ class PlayRTCActivity : Activity() {
             snapshotLayer!!.createControls { local ->
                 if (local && videoLayer!!.localView != null) {
                     /*
-                         * Snapshot 이미지 요청
-                         */
+                     * Snapshot 이미지 요청
+                     */
                     videoLayer!!.localView.snapshot { image ->
                         val w = image.width
                         val h = image.height
@@ -1269,13 +1200,11 @@ class PlayRTCActivity : Activity() {
                         try {
                             val sdCard = Environment.getExternalStorageDirectory()   //저장소 디렉토리 받아오기
                             val dir = File(sdCard.absolutePath + "/test")     //위치+하위디렉토리에 빈파일 만들기
-
-                            dir.mkdirs()
-
                             val fileName = System.currentTimeMillis().toString() + ".png" //현재시간으로 사진 이름 저장
                             val outFile = File(dir, fileName)   //dir 위치에다가 fileName이라는 파일을 만든다
-
                             var out = FileOutputStream(outFile)
+
+                            dir.mkdirs()
                             image.compress(Bitmap.CompressFormat.PNG, 100, out)
                             out.close()
                             refreshGallery(outFile) //갤러리 갱신
@@ -1300,13 +1229,11 @@ class PlayRTCActivity : Activity() {
                         try {
                             val sdCard = Environment.getExternalStorageDirectory()
                             val dir = File(sdCard.absolutePath + "/test")
-
-                            dir.mkdirs()
-
                             val fileName = System.currentTimeMillis().toString() + ".png"
                             val outFile = File(dir, fileName)
-
                             var out = FileOutputStream(outFile)
+
+                            dir.mkdirs()
                             image.compress(Bitmap.CompressFormat.PNG, 100, out)
                             out.close()
                             refreshGallery(outFile)
@@ -1319,31 +1246,6 @@ class PlayRTCActivity : Activity() {
             }
         }
     }
-
-    /*private fun resetLogViewArea() {
-        if (isResetLogViewArea == true) {
-            return
-        }
-
-        val screenDimensions=Point()
-        val height=videoLayer!!.height
-
-        // ViewGroup의 사이즈 재조정, 높이 기준으로 4(폭):3(높이)으로 재 조정
-        // 4:3 = width:height ,  width = ( 4 * height) / 3
-        val width=4.0f * height / 3.0f
-
-        val logLayoutparam=RelativeLayout.LayoutParams(width.toInt(), height.toInt())
-        logLayoutparam.addRule(RelativeLayout.CENTER_VERTICAL)
-        logLayoutparam.addRule(RelativeLayout.CENTER_HORIZONTAL)
-        logView!!.layoutParams=logLayoutparam
-
-        val videoLayoutparam=RelativeLayout.LayoutParams(width.toInt(), height.toInt())
-        videoLayoutparam.addRule(RelativeLayout.CENTER_VERTICAL)
-        videoLayoutparam.addRule(RelativeLayout.CENTER_HORIZONTAL)
-        videoLayer!!.layoutParams=videoLayoutparam
-
-        isResetLogViewArea=true
-    }*/
 
     companion object {
         private val LOG_TAG = "PlayRTCActivity"

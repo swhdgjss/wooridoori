@@ -18,7 +18,7 @@ public class RemoteVideoView extends PlayRTCVideoView {
     }
 
     public RemoteVideoView(Context context, AttributeSet attrs) {
-        super(context, attrs );
+        super(context, attrs);
         // 레이어 중첩 시 로컬 영상 뷰 밑에 출력 되도록 렌더링 우선순위를 낮게 지정
         super.setZOrderMediaOverlay(false);
     }

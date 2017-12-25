@@ -22,10 +22,10 @@ import org.json.JSONObject
  */
 class PlayRTCChannelViewListener(activity: PlayRTCActivity) : PlayRTCChannelView.PlayRTCChannelViewListener {
 
-    private var activity: PlayRTCActivity?=null
+    private var activity: PlayRTCActivity? = null
 
     init {
-        this.activity=activity                         //yn var로 바꿈
+        this.activity = activity                         //yn var로 바꿈
     }
 
     /*
@@ -39,11 +39,11 @@ class PlayRTCChannelViewListener(activity: PlayRTCActivity) : PlayRTCChannelView
         Log.d(LOG_TAG, "onClickCreateChannel channelName[$channelName] userId[$userId] userName[$userName]")
 
         // 채널방 정보 생성
-        val parameters=JSONObject()
+        val parameters = JSONObject()
 
         if (TextUtils.isEmpty(channelName) == false) {
             // 채널정보를 정의한다.
-            val channel=JSONObject()
+            val channel = JSONObject()
             try {
                 // 채널에 대한 이름을 지정한다.
                 channel.put("channelName", channelName)
@@ -55,7 +55,7 @@ class PlayRTCChannelViewListener(activity: PlayRTCActivity) : PlayRTCChannelView
         }
         if (TextUtils.isEmpty(userId) == false || TextUtils.isEmpty(userName) == false) {
             // 채널 사용자에 대한 정보를 정의한다.
-            val peer=JSONObject()
+            val peer = JSONObject()
             try {
                 if (TextUtils.isEmpty(userId) == false) {
                     // application에서 사용하는 사용자 아이디를 지정
@@ -92,11 +92,11 @@ class PlayRTCChannelViewListener(activity: PlayRTCActivity) : PlayRTCChannelView
         Log.d("LOG_TAG", "onConnectChannel channelId[$channelId] userId[$userId] userName[$userName]")
 
         // 채널방 정보 생성
-        val parameters=JSONObject()
+        val parameters = JSONObject()
 
         if (TextUtils.isEmpty(userId) == false || TextUtils.isEmpty(userName) == false) {
 
-            val peer=JSONObject()
+            val peer = JSONObject()
             try {
                 if (TextUtils.isEmpty(userId) == false) {
                     peer.put("uid", userId)
@@ -122,6 +122,6 @@ class PlayRTCChannelViewListener(activity: PlayRTCActivity) : PlayRTCChannelView
 
     companion object {
 
-        private val LOG_TAG="CHANNEL"
+        private val LOG_TAG = "CHANNEL"
     }
 }

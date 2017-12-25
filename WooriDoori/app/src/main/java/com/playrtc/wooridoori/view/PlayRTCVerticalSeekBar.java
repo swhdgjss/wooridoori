@@ -5,39 +5,34 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.SeekBar;
+
 /**
  * Created by ds3grk on 2017. 1. 4..
  */
 public class PlayRTCVerticalSeekBar extends SeekBar {
-    public PlayRTCVerticalSeekBar(Context c)
-    {
+    public PlayRTCVerticalSeekBar(Context c) {
         super(c);
     }
 
-    public PlayRTCVerticalSeekBar(Context c, AttributeSet attrs)
-    {
+    public PlayRTCVerticalSeekBar(Context c, AttributeSet attrs) {
         super(c, attrs);
     }
 
 
-    public PlayRTCVerticalSeekBar(Context c, AttributeSet attrs, int defStyle)
-    {
+    public PlayRTCVerticalSeekBar(Context c, AttributeSet attrs, int defStyle) {
         super(c, attrs, defStyle);
     }
 
-    protected void onSizeChanged(int w, int h, int oldw, int oldh)
-    {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(h, w, oldh, oldw);
     }
 
-    protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-    {
+    protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(heightMeasureSpec, widthMeasureSpec);
         setMeasuredDimension(getMeasuredHeight(), getMeasuredWidth());
     }
 
-    protected void onDraw(Canvas c)
-    {
+    protected void onDraw(Canvas c) {
         c.rotate(-90);
         c.translate(-getHeight(), 0);
 
@@ -46,23 +41,19 @@ public class PlayRTCVerticalSeekBar extends SeekBar {
 
     private OnSeekBarChangeListener mChangeListener;
 
-    public void setOnSeekBarChangeListener(OnSeekBarChangeListener onChangeListener)
-    {
+    public void setOnSeekBarChangeListener(OnSeekBarChangeListener onChangeListener) {
         this.mChangeListener = onChangeListener;
     }
 
     private int mLastProgress = 0;
 
-    public boolean onTouchEvent(MotionEvent event)
-    {
-        if(!isEnabled())
-        {
+    public boolean onTouchEvent(MotionEvent event) {
+        if (!isEnabled()) {
             return false;
         }
-        switch(event.getAction())
-        {
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if(mChangeListener != null)
+                if (mChangeListener != null)
                     mChangeListener.onStartTrackingTouch(this);
 
                 setPressed(true);
@@ -72,19 +63,16 @@ public class PlayRTCVerticalSeekBar extends SeekBar {
             case MotionEvent.ACTION_MOVE:
                 super.onTouchEvent(event);
                 int nProgress = getMax() - (int) (getMax() * event.getY() / getHeight());
-                if(nProgress < 0)
-                {
+                if (nProgress < 0) {
                     nProgress = 0;
                 }
-                if(nProgress > getMax())
-                {
+                if (nProgress > getMax()) {
                     nProgress = getMax();
                 }
                 setProgress(nProgress); // Draw progress
-                if(nProgress != mLastProgress)
-                {
+                if (nProgress != mLastProgress) {
                     mLastProgress = nProgress;
-                    if(mChangeListener != null)
+                    if (mChangeListener != null)
                         mChangeListener.onProgressChanged(this, nProgress, true);
                 }
                 onSizeChanged(getWidth(), getHeight(), 0, 0);
@@ -93,7 +81,7 @@ public class PlayRTCVerticalSeekBar extends SeekBar {
 
                 break;
             case MotionEvent.ACTION_UP:
-                if(mChangeListener != null)
+                if (mChangeListener != null)
                     mChangeListener.onStopTrackingTouch(this);
                 setPressed(false);
                 setSelected(false);
@@ -108,25 +96,21 @@ public class PlayRTCVerticalSeekBar extends SeekBar {
 
     }
 
-    public synchronized void setProgressAndThumb(int progress)
-    {
+    public synchronized void setProgressAndThumb(int progress) {
         setProgress(progress);
         onSizeChanged(getWidth(), getHeight(), 0, 0);
-        if(progress != mLastProgress)
-        {
+        if (progress != mLastProgress) {
             mLastProgress = progress;
-            if(mChangeListener != null)
+            if (mChangeListener != null)
                 mChangeListener.onProgressChanged(this, progress, true);
         }
     }
 
-    public synchronized void setMaximum(int maximum)
-    {
+    public synchronized void setMaximum(int maximum) {
         setMax(maximum);
     }
 
-    public synchronized int getMaximum()
-    {
+    public synchronized int getMaximum() {
         return getMax();
     }
 }

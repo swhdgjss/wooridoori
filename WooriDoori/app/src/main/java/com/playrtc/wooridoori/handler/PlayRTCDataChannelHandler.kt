@@ -46,18 +46,19 @@ import java.util.Date
      */
 class PlayRTCDataChannelHandler(activity: PlayRTCActivity) : PlayRTCDataObserver {
 
-    private var activity: PlayRTCActivity?=null
+    private var activity: PlayRTCActivity? = null
     /*
      * P2P 데이터 통신을 위한 PlayRTCData객체
      */
-    private var dataChannel: PlayRTCData?=null
+    private var dataChannel: PlayRTCData? = null
     /*
      * 파일 전송 완료 이벤트에서 InputStream Close하기 위해 전역 변수 처리
      */
-    private var dataIs: InputStream?=null
-    private var elaspedStart=0L
+    private var dataIs: InputStream? = null
+    private var elaspedStart = 0L
+
     init {
-        this.activity=activity
+        this.activity = activity
     }
 
     /*
@@ -66,13 +67,13 @@ class PlayRTCDataChannelHandler(activity: PlayRTCActivity) : PlayRTCDataObserver
      * @param dc PlayRTCData, PlayRTCData 인스턴스
      */
     fun setDataChannel(dc: PlayRTCData) {
-        this.dataChannel=dc
+        this.dataChannel = dc
         this.dataChannel!!.setEventObserver(this as PlayRTCDataObserver)
         /*
          * - PlayRTCFileReveType.File : 파일 수신 데이터를 파일로 저장히며 수신 완료 시 저장 파일 정보를 전달한다.
          * - PlayRTCFileReveType.Byte : 파일 수신 데이터를 메모리에 쌓았다가 수신 완료시 한번에 전달. 큰파일의경우 Out of Memory 문제 발생할 수 있음.
          */
-        this.dataChannel!!.fileReveMode=PlayRTCFileReveType.File
+        this.dataChannel!!.fileReveMode = PlayRTCFileReveType.File
     }
 
     /*
@@ -81,7 +82,7 @@ class PlayRTCDataChannelHandler(activity: PlayRTCActivity) : PlayRTCDataObserver
      */
     fun sendText() {
         if (dataChannel != null && dataChannel!!.status == PlayRTCDataStatus.Open) {
-            val sendData="DataChannel Hello 안녕하세요 こんにちは 你好..."
+            val sendData = "DataChannel Hello 안녕하세요 こんにちは 你好..."
             dataChannel!!.sendText(sendData, object : PlayRTCSendDataObserver {
 
                 /*
@@ -99,8 +100,8 @@ class PlayRTCDataChannelHandler(activity: PlayRTCActivity) : PlayRTCDataObserver
                  */
                 @SuppressLint("DefaultLocale")
                 override fun onSending(obj: PlayRTCData, peerId: String, peerUid: String, id: Long, size: Long, send: Long, index: Long, count: Long) {
-                    val per=send.toFloat() / size.toFloat() * 100.0f
-                    val sMsg=java.lang.String.format("Data onSending [%d/%d] [%d/%d]  %.2f%%", index + 1, count, send, size, per)
+                    val per = send.toFloat() / size.toFloat() * 100.0f
+                    val sMsg = java.lang.String.format("Data onSending [%d/%d] [%d/%d]  %.2f%%", index + 1, count, send, size, per)
                     Log.d(LOG_TAG, sMsg)
                     activity!!.progressLogMessage(sMsg)
                 }
@@ -176,19 +177,19 @@ class PlayRTCDataChannelHandler(activity: PlayRTCActivity) : PlayRTCDataObserver
      *  - fileName : String, 파일 전송일 경우 파일 명
      *  - mimeType : String, 파일 전송일 경우 파일의 Mime Type
      */
-    private var recvStartTime=0L
-    private var recvDataSize=0L
+    private var recvStartTime = 0L
+    private var recvDataSize = 0L
 
     @SuppressLint("DefaultLocale")
     override fun onProgress(obj: PlayRTCData, peerId: String, peerUid: String, recvIndex: Int, recvSize: Long, header: PlayRTCDataHeader) {
 
         if (recvDataSize == 0L) {
-            recvStartTime=Date().time
+            recvStartTime = Date().time
         }
-        recvDataSize+=recvSize
-        val total=header.size
-        val per=recvSize.toFloat() / total.toFloat() * 100.0f
-        val sMsg=java.lang.String.format("Data onProgress [%d/%d]  %.2f%%", recvSize, total, per)  //java.lang. yn
+        recvDataSize += recvSize
+        val total = header.size
+        val per = recvSize.toFloat() / total.toFloat() * 100.0f
+        val sMsg = java.lang.String.format("Data onProgress [%d/%d]  %.2f%%", recvSize, total, per)  //java.lang. yn
         Log.d(LOG_TAG, sMsg)
         activity!!.progressLogMessage(sMsg)
     }
@@ -215,23 +216,23 @@ class PlayRTCDataChannelHandler(activity: PlayRTCActivity) : PlayRTCDataObserver
      */
     override fun onMessage(obj: PlayRTCData, peerId: String, peerUid: String, header: PlayRTCDataHeader, data: ByteArray) {
         Log.d(LOG_TAG, "PlayRTCDataEvent onMessage peerId[$peerId] peerUid[$peerUid]")
-        val recvDataElapsed=Date().time - recvStartTime
-        recvStartTime=0
-        recvDataSize=0L
+        val recvDataElapsed = Date().time - recvStartTime
+        recvStartTime = 0
+        recvDataSize = 0L
         Utils.showToast(activity!!, "Data Recv Elapsed-Time=" + recvDataElapsed)   //!!붙이기
         if (header.type == PlayRTCDataHeader.DATA_TYPE_TEXT) {
-            val recvText=String(data)
+            val recvText = String(data)
             Log.d(LOG_TAG, "Text[$recvText]")
             activity!!.appnedLogMessage(">>Data-Channel onMessage[$recvText]")
         } else {
-            val filaNmae=header.fileName
+            val filaNmae = header.fileName
             if (TextUtils.isEmpty(filaNmae)) {
                 Log.d(LOG_TAG, "Binary[" + header.size + "]")
                 activity!!.appnedLogMessage(">>Data-Channel onMessage Binary[" + header.size + "]")
             } else {
                 Log.d(LOG_TAG, "File[$filaNmae]")
                 if (obj.fileReveMode == PlayRTCFileReveType.Byte) {
-                    val f=File(Environment.getExternalStorageDirectory().absolutePath +
+                    val f = File(Environment.getExternalStorageDirectory().absolutePath +
                             "/Android/data/" + activity!!.packageName + "/files/" + filaNmae)
                     Log.d(LOG_TAG, "FilePath[" + f.absolutePath + "]")
                     activity!!.appnedLogMessage(">>Data-Channel onMessage File[" + f.absolutePath + "]") //yn 느낌표 붙임
@@ -239,7 +240,7 @@ class PlayRTCDataChannelHandler(activity: PlayRTCActivity) : PlayRTCDataObserver
                         if (!f.exists()) {
                             f.createNewFile()
                         }
-                        val dataWs=FileOutputStream(f.absolutePath, false)
+                        val dataWs = FileOutputStream(f.absolutePath, false)
                         dataWs.write(data)
                         dataWs.close()
                     } catch (e: IOException) {
@@ -247,7 +248,7 @@ class PlayRTCDataChannelHandler(activity: PlayRTCActivity) : PlayRTCDataObserver
                     }
 
                 } else {
-                    val recvFile=String(data)
+                    val recvFile = String(data)
                     Log.d(LOG_TAG, "FilePath[$recvFile]")
                     activity!!.appnedLogMessage(">>Data-Channel onMessage File[$recvFile]")
                 }
@@ -303,11 +304,11 @@ class PlayRTCDataChannelHandler(activity: PlayRTCActivity) : PlayRTCDataObserver
             }
 
         }
-        dataIs=null
+        dataIs = null
     }
 
     companion object {
-        private val LOG_TAG="DATA-HANDLER"
+        private val LOG_TAG = "DATA-HANDLER"
     }
 
 }

@@ -9,7 +9,7 @@ import android.widget.Toast
  * @author ds3grk
  */
 object Utils {
-    private var logToast: Toast?=null
+    private var logToast: Toast? = null
 
 
     /**
@@ -21,9 +21,9 @@ object Utils {
         activity.runOnUiThread {
             if (logToast != null) {
                 logToast!!.cancel()
-                logToast=null
+                logToast = null
             }
-            logToast=Toast.makeText(activity.applicationContext, msg, Toast.LENGTH_SHORT)
+            logToast = Toast.makeText(activity.applicationContext, msg, Toast.LENGTH_SHORT)
             logToast!!.show()
         }
     }
@@ -35,12 +35,12 @@ object Utils {
      */
     val randomServiceMailId: String
         get() {
-            var userId=""
-            val possible="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            var userId = ""
+            val possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
             for (i in 0..4) {
-                val randomVal=Math.random()
-                val idx=Math.floor(randomVal * possible.length).toInt()
-                userId+=possible[idx]
+                val randomVal = Math.random()
+                val idx = Math.floor(randomVal * possible.length).toInt()
+                userId += possible[idx]
             }
 
             return userId + "@playrtc.com"
