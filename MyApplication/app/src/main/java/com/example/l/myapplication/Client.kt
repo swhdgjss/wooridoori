@@ -85,7 +85,6 @@ class Client : Activity() {
                             // TODO Auto-generated catch block
                             e.printStackTrace()
                         }
-
                     }//while
                 }//run method...
                 ).start()//Thread 실행..

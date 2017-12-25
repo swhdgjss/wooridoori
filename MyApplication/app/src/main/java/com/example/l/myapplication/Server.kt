@@ -105,7 +105,7 @@ class Server:Activity() {
                 if (outputStream == null) return  //클라이언트와 연결되어 있지 않다면 전송불가..
                 //네트워크 작업이므로 Thread 생성
                 Thread(object:Runnable {
-                    public override fun run() {
+                    override fun run() {
                         // TODO Auto-generated method stub
                         //클라이언트로 보낼 메세지 EditText로 부터 얻어오기
 
