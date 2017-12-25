@@ -90,10 +90,10 @@
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="#96413126"
-					android:text="Local Mute"
+					android:background="@color/back"
 					android:gravity="center"
-					android:textColor="#AC9588"
+					android:text="Local Mute"
+					android:textColor="@color/text"
 					android:textSize="16sp"></TextView>
 
 				<ImageButton
@@ -107,7 +107,7 @@
 					android:id="@+id/btn_local_amute"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="10dp"
+					android:layout_marginTop="0dp"
 					android:background="@drawable/list_btn"
 					android:src="@drawable/audio_off" />" />
 
@@ -133,10 +133,9 @@
 					android:id="@+id/btn_remote_amute"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="10dp"
+					android:layout_marginTop="0dp"
 					android:background="@drawable/list_btn"
-					android:src="@drawable/audio_off"
-					 />
+					android:src="@drawable/audio_off" />
 
 			</LinearLayout>
 
@@ -554,7 +553,7 @@
 			android:layout_width="220dp"
 			android:layout_height="150dp"
 			android:layout_above="@+id/editText"
-			android:layout_marginTop="10dp"
+			android:layout_marginTop="0dp"
 			android:background="#78ac9588"
 			android:scrollbars="vertical"
 			android:textColor="@android:color/black"
@@ -611,9 +610,7 @@
 			android:id="@+id/btn_sticker"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_alignBottom="@+id/btn_sticker_layer"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentStart="true"
+			android:layout_above="@+id/textView"
 			android:background="@drawable/list_row_bg"
 			android:src="@drawable/sticker" />
 
@@ -621,8 +618,7 @@
 			android:id="@+id/btn_sticker_layer"
 			android:layout_width="wrap_content"
 			android:layout_height="100dp"
-			android:layout_above="@+id/editText"
-			android:layout_marginBottom="148dp"
+			android:layout_above="@+id/textView"
 			android:layout_toEndOf="@+id/btn_sticker"
 			android:layout_toRightOf="@+id/btn_sticker"
 			android:visibility="invisible">

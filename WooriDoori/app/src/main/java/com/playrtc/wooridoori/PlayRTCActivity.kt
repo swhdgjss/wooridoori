@@ -1,19 +1,23 @@
 package com.playrtc.wooridoori
 
+
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.res.Configuration
-import android.graphics.Point
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.method.ScrollingMovementMethod
+import android.text.style.ImageSpan
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import android.widget.SeekBar.OnSeekBarChangeListener
-
-
 import com.playrtc.wooridoori.handler.PlayRTCChannelViewListener
 import com.playrtc.wooridoori.handler.PlayRTCDataChannelHandler
 import com.playrtc.wooridoori.handler.PlayRTCHandler
@@ -22,27 +26,11 @@ import com.playrtc.wooridoori.view.*
 import com.sktelecom.playrtc.PlayRTC.PlayRTCWhiteBalance
 import com.sktelecom.playrtc.exception.RequiredParameterMissingException
 import com.sktelecom.playrtc.exception.UnsupportedPlatformVersionException
-import com.sktelecom.playrtc.util.PlayRTCRange
 import com.sktelecom.playrtc.util.ui.PlayRTCVideoView
-import android.widget.Toast
-import android.graphics.Bitmap.CompressFormat
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.os.Environment
-import android.provider.Telephony.Carriers.PORT
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ImageSpan
-import kotlinx.android.synthetic.main.activity_rtc.*
 import java.io.*
 import java.net.InetAddress
 import java.net.ServerSocket
 import java.net.Socket
-import java.text.SimpleDateFormat
-import java.util.*
 
 /*
  * PlayRTC를 구현한 Activity Class

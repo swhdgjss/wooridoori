@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -96,10 +97,14 @@ public class PlayRTCSnapshotView extends RelativeLayout {
         Button btnLocal = new Button(this.getContext());
         btnLocal.setText("Local");
         btnLocal.setId(1);
+        btnLocal.setBackgroundColor(Color.argb(150,65,49,38));
+        btnLocal.setTextColor(Color.argb(255,172,149,136));
+        btnLocal.setWidth(150);
+        btnLocal.setHeight(100);
         RelativeLayout.LayoutParams local_params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         local_params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         local_params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        local_params.setMargins(20, 20, 10, 20);
+        local_params.setMargins(160, 20, 10, 20);
         btnLocal.setLayoutParams(local_params);
         this.addView(btnLocal);
         btnLocal.setOnClickListener(new OnClickListener() {
@@ -118,6 +123,10 @@ public class PlayRTCSnapshotView extends RelativeLayout {
         Button btnRemote = new Button(this.getContext());
         btnRemote.setText("Remote");
         btnRemote.setId(2);
+        btnRemote.setBackgroundColor(Color.argb(150,65,49,38));
+        btnRemote.setTextColor(Color.argb(255,172,149,136));
+        btnRemote.setWidth(150);
+        btnRemote.setHeight(100);
         RelativeLayout.LayoutParams remote_params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         remote_params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         remote_params.addRule(RelativeLayout.RIGHT_OF, 1);
@@ -140,6 +149,10 @@ public class PlayRTCSnapshotView extends RelativeLayout {
         Button btnClear = new Button(this.getContext());
         btnClear.setText("Clear");
         btnClear.setId(3);
+        btnClear.setBackgroundColor(Color.argb(150,65,49,38));
+        btnClear.setTextColor(Color.argb(255,172,149,136));
+        btnClear.setWidth(150);
+        btnClear.setHeight(100);
         RelativeLayout.LayoutParams clear_params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         clear_params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         clear_params.addRule(RelativeLayout.RIGHT_OF, 2);
@@ -160,8 +173,11 @@ public class PlayRTCSnapshotView extends RelativeLayout {
         Button btnClose = new Button(this.getContext());
         btnClose.setText("Close");
         btnClose.bringToFront();
+        btnClose.setBackgroundColor(Color.argb(150,65,49,38));
+        btnClose.setTextColor(Color.argb(255,172,149,136));
+        btnClose.setWidth(150);
+        btnClose.setHeight(100);
         RelativeLayout.LayoutParams close_params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
         close_params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         close_params.addRule(RelativeLayout.RIGHT_OF, 3);
         close_params.setMargins(10, 20, 10, 20);
