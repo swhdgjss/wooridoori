@@ -787,26 +787,17 @@ class PlayRTCActivity : Activity() {
         val btn_server = findViewById(R.id.btn_server) as Button
         val btn_client = findViewById(R.id.btn_client) as Button
         val btn_send = findViewById(R.id.btn_send) as Button
-        val btn_sticker = findViewById(R.id.btn_sticker) as ImageButton
 
         text.movementMethod = ScrollingMovementMethod()
         chat.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
-                if (edit.isShown) {
-                    edit.setVisibility(View.GONE)
-                    text.setVisibility(View.GONE)
-                    btn_server.setVisibility(View.GONE)
-                    btn_client.setVisibility(View.GONE)
-                    btn_send.setVisibility(View.GONE)
-                    btn_sticker.setVisibility(View.GONE)
+                val layer = findViewById(R.id.chat_layer) as RelativeLayout
+
+                if (layer.isShown) {
+                    layer.visibility = View.GONE
                     Toast.makeText(this@PlayRTCActivity, "채팅 비활성화", Toast.LENGTH_SHORT).show()
                 } else {
-                    edit.setVisibility(View.VISIBLE)
-                    text.setVisibility(View.VISIBLE)
-                    btn_server.setVisibility(View.VISIBLE)
-                    btn_client.setVisibility(View.VISIBLE)
-                    btn_send.setVisibility(View.VISIBLE)
-                    btn_sticker.setVisibility(View.VISIBLE)
+                    layer.visibility = View.VISIBLE
                     Toast.makeText(this@PlayRTCActivity, "채팅 활성화", Toast.LENGTH_SHORT).show()
                 }
             }

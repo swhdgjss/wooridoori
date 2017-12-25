@@ -83,17 +83,17 @@
 			<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_alignParentEnd="true"
 				android:layout_alignParentRight="true"
-				android:layout_below="@+id/txt_stat_report"
+				android:layout_marginTop="60dp"
 				android:orientation="vertical">
 
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="#e0e0e0"
+					android:background="#96413126"
 					android:text="Local Mute"
-					android:textColor="#000000"
+					android:gravity="center"
+					android:textColor="#AC9588"
 					android:textSize="16sp"></TextView>
 
 				<ImageButton
@@ -115,9 +115,10 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10dp"
-					android:background="#e0e0e0"
+					android:background="#96413126"
 					android:text="Remote Mute"
-					android:textColor="#000000"
+					android:gravity="center"
+					android:textColor="#AC9588"
 					android:textSize="16sp"></TextView>
 
 				<ImageButton
@@ -126,8 +127,7 @@
 					android:layout_height="wrap_content"
 					android:background="@drawable/list_btn"
 					android:src="@drawable/video_off"
-					android:textColor="#AC9588"
-					android:textSize="12sp" />
+					 />
 
 				<ImageButton
 					android:id="@+id/btn_remote_amute"
@@ -136,8 +136,7 @@
 					android:layout_marginTop="10dp"
 					android:background="@drawable/list_btn"
 					android:src="@drawable/audio_off"
-					android:textColor="#AC9588"
-					android:textSize="12sp" />
+					 />
 
 			</LinearLayout>
 
@@ -204,12 +203,14 @@
 			android:id="@+id/lb_switch_flash"
 			android:layout_width="54dp"
 			android:layout_height="wrap_content"
-			android:layout_above="@+id/btn_camera_zoom"
-			android:layout_alignLeft="@+id/btn_chat"
-			android:layout_alignStart="@+id/btn_chat"
+			android:layout_alignBaseline="@+id/lb_camera_zoom"
+			android:layout_alignBottom="@+id/lb_camera_zoom"
+			android:layout_toLeftOf="@+id/lb_camera_zoom"
+			android:layout_toStartOf="@+id/lb_camera_zoom"
+			android:background="#96413126"
 			android:gravity="center"
 			android:text="플래쉬"
-			android:textColor="#ff0000"
+			android:textColor="#AC9588"
 			android:textSize="12sp"></TextView>
 
 		<ImageButton
@@ -218,22 +219,12 @@
 			android:layout_height="wrap_content"
 			android:layout_alignLeft="@+id/lb_btn_mirror"
 			android:layout_alignStart="@+id/lb_btn_mirror"
-			android:layout_below="@+id/btn_camera_zoom_layer"
 			android:layout_marginTop="17dp"
 			android:background="@drawable/list_btn"
 			android:src="@drawable/flash" />
 
 
-		<EditText
-			android:id="@+id/editText"
-			android:layout_width="220dp"
-			android:layout_height="wrap_content"
-			android:layout_alignParentBottom="true"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentStart="true"
-			android:ems="10"
-			android:inputType="textPersonName"
-			android:visibility="invisible" />
+
 
 		<TextView
 			android:id="@+id/lb_channel"
@@ -242,9 +233,10 @@
 			android:layout_above="@+id/btn_chat"
 			android:layout_alignLeft="@+id/btn_camera_zoom"
 			android:layout_alignStart="@+id/btn_camera_zoom"
+			android:background="#96413126"
 			android:gravity="center"
 			android:text="채널팝업"
-			android:textColor="#ff0000"
+			android:textColor="#AC9588"
 			android:textSize="12sp"></TextView>
 
 		<ImageButton
@@ -268,9 +260,10 @@
 			android:layout_alignBottom="@+id/lb_btn_mirror"
 			android:layout_toEndOf="@+id/lb_btn_mirror"
 			android:layout_toRightOf="@+id/lb_btn_mirror"
+			android:background="#96413126"
 			android:gravity="center"
-			android:text="자동"
-			android:textColor="#ff0000"
+			android:text="필터"
+			android:textColor="#AC9588"
 			android:textSize="12sp" />
 
 		<ImageButton
@@ -297,7 +290,9 @@
 				android:layout_width="100dp"
 				android:layout_height="34dp"
 				android:layout_alignParentLeft="true"
+				android:background="#c8413126"
 				android:text="자동"
+				android:textColor="#AC9588"
 				android:textSize="12sp" />
 
 			<Button
@@ -306,7 +301,9 @@
 				android:layout_height="34dp"
 				android:layout_alignParentLeft="true"
 				android:layout_below="@id/btn_white_balance_auto"
+				android:background="#c8413126"
 				android:text="백열등"
+				android:textColor="#AC9588"
 				android:textSize="12sp" />
 
 			<Button
@@ -315,7 +312,9 @@
 				android:layout_height="34dp"
 				android:layout_below="@id/btn_white_balance_auto"
 				android:layout_toRightOf="@id/btn_white_balance_incandescent"
+				android:background="#c8413126"
 				android:text="형광등"
+				android:textColor="#AC9588"
 				android:textSize="12sp" />
 
 
@@ -325,7 +324,9 @@
 				android:layout_height="34dp"
 				android:layout_alignParentLeft="true"
 				android:layout_below="@id/btn_white_balance_incandescent"
+				android:background="#c8413126"
 				android:text="햇빛"
+				android:textColor="#AC9588"
 				android:textSize="12sp" />
 
 			<Button
@@ -334,7 +335,9 @@
 				android:layout_height="34dp"
 				android:layout_below="@id/btn_white_balance_incandescent"
 				android:layout_toRightOf="@id/btn_white_balance_daylight"
+				android:background="#c8413126"
 				android:text="흐림"
+				android:textColor="#AC9588"
 				android:textSize="12sp" />
 
 			<Button
@@ -343,7 +346,9 @@
 				android:layout_height="34dp"
 				android:layout_alignParentLeft="true"
 				android:layout_below="@id/btn_white_balance_daylight"
+				android:background="#c8413126"
 				android:text="저녁빛"
+				android:textColor="#AC9588"
 				android:textSize="12sp" />
 
 			<Button
@@ -352,7 +357,9 @@
 				android:layout_height="34dp"
 				android:layout_below="@id/btn_white_balance_daylight"
 				android:layout_toRightOf="@id/btn_white_balance_twilight"
+				android:background="#c8413126"
 				android:text="그늘"
+				android:textColor="#AC9588"
 				android:textSize="12sp" />
 
 		</RelativeLayout>
@@ -364,13 +371,16 @@
 			android:id="@+id/lb_camera_zoom"
 			android:layout_width="54dp"
 			android:layout_height="wrap_content"
-			android:layout_below="@+id/btn_white_balance_layer"
-			android:layout_toEndOf="@+id/lb_btn_mirror"
-			android:layout_toRightOf="@+id/lb_btn_mirror"
+			android:layout_above="@+id/btn_camera_zoom"
+			android:layout_alignLeft="@+id/btn_camera_zoom"
+			android:layout_alignStart="@+id/btn_camera_zoom"
+			android:background="#96413126"
 			android:gravity="center"
-			android:text="Zoom :0"
-			android:textColor="#ff0000"
+			android:text="Zoom"
+			android:textColor="#AC9588"
 			android:textSize="12sp"></TextView>
+
+
 
 		<ImageButton
 			android:id="@+id/btn_camera_zoom"
@@ -386,8 +396,9 @@
 			android:id="@+id/btn_camera_zoom_layer"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_centerVertical="true"
-			android:layout_toRightOf="@id/btn_camera_zoom"
+			android:layout_alignTop="@+id/lb_camera_zoom"
+			android:layout_toEndOf="@+id/lb_channel"
+			android:layout_toRightOf="@+id/lb_channel"
 			android:orientation="vertical"
 			android:visibility="gone">
 
@@ -398,7 +409,7 @@
 				android:layout_alignParentTop="true"
 				android:layout_centerHorizontal="true"
 				android:text="0"
-				android:textColor="#ff0000"
+				android:textColor="#AC9588"
 				android:textSize="12sp" />
 
 			<com.playrtc.wooridoori.view.PlayRTCVerticalSeekBar
@@ -406,7 +417,8 @@
 				style="@style/VerticalSeekBar"
 				android:layout_width="wrap_content"
 				android:layout_height="240dp"
-				android:layout_below="@id/lb_camera_zoom_max"
+				android:layout_alignParentTop="true"
+				android:layout_centerHorizontal="true"
 				android:max="0"
 				android:progress="0"
 				android:thumb="@drawable/seekbar_thumb"
@@ -419,7 +431,7 @@
 				android:layout_below="@id/seekbar_camera_zoom"
 				android:layout_centerHorizontal="true"
 				android:text="0"
-				android:textColor="#ff0000"
+				android:textColor="#AC9588"
 				android:textSize="12sp" />
 		</RelativeLayout>
 		<!-- zoom -->
@@ -432,9 +444,10 @@
 			android:layout_alignLeft="@+id/btn_mirror"
 			android:layout_alignStart="@+id/btn_mirror"
 			android:layout_below="@+id/btn_camera_zoom"
+			android:background="#96413126"
 			android:gravity="center"
 			android:text="미러-Off"
-			android:textColor="#ff0000"
+			android:textColor="#AC9588"
 			android:textSize="12sp"></TextView>
 
 		<ImageButton
@@ -461,7 +474,9 @@
 				android:layout_width="80dp"
 				android:layout_height="35dp"
 				android:layout_alignParentTop="true"
+				android:background="#c8413126"
 				android:text="미러-On"
+				android:textColor="#AC9588"
 				android:textSize="11sp" />
 
 			<Button
@@ -470,7 +485,9 @@
 				android:layout_height="35dp"
 				android:layout_below="@id/btn_mirror_on"
 				android:layout_marginTop="2dp"
+				android:background="#c8413126"
 				android:text="미러-Off"
+				android:textColor="#AC9588"
 				android:textSize="11sp" />
 		</RelativeLayout>
 		<!-- 영상 미러모드 -->
@@ -484,10 +501,12 @@
 			android:layout_above="@+id/btn_chat"
 			android:layout_alignLeft="@+id/btn_chat"
 			android:layout_alignStart="@+id/btn_chat"
+			android:background="#96413126"
 			android:gravity="center"
 			android:text="채팅하기"
-			android:textColor="#ff0000"
+			android:textColor="#AC9588"
 			android:textSize="12sp"></TextView>
+
 
 		<ImageButton
 			android:id="@+id/btn_chat"
@@ -499,69 +518,113 @@
 			android:background="@drawable/list_row_bg"
 			android:src="@drawable/chatting" />
 
+
+		<!-- 채팅 -->
+
+	</RelativeLayout>
+
+	<ImageButton
+		android:id="@+id/btn_show_snapshot"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/btn_menu"
+		android:background="@drawable/list_btn"
+		android:src="@drawable/capture" />
+
+	<ImageButton
+		android:id="@+id/btn_chClose"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentRight="true"
+		android:background="@drawable/list_btn"
+		android:src="@drawable/end" />
+
+	<RelativeLayout
+		android:id="@+id/chat_layer"
+		android:layout_width="match_parent"
+		android:layout_height="300dp"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:visibility="invisible">
+
 		<TextView
 			android:id="@+id/textView"
 			android:layout_width="220dp"
 			android:layout_height="150dp"
 			android:layout_above="@+id/editText"
-			android:layout_alignEnd="@+id/lb_channel"
-			android:layout_alignRight="@+id/lb_channel"
 			android:layout_marginTop="10dp"
+			android:background="#78ac9588"
 			android:scrollbars="vertical"
 			android:textColor="@android:color/black"
-			android:textSize="20sp"
-			android:visibility="invisible" />
+			android:textSize="20sp" />
 
-		<Button
-			android:id="@+id/btn_server"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_above="@+id/textView"
+		<EditText
+			android:id="@+id/editText"
+			android:layout_width="220dp"
+			android:layout_height="50dp"
+			android:layout_alignParentBottom="true"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentStart="true"
-			android:text="서버"
-			android:visibility="invisible" />
-
-		<Button
-			android:id="@+id/btn_client"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_above="@+id/textView"
-			android:layout_alignEnd="@+id/btn_chat"
-			android:layout_alignRight="@+id/btn_chat"
-			android:text="클라"
-			android:visibility="invisible" />
+			android:height="50dp"
+			android:background="#AC9588"
+			android:cursorVisible="true"
+			android:ems="10"
+			android:inputType="textPersonName" />
 
 		<Button
 			android:id="@+id/btn_send"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_above="@+id/textView"
-			android:layout_toEndOf="@+id/lb_chat"
-			android:layout_toRightOf="@+id/lb_chat"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_alignTop="@+id/editText"
+			android:layout_toEndOf="@+id/editText"
+			android:layout_toRightOf="@+id/editText"
+			android:background="#c8413126"
 			android:text="전송"
-			android:visibility="invisible" />
+			android:textColor="#AC9588" />
 
+		<Button
+			android:id="@+id/btn_server"
+			android:layout_width="45dp"
+			android:layout_height="50dp"
+			android:layout_alignParentBottom="true"
+			android:layout_toLeftOf="@+id/btn_client"
+			android:layout_toStartOf="@+id/btn_client"
+			android:background="#c8413126"
+			android:text="서버"
+			android:textColor="#AC9588" />
+
+		<Button
+			android:id="@+id/btn_client"
+			android:layout_width="45dp"
+			android:layout_height="50dp"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentEnd="true"
+			android:layout_alignParentRight="true"
+			android:background="#c8413126"
+			android:text="클라"
+			android:textColor="#AC9588" />
 
 		<!--sticker 보내기 버튼-->
 		<ImageButton
 			android:id="@+id/btn_sticker"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_above="@+id/btn_send"
+			android:layout_alignBottom="@+id/btn_sticker_layer"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentStart="true"
 			android:background="@drawable/list_row_bg"
-			android:src="@drawable/sticker"
-			android:visibility="invisible" />
+			android:src="@drawable/sticker" />
 
 		<RelativeLayout
 			android:id="@+id/btn_sticker_layer"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentEnd="true"
-			android:layout_alignParentRight="true"
-			android:layout_alignTop="@+id/btn_sticker"
+			android:layout_height="100dp"
+			android:layout_above="@+id/editText"
+			android:layout_marginBottom="148dp"
+			android:layout_toEndOf="@+id/btn_sticker"
+			android:layout_toRightOf="@+id/btn_sticker"
 			android:visibility="invisible">
 
 			<ImageButton
@@ -596,8 +659,10 @@
 				android:id="@+id/btn_cong"
 				android:layout_width="50dp"
 				android:layout_height="50dp"
-				android:layout_alignTop="@+id/btn_flower"
-				android:layout_toRightOf="@+id/btn_flower"
+
+				android:layout_alignParentBottom="true"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentStart="true"
 				android:background="@android:color/transparent"
 				android:scaleType="fitCenter"
 				android:src="@drawable/cong" />
@@ -622,26 +687,7 @@
 				android:scaleType="fitCenter"
 				android:src="@drawable/ok" />
 		</RelativeLayout>
-
-		<!-- 채팅 -->
-
 	</RelativeLayout>
 
-	<ImageButton
-		android:id="@+id/btn_show_snapshot"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/btn_menu"
-		android:background="@drawable/list_btn"
-		android:src="@drawable/capture" />
-
-	<ImageButton
-		android:id="@+id/btn_chClose"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentEnd="true"
-		android:layout_alignParentRight="true"
-		android:background="@drawable/list_btn"
-		android:src="@drawable/end" />
 
 </RelativeLayout>
