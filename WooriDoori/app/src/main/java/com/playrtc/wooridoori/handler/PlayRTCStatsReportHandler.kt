@@ -9,17 +9,17 @@ import com.sktelecom.playrtc.observer.PlayRTCStatsReportObserver
 
 class PlayRTCStatsReportHandler(activity: PlayRTCActivity) : PlayRTCStatsReportObserver {
 
-    private var activity: PlayRTCActivity?=null
-    private var playrtc: PlayRTC?=null
+    private var activity: PlayRTCActivity? = null
+    private var playrtc: PlayRTC? = null
 
     init {
-        this.activity=activity  //yn var로 바꿈
+        this.activity = activity  //yn var로 바꿈
     }
 
     fun start(playrtc: PlayRTC?, peerId: String) {
 
         playrtc?.startStatsReport(TIMER_INTERVAL, this as PlayRTCStatsReportObserver, peerId)
-        this.playrtc=playrtc
+        this.playrtc = playrtc
     }
 
     fun stop() {
@@ -81,13 +81,13 @@ class PlayRTCStatsReportHandler(activity: PlayRTCActivity) : PlayRTCStatsReportO
 	 */
     override fun onStatsReport(report: PlayRTCStatsReport) {
 
-        val localVideoFl=report.localVideoFractionLost
-        val localAudioFl=report.localAudioFractionLost
-        val remoteVideoFl=report.remoteVideoFractionLost
-        val remoteAudioFl=report.remoteAudioFractionLost
+        val localVideoFl = report.localVideoFractionLost
+        val localAudioFl = report.localAudioFractionLost
+        val remoteVideoFl = report.remoteVideoFractionLost
+        val remoteAudioFl = report.remoteAudioFractionLost
 
 
-        val text=java.lang.String.format("Local\n ICE:%s\n Frame:%sx%sx%s\n 코덱:%s,%s\n Bandwidth[%sps]\n RTT[%s]\n RttRating[%d/%.4f]\n VFLost[%d/%.4f]\n AFLost[%d/%.4f]\n\nRemote\n ICE:%s\n Frame:%sx%sx%s\n 코덱:%s,%s\n Bandwidth[%sps]\n VFLost[%d/%.4f]\n AFLost[%d/%.4f]\n",
+        val text = java.lang.String.format("Local\n ICE:%s\n Frame:%sx%sx%s\n 코덱:%s,%s\n Bandwidth[%sps]\n RTT[%s]\n RttRating[%d/%.4f]\n VFLost[%d/%.4f]\n AFLost[%d/%.4f]\n\nRemote\n ICE:%s\n Frame:%sx%sx%s\n 코덱:%s,%s\n Bandwidth[%sps]\n VFLost[%d/%.4f]\n AFLost[%d/%.4f]\n",
                 report.localCandidate,
                 report.localFrameWidth,
                 report.localFrameHeight,
@@ -121,7 +121,7 @@ class PlayRTCStatsReportHandler(activity: PlayRTCActivity) : PlayRTCStatsReportO
     companion object {
 
         //StatsReport 조회 주기 msec
-        private val TIMER_INTERVAL: Long=5000//5 sec
+        private val TIMER_INTERVAL: Long = 5000//5 sec
     }
 
 }

@@ -29,13 +29,16 @@ public class PlayRTCSnapshotView extends RelativeLayout {
     /**
      * Local뷰와 Remote뷰의 Snapshot 버튼 이벤트를 전달하기 위한 인터페이스 Class
      */
-    public interface  SnapshotLayerObserver {
+    public interface SnapshotLayerObserver {
         /**
          * Local뷰와 Remote뷰의 Snapshot 버튼 이벤트를 전달
+         *
          * @param local boolean, Snapshot 대상이 Local뷰 인지  Remote뷰 인지 구분
          */
         public abstract void onClickSnapshotImage(boolean local);
-    };
+    }
+
+    ;
 
     public PlayRTCSnapshotView(Context context) {
         super(context);
@@ -51,7 +54,7 @@ public class PlayRTCSnapshotView extends RelativeLayout {
 
 
     /**
-     *  Snapshot 뷰의 Layout 크기를 PlayRTCVideoViewGroup과 같은 크기로 지정한다.
+     * Snapshot 뷰의 Layout 크기를 PlayRTCVideoViewGroup과 같은 크기로 지정한다.
      */
     public void resetViewSize() {
 
@@ -62,14 +65,15 @@ public class PlayRTCSnapshotView extends RelativeLayout {
         // 4:3 = width:height ,  width = ( 4 * height) / 3
         float width = (4.0f * height) / 3.0f;
 
-        LayoutParams param = (LayoutParams)this.getLayoutParams();
-        param.width = (int)width;
-        param.height = (int)height;
+        LayoutParams param = (LayoutParams) this.getLayoutParams();
+        param.width = (int) width;
+        param.height = (int) height;
         this.setLayoutParams(param);
     }
 
     /**
      * Snapshot 버튼과 이미지 배치등의 자식 요소를 동적으로 생성하여 Lauout 구성
+     *
      * @param observer SnapshotLayerObserver
      */
     public void createControls(SnapshotLayerObserver observer) {
@@ -95,14 +99,14 @@ public class PlayRTCSnapshotView extends RelativeLayout {
         RelativeLayout.LayoutParams local_params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         local_params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         local_params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        local_params.setMargins(20,20,10,20);
+        local_params.setMargins(20, 20, 10, 20);
         btnLocal.setLayoutParams(local_params);
         this.addView(btnLocal);
         btnLocal.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(snapshotObserver != null) {
+                if (snapshotObserver != null) {
                     snapshotObserver.onClickSnapshotImage(true);
                 }
             }
@@ -117,14 +121,14 @@ public class PlayRTCSnapshotView extends RelativeLayout {
         RelativeLayout.LayoutParams remote_params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         remote_params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         remote_params.addRule(RelativeLayout.RIGHT_OF, 1);
-        remote_params.setMargins(10,20,10,20);
+        remote_params.setMargins(10, 20, 10, 20);
         btnRemote.setLayoutParams(remote_params);
         this.addView(btnRemote);
         btnRemote.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(snapshotObserver != null) {
+                if (snapshotObserver != null) {
                     snapshotObserver.onClickSnapshotImage(false);
                 }
             }
@@ -139,7 +143,7 @@ public class PlayRTCSnapshotView extends RelativeLayout {
         RelativeLayout.LayoutParams clear_params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         clear_params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         clear_params.addRule(RelativeLayout.RIGHT_OF, 2);
-        clear_params.setMargins(10,20,10,20);
+        clear_params.setMargins(10, 20, 10, 20);
         btnClear.setLayoutParams(clear_params);
         this.addView(btnClear);
         btnClear.setOnClickListener(new OnClickListener() {
@@ -160,7 +164,7 @@ public class PlayRTCSnapshotView extends RelativeLayout {
 
         close_params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         close_params.addRule(RelativeLayout.RIGHT_OF, 3);
-        close_params.setMargins(10,20,10,20);
+        close_params.setMargins(10, 20, 10, 20);
         btnClose.setLayoutParams(close_params);
         this.addView(btnClose);
         btnClose.setOnClickListener(new OnClickListener() {

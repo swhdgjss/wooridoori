@@ -47,8 +47,8 @@ public class ChannelListAdapter extends BaseAdapter {
      *
      * @author ds3grk
      *         <pre>
-     *         - void onSelectListItem(ChannelData data)
-     *         </pre>
+     *                 - void onSelectListItem(ChannelData data)
+     *                 </pre>
      */
     public interface IChannelListAdapter {
         /**

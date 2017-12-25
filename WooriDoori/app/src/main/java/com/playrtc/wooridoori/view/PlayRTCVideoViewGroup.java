@@ -14,9 +14,9 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
 
     private static final String LOG_TAG = "VIDEO-VIEW";
 
-     /*
-     * 로컬 영상 출력 뷰
-     */
+    /*
+    * 로컬 영상 출력 뷰
+    */
     private LocalVideoView localView = null;
 
     /*
@@ -33,10 +33,13 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
     private Point screenDimensions = null;
 
     private RTCViewSizeType localViewSize = RTCViewSizeType.Full;
+
     public enum RTCViewSizeType {
         Full,
         Small
-    };
+    }
+
+    ;
 
     public PlayRTCVideoViewGroup(Context context) {
         super(context);
@@ -56,10 +59,10 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
      * new v2.2.5
      */
     public void releaseView() {
-        if(localView != null) {
+        if (localView != null) {
             localView.release();
         }
-        if(remoteView != null) {
+        if (remoteView != null) {
             remoteView.release();
         }
     }
@@ -73,8 +76,7 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
      */
     public void createVideoView() {
         // 이미 뷰를 생성 했는지 체크
-        if(isCreatedVideoView() == true)
-        {
+        if (isCreatedVideoView() == true) {
             return;
         }
         // PlayRTCVideoView의 부모 ViewGroup의 사이즈 확인
@@ -85,8 +87,8 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
         // 4:3 = width:height ,  width = ( 4 * height) / 3
         float width = (4.0f * height) / 3.0f;
 
-        LayoutParams param = (LayoutParams)this.getLayoutParams();
-        param.width = (int)width;
+        LayoutParams param = (LayoutParams) this.getLayoutParams();
+        param.width = (int) width;
         param.height = height;
         this.setLayoutParams(param);
 
@@ -94,9 +96,9 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
         screenDimensions.y = param.height;
 
         // big, remote, 4(폭):3(높이)
-        createRemoteVideoView (screenDimensions);
+        createRemoteVideoView(screenDimensions);
         // small. local , 4(폭):3(높이) 30%
-        createLocalVideoView (screenDimensions);
+        createLocalVideoView(screenDimensions);
     }
 
     /*
@@ -112,7 +114,7 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
     public void initVideoView() {
 
         // 이미 뷰를 초기화 했는지 체크
-        if(initVideoView == true) {
+        if (initVideoView == true) {
             return;
 
         }
@@ -127,9 +129,9 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
         // 4:3 = width:height ,  width = ( 4 * height) / 3
         float width = (4.0f * height) / 3.0f;
 
-        LayoutParams param = (LayoutParams)this.getLayoutParams();
-        param.width = (int)width;
-        param.height = (int)height;
+        LayoutParams param = (LayoutParams) this.getLayoutParams();
+        param.width = (int) width;
+        param.height = (int) height;
         this.setLayoutParams(param);
 
         screenDimensions.x = param.width;
@@ -146,7 +148,7 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
      * @return boolean
      *
      */
-    public boolean isInitVideoView () {
+    public boolean isInitVideoView() {
         return initVideoView;
     }
 
@@ -158,8 +160,7 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
      *
      */
     public boolean isCreatedVideoView() {
-        if(localView == null && remoteView == null)
-        {
+        if (localView == null && remoteView == null) {
             return false;
         }
 
@@ -186,30 +187,29 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
 
     public void resizeLocalVideoView(RTCViewSizeType size) {
 
-        if(size == localViewSize) {
+        if (size == localViewSize) {
             return;
         }
         localViewSize = size;
 
         RelativeLayout.LayoutParams lp;
-        if(size == RTCViewSizeType.Full) {
+        if (size == RTCViewSizeType.Full) {
             lp = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
             lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            lp.setMargins(0,0,0,0);
-        }
-        else {
+            lp.setMargins(0, 0, 0, 0);
+        } else {
             // 세로 모드임, 해상도는 가로 기준
-            int smallWidth = (int)(screenDimensions.x*0.3);
-            int samllHeight = (int)(screenDimensions.y*0.3);
+            int smallWidth = (int) (screenDimensions.x * 0.3);
+            int samllHeight = (int) (screenDimensions.y * 0.3);
 
             lp = new RelativeLayout.LayoutParams(smallWidth, samllHeight);
             lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 
-            lp.setMargins(30,30, 30, 30);
+            lp.setMargins(30, 30, 30, 30);
         }
-        localView.setLayoutParams( lp );
+        localView.setLayoutParams(lp);
         //localView.requestLayout();
     }
 
@@ -218,16 +218,16 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
      * Local 뷰는 PlayRTCVideoViewGroup 크기의 30%로 생성하여 좌상단에 배치한다.
      * @param screenDimensions Point, PlayRTCVideoViewGroup 크기
      */
-    private void createLocalVideoView (final Point screenDimensions) {
+    private void createLocalVideoView(final Point screenDimensions) {
         // 자신의 스트림 출력을 위한 PlayRTCVideoView 객체 동적 생성
-        if(localView == null) {
+        if (localView == null) {
             // 부모 View의 30% 비율로 크기를 지정한다
             Point displaySize = new Point();
-            displaySize.x = (int)(screenDimensions.x*0.3);
-            displaySize.y = (int)(screenDimensions.y*0.3);
+            displaySize.x = (int) (screenDimensions.x * 0.3);
+            displaySize.y = (int) (screenDimensions.y * 0.3);
 
 			/*
-			 * PlayRTCVideoView 생성자
+             * PlayRTCVideoView 생성자
 			 * @param context Context
 			 * @param dimensions Point
 			 * @param mirror boolean, 영상 출력을 거울 모드로 할지 여부를 지정한다.<br>
@@ -247,17 +247,17 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
             LayoutParams param = new LayoutParams(displaySize.x, displaySize.y);
             param.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             param.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            param.setMargins(30,30,30,30);
+            param.setMargins(30, 30, 30, 30);
 
             localView.setLayoutParams(param);
             // 부모뷰에 PlayRTCVideoView 추가
             this.addView(localView);
             localView.setZOrderOnTop(true);
             //localView.setVisibility(View.INVISIBLE);
-            localView.setVideoFrameObserver(new PlayRTCVideoView.VideoRendererObserver(){
+            localView.setVideoFrameObserver(new PlayRTCVideoView.VideoRendererObserver() {
                 @Override
                 public void onFrameResolutionChanged(PlayRTCVideoView view, int videoWidth, int videoHeight, int rotationDegree) {
-                    Log.i(LOG_TAG, "Local FrameResolution videoWidth[" + videoWidth + "] videoHeight["+videoHeight+"] rotationDegree["+rotationDegree+"]");
+                    Log.i(LOG_TAG, "Local FrameResolution videoWidth[" + videoWidth + "] videoHeight[" + videoHeight + "] rotationDegree[" + rotationDegree + "]");
                 }
 
                 @Override
@@ -278,9 +278,9 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
      * Remote 뷰는 PlayRTCVideoViewGroup 크기에 맞게 생성하여 배치한다.
      * @param screenDimensions Point, PlayRTCVideoViewGroup 크기
      */
-    private void createRemoteVideoView (final Point screenDimensions) {
+    private void createRemoteVideoView(final Point screenDimensions) {
         // 상대방 스트림 출력을 위한 PlayRTCVideoView 객체 동적 생성
-        if(remoteView == null) {
+        if (remoteView == null) {
             Point displaySize = new Point();
             displaySize.x = screenDimensions.x;
             displaySize.y = screenDimensions.y;
@@ -303,10 +303,10 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
             remoteView.setLayoutParams(param);
             // 부모뷰에 PlayRTCVideoView 추가
             this.addView(remoteView);
-            remoteView.setVideoFrameObserver(new PlayRTCVideoView.VideoRendererObserver(){
+            remoteView.setVideoFrameObserver(new PlayRTCVideoView.VideoRendererObserver() {
                 @Override
                 public void onFrameResolutionChanged(PlayRTCVideoView view, int videoWidth, int videoHeight, int rotationDegree) {
-                    Log.i(LOG_TAG, "Remote FrameResolution videoWidth[" + videoWidth + "] videoHeight["+videoHeight+"] rotationDegree["+rotationDegree+"]");
+                    Log.i(LOG_TAG, "Remote FrameResolution videoWidth[" + videoWidth + "] videoHeight[" + videoHeight + "] rotationDegree[" + rotationDegree + "]");
                 }
 
                 @Override
@@ -331,10 +331,10 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
 
 
         // 부모 View의 30% 비율로 크기를 지정한다
-        int width = (int)(screenDimensions.x*0.3);
-        int height = (int)(screenDimensions.y*0.3);
+        int width = (int) (screenDimensions.x * 0.3);
+        int height = (int) (screenDimensions.y * 0.3);
 
-        localView = (LocalVideoView)findViewById(R.id.local_video);
+        localView = (LocalVideoView) findViewById(R.id.local_video);
 
 
         /*
@@ -346,10 +346,10 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
 
         localView.setMirror(false);
         localView.setBgClearColor(200, 200, 200, 255);
-        localView.setVideoFrameObserver(new PlayRTCVideoView.VideoRendererObserver(){
+        localView.setVideoFrameObserver(new PlayRTCVideoView.VideoRendererObserver() {
             @Override
-            public	void onFrameResolutionChanged(PlayRTCVideoView view, int videoWidth, int videoHeight, int rotationDegree) {
-                Log.i(LOG_TAG, "Local FrameResolution videoWidth[" + videoWidth + "] videoHeight["+videoHeight+"] rotationDegree["+rotationDegree+"]");
+            public void onFrameResolutionChanged(PlayRTCVideoView view, int videoWidth, int videoHeight, int rotationDegree) {
+                Log.i(LOG_TAG, "Local FrameResolution videoWidth[" + videoWidth + "] videoHeight[" + videoHeight + "] rotationDegree[" + rotationDegree + "]");
             }
 
             @Override
@@ -368,7 +368,7 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
      */
     private void initRemoteVideo() {
 
-        remoteView = (RemoteVideoView)findViewById(R.id.remote_video);
+        remoteView = (RemoteVideoView) findViewById(R.id.remote_video);
         /*
          * 거울 모드를 지정한다.
          * @param mirror boolean, 영상 출력을 거울 모드로 지정한다.<br>
@@ -377,17 +377,17 @@ public class PlayRTCVideoViewGroup extends RelativeLayout {
          */
         remoteView.setMirror(false);
         remoteView.setBgClearColor(127, 127, 127, 255);
-        remoteView.setVideoFrameObserver(new PlayRTCVideoView.VideoRendererObserver(){
+        remoteView.setVideoFrameObserver(new PlayRTCVideoView.VideoRendererObserver() {
             @Override
-            public	void onFrameResolutionChanged(PlayRTCVideoView view, int videoWidth, int videoHeight, int rotationDegree) {
-                Log.i(LOG_TAG, "Remote FrameResolution videoWidth[" + videoWidth + "] videoHeight["+videoHeight+"] rotationDegree["+rotationDegree+"]");
+            public void onFrameResolutionChanged(PlayRTCVideoView view, int videoWidth, int videoHeight, int rotationDegree) {
+                Log.i(LOG_TAG, "Remote FrameResolution videoWidth[" + videoWidth + "] videoHeight[" + videoHeight + "] rotationDegree[" + rotationDegree + "]");
 
             }
 
             @Override
             public void onFirstFrameRendered() {
                 Log.i(LOG_TAG, "Remote onFirstFrameRendered....");
-                localView.post(new Runnable(){
+                localView.post(new Runnable() {
 
                     @Override
                     public void run() {

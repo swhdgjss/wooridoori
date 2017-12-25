@@ -147,7 +147,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      * Activity 인스턴스. <br></br>
      * PlayRTCActivity 인스턴스를 이용하여 이용해 객체 간 인터페이스 사용
      */
-    private var activity: PlayRTCActivity?=null
+    private var activity: PlayRTCActivity? = null
 
     /**
      * PlayRTC 인스턴스
@@ -156,21 +156,21 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      * PlayRTC 인스턴스를 반환한다.
      * @return PlayRTC
      */
-    var playRTC: PlayRTC?=null
+    var playRTC: PlayRTC? = null
         private set
     /**
      * 로컬 PlayRTCMedia 전역 변수
      */
-    private var localMedia: PlayRTCMedia?=null
+    private var localMedia: PlayRTCMedia? = null
     /**
      * 상대방 PlayRTCMedia 전역 변수
      */
-    private var remoteMedia: PlayRTCMedia?=null
+    private var remoteMedia: PlayRTCMedia? = null
 
     /**
      * P2P연결 수립 후 PlayRTC의 P2P 상태 정보를 제공하기 위한 Report 객체
      */
-    private var statReportHandler: PlayRTCStatsReportHandler?=null
+    private var statReportHandler: PlayRTCStatsReportHandler? = null
 
     /**
      * 채널 서비스에 생성된 P2P 채널의 아이디
@@ -179,7 +179,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      * 입장해 있는 채널 서비스의 채널 아이디를 반환한다.<br></br>
      * @return String
      */
-    var channelId: String?=null
+    var channelId: String? = null
         private set
 
     /**
@@ -191,12 +191,12 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      * Peer-Id와는 다르다. Peer-Id는 PlayRTC 서비스에서 사용하는 임시로 발급하는 고유 아이디이다.
      * @return String
      */
-    val userPid: String?=null
+    val userPid: String? = null
 
     /**
      * 채널 서비스에서 발급한 상대방의 P2P 채널 임시 사용자 고유 아이디.
      */
-    private var peerId: String?=null
+    private var peerId: String? = null
 
     /**
      * 채널 서비스 연결 여부.
@@ -210,15 +210,15 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      *
      * @return boolean
      */
-    var isChannelConnected=false
+    var isChannelConnected = false
         private set
 
     init {
 
-        this.activity=activity
+        this.activity = activity
 
         // P2P연결 수립 후 PlayRTC의 P2P 상태 정보를 제공하기 위한 Report 객체 생성
-        statReportHandler=PlayRTCStatsReportHandler(activity)
+        statReportHandler = PlayRTCStatsReportHandler(activity)
     }
 
     /**
@@ -229,7 +229,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
     fun createPlayRTC(channelRing: String, videoCodec: String, audioCodec: String) {
 
         // PlayRTC 서비스 설정 객체를 생성하여 반환
-        val config=createPlayRTCConfig(channelRing, videoCodec, audioCodec)
+        val config = createPlayRTCConfig(channelRing, videoCodec, audioCodec)
 
         /*
 		 * PlayRTC 인터페이스를 구현한 객체 인스턴스를 생성하고 PlayRTC를 반환한다. static
@@ -238,7 +238,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
 		 * @param observer PlayRTCObserver, PlayRTC Event 리스너
 		 * @return PlayRTC
 		 */
-        playRTC=PlayRTCFactory.createPlayRTC(config, this as PlayRTCObserver)
+        playRTC = PlayRTCFactory.createPlayRTC(config, this as PlayRTCObserver)
 
     }
 
@@ -302,11 +302,11 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
             playRTC!!.close()
             statReportHandler!!.stop()
         }
-        playRTC=null
-        localMedia=null
-        remoteMedia=null
-        statReportHandler=null
-        activity=null
+        playRTC = null
+        localMedia = null
+        remoteMedia = null
+        statReportHandler = null
+        activity = null
     }
 
     /**
@@ -325,7 +325,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      */
     fun switchBackCameraFlash() {
         if (playRTC != null) {
-            val on=!playRTC!!.isBackCameraFlashOn
+            val on = !playRTC!!.isBackCameraFlashOn
             playRTC!!.setBackCameraFlash(on)
         }
     }
@@ -366,7 +366,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      */
     fun setLocalAudioMute(on: Boolean) {
         if (localMedia != null) {
-            localMedia!!.isAudioMute=on
+            localMedia!!.isAudioMute = on
         }
     }
 
@@ -377,7 +377,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      */
     fun setRemoteAudioMute(on: Boolean) {
         if (remoteMedia != null) {
-            remoteMedia!!.isAudioMute=on
+            remoteMedia!!.isAudioMute = on
         }
     }
 
@@ -388,7 +388,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      */
     fun setLocalVideoPause(on: Boolean) {
         if (localMedia != null) {
-            localMedia!!.isVideoMute=on
+            localMedia!!.isVideoMute = on
         }
     }
 
@@ -399,7 +399,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      */
     fun setRemoteVideoPause(on: Boolean) {
         if (remoteMedia != null) {
-            remoteMedia!!.isVideoMute=on
+            remoteMedia!!.isVideoMute = on
         }
     }
 
@@ -411,7 +411,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      */
     fun setCameraRotation(rotation: Int) {
         if (playRTC != null) {
-            playRTC!!.cameraRotation=rotation
+            playRTC!!.cameraRotation = rotation
         }
     }
 
@@ -421,7 +421,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      * @return PlayRTCRange<Integer>
     </Integer> */
     val cameraZoomRange: PlayRTCRange<Int>
-        get()=if (playRTC != null) {
+        get() = if (playRTC != null) {
             playRTC!!.cameraZoomRange
         } else PlayRTCRange.create(0, 0)
 
@@ -431,7 +431,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      * @return int
      */
     val currentCameraZoom: Int
-        get()=if (playRTC != null) {
+        get() = if (playRTC != null) {
             playRTC!!.currentCameraZoom
         } else 0
 
@@ -443,7 +443,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      */
     fun setCameraZoom(value: Int): Boolean {
         if (playRTC != null) {
-            val zoomRange=playRTC!!.cameraZoomRange
+            val zoomRange = playRTC!!.cameraZoomRange
             if (value >= zoomRange.minValue && value <= zoomRange.maxValue) {
                 return playRTC!!.setCameraZoom(value)
             }
@@ -467,7 +467,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
     </pre> *
      */
     val cameraWhiteBalance: PlayRTCWhiteBalance
-        get()=if (playRTC != null) {
+        get() = if (playRTC != null) {
             playRTC!!.cameraWhiteBalance
         } else PlayRTCWhiteBalance.Auto
 
@@ -530,10 +530,10 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
     override fun onConnectChannel(obj: PlayRTC?, channelId: String?, reason: String?, channelType: String?) {
         if (reason == "create") {
             // 채널 팝업 뷰에 채널 아이디를 전달하여 화면에 표시
-            activity!!.channelInfoPopup!!.channelId=channelId
-            this.channelId=channelId
+            activity!!.channelInfoPopup!!.channelId = channelId
+            this.channelId = channelId
         }
-        isChannelConnected=true
+        isChannelConnected = true
         // 채널 아이디를 확인하기 위해서 0.8초 지연 시간 후 숨김
         activity!!.channelInfoPopup!!.hide(800)
     }
@@ -549,7 +549,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
     override fun onRing(obj: PlayRTC?, peerId: String?, peerUid: String?) {
 
         activity!!.appnedLogMessage(">>[$peerId] onRing....")
-        val alert=AlertDialog.Builder(activity)
+        val alert = AlertDialog.Builder(activity)
         alert.setTitle("PlayRTC")
         alert.setMessage(peerId!! + "이 연결을 요청했습니다.")
 
@@ -626,8 +626,8 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
         if (media!!.hasVideoStream() == false) {
             return
         }
-        localMedia=media
-        localMedia!!.isAudioMute=false
+        localMedia = media
+        localMedia!!.isAudioMute = false
         // 영상뷰가 있는지 검사.
         if (activity!!.localVideoView == null) {
             return
@@ -657,8 +657,8 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
         if (media!!.hasVideoStream() == false) {
             return
         }
-        remoteMedia=media
-        remoteMedia!!.isAudioMute=false
+        remoteMedia = media
+        remoteMedia!!.isAudioMute = false
         // 영상뷰가 있는지 검사.
         if (activity!!.remoteVideoView == null) {
             return
@@ -706,7 +706,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
         statReportHandler!!.stop()
 
         // 채널이 종료 되었으므로 false 지정
-        isChannelConnected=false
+        isChannelConnected = false
 
         /**
          * 내가 채널에서 퇴장 했으므로 PlayRTCActivity를 종료한다.
@@ -726,11 +726,11 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      */
     override fun onOtherDisconnectChannel(obj: PlayRTC?, peerId: String?, peerUid: String?, reason: String?) {
 
-        var notiMsg=""
+        var notiMsg = ""
         if (reason != null && reason == "timeout") {
-            notiMsg="[$peerUid]님의 네트워크 연결이 해제되었습니다...."
+            notiMsg = "[$peerUid]님의 네트워크 연결이 해제되었습니다...."
         } else {
-            notiMsg="[$peerUid]님이 채널에서 퇴장하였습니다...."
+            notiMsg = "[$peerUid]님이 채널에서 퇴장하였습니다...."
         }
 
         Utils.showToast(activity!!, notiMsg)      //!!붙이기
@@ -775,7 +775,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
      * @param desc String, Description
      */
     override fun onError(obj: PlayRTC?, status: PlayRTCStatus?, code: PlayRTCCode?, desc: String?) {
-        val msg="Error[$code] Status[$status] $desc"
+        val msg = "Error[$code] Status[$status] $desc"
 
         Utils.showToast(activity!!, msg)    //!!붙이기
         activity!!.appnedLogMessage(">>$peerId  $msg")
@@ -810,13 +810,13 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
     private fun createPlayRTCConfig(channelRing: String, videoCodec: String, audioCodec: String): PlayRTCConfig {
         /* PlayRTC 서비스 설정 */
         // 1. create PlayRTCConfig
-        val config=PlayRTCFactory.createConfig()
+        val config = PlayRTCFactory.createConfig()
         config.setAndroidContext(activity!!.applicationContext)
 
         // 2. TDCProjectId/TDCLicense set
         config.setProjectId(TDCProjectId)
 
-        val useChannelRing=channelRing == "true"
+        val useChannelRing = channelRing == "true"
         // 3. Ring : false 연결 수립 여부를 상대방에게 묻지 않음
         config.setRingEnable(useChannelRing)
 
@@ -833,17 +833,17 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
 		 * - 640x480 해상도 : 기본 해상도
 		 * - 1280x720 해상도 : 단말기 성능에 따라 영상 품질이 매우 않좋아질 수 있음.
 		 */
-        val frameWidth=1280
-        val frameHeight=720
+        val frameWidth = 1280
+        val frameHeight = 720
 
-        val minVideoFrameRate=15
-        val maxVideoFrameRate=30
-        val videoBitrateKbps=2500
+        val minVideoFrameRate = 15
+        val maxVideoFrameRate = 30
+        val videoBitrateKbps = 2500
 
         // 음성 데이터 평균 bitrate 지정,kbps
         // ISAC 32
         // OPUS 32 ~ 64
-        val audioBitrateKbps=32
+        val audioBitrateKbps = 32
 
         /*
          * 전방카메라 사용
@@ -851,17 +851,17 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
 		 * - Front,
 		 * - Back
          */
-        val cameraType=PlayRTCVideoConfig.CameraType.Front
+        val cameraType = PlayRTCVideoConfig.CameraType.Front
         /* enum PlayRTCVideoConfig.VideoCodec
          *  - VP8
          *  - VP9
          *  - H264, Open H.264
          */
-        var videPreferCodec: PlayRTCVideoConfig.VideoCodec=VideoCodec.VP8
+        var videPreferCodec: PlayRTCVideoConfig.VideoCodec = VideoCodec.VP8
         if (videoCodec == "vp9") {
-            videPreferCodec=VideoCodec.VP9
+            videPreferCodec = VideoCodec.VP9
         } else if (videoCodec == "h264") {
-            videPreferCodec=VideoCodec.H264
+            videPreferCodec = VideoCodec.H264
         }
 
         /*
@@ -869,16 +869,16 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
          *  - ISAC,
          *  - OPUS
          */
-        var audioPreferCodec: PlayRTCAudioConfig.AudioCodec=AudioCodec.OPUS
+        var audioPreferCodec: PlayRTCAudioConfig.AudioCodec = AudioCodec.OPUS
         if (audioCodec == "isac") {
-            audioPreferCodec=AudioCodec.ISAC
+            audioPreferCodec = AudioCodec.ISAC
         }
 
         /*
          * 영상 스트림 전송 사용.
          * false 설정 시 SDK는 read-only 모드로 동작하며, 상대방이 영상 스트림을 전송하면 수신이 된다.
          */
-        config.video.isEnable=true
+        config.video.isEnable = true
 
         /*
          * 전방카메라 사용
@@ -923,7 +923,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
          * 음성 스트림 전송 사용.
          * false 설정 시 SDK는 read-only 모드로 동작하며, 상대방이 음성 스트림을 전송하면 수신이 된다.
          */
-        config.audio.isEnable=true
+        config.audio.isEnable = true
 
         /*
          * Audio의 선호 코덱을 지정, default ISAC
@@ -960,7 +960,7 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
 
         /* 파일 로그를 남기려면 로그파일 폴더 지정 . [PATH]/yyyyMMdd.log , default 10일간 보존 */
         /* SDK 파일 로깅을 위한 로그 파일 경로, 파일 로깅을 사용하지 않는다면 Pass */
-        val logPath=File(Environment.getExternalStorageDirectory().absolutePath +
+        val logPath = File(Environment.getExternalStorageDirectory().absolutePath +
                 "/Android/data/" + activity!!.packageName + "/files/log")
 
         //  파일 로그 10일간 보존
@@ -973,22 +973,22 @@ class PlayRTCHandler(activity: PlayRTCActivity) : PlayRTCObserver() {
 
     companion object {
 
-        private val LOG_TAG="PLAYRTC"
+        private val LOG_TAG = "PLAYRTC"
 
         /**
          * PlayRTC SDK 콘솔 Log 레벨 정의. WARN
          */
-        private val CONSOLE_LOG=PlayRTCConfig.DEBUG
+        private val CONSOLE_LOG = PlayRTCConfig.DEBUG
 
         /**
          * PlayRTC SDK 파일 Log 레벨 정의. WARN
          */
-        private val FILE_LOG=PlayRTCConfig.WARN
+        private val FILE_LOG = PlayRTCConfig.WARN
 
         /**
          * PlayRTC 서비스에 생성한 프로젝트의 고유 아이디.
          * Sample 테스트용으로 생성한 프로젝트 아이디를 사용. 실제 앱 서비스 개발 시 프로젝트 아이디를 사용해야 함.
          */
-        private val TDCProjectId="60ba608a-e228-4530-8711-fa38004719c1" // playrtc
+        private val TDCProjectId = "60ba608a-e228-4530-8711-fa38004719c1" // playrtc
     }
 }
