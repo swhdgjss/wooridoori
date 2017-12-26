@@ -279,9 +279,9 @@
 			android:id="@+id/btn_white_balance_layer"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_alignBottom="@id/btn_white_balance"
-			android:layout_toEndOf="@+id/btn_camera_zoom_layer"
-			android:layout_toRightOf="@+id/btn_camera_zoom_layer"
+			android:layout_below="@+id/btn_camera_zoom"
+			android:layout_toEndOf="@+id/btn_white_balance"
+			android:layout_toRightOf="@+id/btn_white_balance"
 			android:visibility="gone">
 
 			<Button
@@ -339,27 +339,6 @@
 				android:textColor="#AC9588"
 				android:textSize="12sp" />
 
-			<Button
-				android:id="@+id/btn_white_balance_twilight"
-				android:layout_width="100dp"
-				android:layout_height="34dp"
-				android:layout_alignParentLeft="true"
-				android:layout_below="@id/btn_white_balance_daylight"
-				android:background="#c8413126"
-				android:text="저녁빛"
-				android:textColor="#AC9588"
-				android:textSize="12sp" />
-
-			<Button
-				android:id="@+id/btn_white_balance_shade"
-				android:layout_width="100dp"
-				android:layout_height="34dp"
-				android:layout_below="@id/btn_white_balance_daylight"
-				android:layout_toRightOf="@id/btn_white_balance_twilight"
-				android:background="#c8413126"
-				android:text="그늘"
-				android:textColor="#AC9588"
-				android:textSize="12sp" />
 
 		</RelativeLayout>
 		<!-- v2.3.0 카메라 white balance -->

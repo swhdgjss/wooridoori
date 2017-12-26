@@ -571,10 +571,6 @@ class PlayRTCActivity : Activity() {
                         labelText = "햇빛"
                     } else if (whiteBalance == PlayRTCWhiteBalance.CloudyDayLight) {
                         labelText = "흐림"
-                    } else if (whiteBalance == PlayRTCWhiteBalance.TwiLight) {
-                        labelText = "저녁빛"
-                    } else if (whiteBalance == PlayRTCWhiteBalance.Shade) {
-                        labelText = "그늘"
                     }
                     (findViewById(R.id.white_balance_label) as TextView).text = labelText
                     layer.visibility = View.VISIBLE
@@ -650,37 +646,6 @@ class PlayRTCActivity : Activity() {
                     val layer = findViewById(R.id.btn_white_balance_layer) as RelativeLayout
 
                     (findViewById(R.id.white_balance_label) as TextView).text = "흐림"
-                    layer.visibility = View.GONE
-                }
-            }
-        })
-
-        (this.findViewById(R.id.btn_white_balance_twilight) as Button).setOnClickListener(object : View.OnClickListener {    //Button->view
-            override fun onClick(v: View) {
-
-                if (playRTCHandler!!.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.TwiLight) == false) {
-                    Utils.showToast(this@PlayRTCActivity, "단말기가 지원하지 않습니다.")
-                    return
-                }
-                if (playRTCHandler!!.setCameraWhiteBalance(PlayRTCWhiteBalance.TwiLight)) {
-                    val layer = findViewById(R.id.btn_white_balance_layer) as RelativeLayout
-
-                    (findViewById(R.id.white_balance_label) as TextView).text = "저녁빛"
-                    layer.visibility = View.GONE
-                }
-            }
-        })
-
-        (this.findViewById(R.id.btn_white_balance_shade) as Button).setOnClickListener(object : View.OnClickListener {   //Button->view
-            override fun onClick(v: View) {
-                if (playRTCHandler!!.isSupportedCameraWhiteBalance(PlayRTCWhiteBalance.Shade) == false) {
-                    Utils.showToast(this@PlayRTCActivity, "단말기가 지원하지 않습니다.")
-                    return
-                }
-                if (playRTCHandler!!.setCameraWhiteBalance(PlayRTCWhiteBalance.Shade)) {
-                    val layer = findViewById(R.id.btn_white_balance_layer) as RelativeLayout
-
-                    (findViewById(R.id.white_balance_label) as TextView).text = "그늘"
                     layer.visibility = View.GONE
                 }
             }
@@ -864,7 +829,6 @@ class PlayRTCActivity : Activity() {
             text.append("\n")
             scrollBottom(text)
         }
-
         btn_server.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 Toast.makeText(applicationContext, "기다려 주세요.", Toast.LENGTH_SHORT).show()
@@ -898,9 +862,7 @@ class PlayRTCActivity : Activity() {
                             } catch (e: IOException) {
                                 e.printStackTrace()
                             }
-                            //클라이언트로부터 읽어들인 메시지msg를 TextView에 출력..
-                            //안드로이드는 오직 main Thread 만이 UI를 변경할 수 있기에
-                            //네트워크 작업을 하는 이 Thread에서는 TextView의 글씨를 직접 변경할 수 없음.
+                            //클라이언트로부터 읽어들인 메시지msg를 TextView에 출력.. //안드로이드는 오직 main Thread 만이 UI를 변경할 수 있기에 //네트워크 작업을 하는 이 Thread에서는 TextView의 글씨를 직접 변경할 수 없음.
                             //runOnUiThread()는 별도의 Thread가 main Thread에게 UI 작업을 요청하는 메소드임.
                             runOnUiThread(object : Runnable {
                                 override fun run() {
